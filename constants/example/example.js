@@ -1,0 +1,1 @@
+export const HEADER_TITLE = "I'm a Title";

@@ -1,0 +1,50 @@
+{
+    "pages": [
+        "pages/home/index",
+        "pages/category/index",
+        "pages/order/index",
+        "pages/userCenter/index",
+        "pages/example/index"
+    ],
+    "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "Wechat Group",
+      "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json",
+    "tabBar": {
+      "color": "#808080",
+      "selectedColor": "#000000",
+      "list": [
+        {
+          "pagePath": "pages/home/index",
+          "iconPath": "/images/home-unselected@2x.png",
+          "selectedIconPath": "/images/home-selected@2x.png",
+          "text": "首页"
+        },
+        {
+          "pagePath": "pages/category/index",
+          "iconPath": "/images/category-unselect@2x.png",
+          "selectedIconPath": "/images/category-select@2x.png",
+          "text": "商品分类"
+        },
+        {
+          "pagePath": "pages/order/index",
+          "iconPath": "/images/order-unselect@2x.png",
+          "selectedIconPath": "/images/order-select@2x.png",
+          "text": "订单"
+        },
+        {
+          "pagePath": "pages/userCenter/index",
+          "iconPath": "/images/unme.png",
+          "selectedIconPath": "/images/me.png",
+          "text": "个人中心"
+        }
+      ]
+    },
+    "lazyCodeLoading": "requiredComponents",
+    "usingComponents": {
+
+    }
+  }
