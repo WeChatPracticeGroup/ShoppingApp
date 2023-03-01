@@ -37,23 +37,19 @@ Page({
         }, 1000);
     },
     
-    handleDetail() {
-        console.log("handleDetail");
-        wx.showModal({
-            title: '编辑',
-            content: '',
-            showCancel: true,
-            cancelText: '取消',
-            cancelColor: '#000000',
-            confirmText: '确定',
-            confirmColor: '#3CC51F',
-            success: (result) => {
-                if(result.confirm){
-                    
-                }
-            },
-            fail: ()=>{},
-            complete: ()=>{}
+    handleEdit(e) {
+        const { id, type } = e.currentTarget.dataset;
+        if(!id || !type) {
+            wx.showToast({
+                title: '跳转失败，请重试',
+                icon: 'error',
+                duration: 2000
+              })
+            return;              
+        }
+        
+        wx.navigateTo({
+            url: `/pages/userCenter/address/edit/index?id=${id}&type=${type}`,
         });
     }
 });

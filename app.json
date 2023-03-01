@@ -5,6 +5,7 @@
         "pages/order/index",
         "pages/userCenter/index",
         "pages/userCenter/address/index",
+        "pages/userCenter/address/edit/index",
         "pages/example/index"
     ],
     "window": {

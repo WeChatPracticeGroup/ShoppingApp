@@ -2,10 +2,21 @@
     <van-tabs color="#1989fa" active="{{ active }}" bind:change="onChange">
         <van-tab title="售达地址">
             <view class="card-container" wx:for="{{addressSale}}" wx:key="id">
-                <view class="card-content" bindtap="handleDetail">
+                <view class="card-content">
                     <view class="address-main">{{item.addressMain}}</view>
                     <view class="address-detail">{{item.addressDetail}}</view>
                     <view class="address-zip">邮编: {{item.zipCode}}</view>
+                    <view>{{item.type}}</view>
+                </view>
+                <view class="card-action">
+                    <text 
+                        class="card-action-edit" 
+                        bindtap="handleEdit" 
+                        data-id="{{item.id}}" 
+                        data-type="{{item.type}}"
+                    >
+                        编辑
+                    </text>
                 </view>
             </view>
         </van-tab>
