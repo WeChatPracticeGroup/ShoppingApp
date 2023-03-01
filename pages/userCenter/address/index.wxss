@@ -1,0 +1,16 @@
+
+.card-container {
+    margin: 12rpx;
+    padding: 24rpx;
+    background-color: #fff;
+}
+
+.card-content {
+    font-size: 24rpx;
+    line-height: 40rpx;
+}
+
+.address-main {
+    font-weight: 500;
+    font-size: 28rpx;
+}

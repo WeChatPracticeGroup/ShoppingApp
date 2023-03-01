@@ -1,0 +1,31 @@
+<view class="page-container">
+    <van-tabs color="#1989fa" active="{{ active }}" bind:change="onChange">
+        <van-tab title="售达地址">
+            <view class="card-container" wx:for="{{addressSale}}" wx:key="id">
+                <view class="card-content" bindtap="handleDetail">
+                    <view class="address-main">{{item.addressMain}}</view>
+                    <view class="address-detail">{{item.addressDetail}}</view>
+                    <view class="address-zip">邮编: {{item.zipCode}}</view>
+                </view>
+            </view>
+        </van-tab>
+        <van-tab title="送货地址">
+            <view class="card-container" wx:for="{{addressDelivery}}" wx:key="id">
+                <view class="card-content">
+                    <view class="address-main">{{item.addressMain}}</view>
+                    <view class="address-detail">{{item.addressDetail}}</view>
+                    <view class="address-zip">邮编: {{item.zipCode}}</view>
+                </view>
+            </view>
+        </van-tab>
+        <van-tab title="付款人地址">
+            <view class="card-container" wx:for="{{addressPayer}}" wx:key="id">
+                <view class="card-content">
+                    <view class="address-main">{{item.addressMain}}</view>
+                    <view class="address-detail">{{item.addressDetail}}</view>
+                    <view class="address-zip">邮编: {{item.zipCode}}</view>
+                </view>
+            </view>
+        </van-tab>
+    </van-tabs>
+</view>

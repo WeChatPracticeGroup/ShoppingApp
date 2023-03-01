@@ -4,6 +4,7 @@
         "pages/category/index",
         "pages/order/index",
         "pages/userCenter/index",
+        "pages/userCenter/address/index",
         "pages/example/index"
     ],
     "window": {
