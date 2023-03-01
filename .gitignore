@@ -22,3 +22,4 @@ package-lock.json
 .temp/**
 miniprogram_npm
 miniprogram_dist
+project.private.config.json
