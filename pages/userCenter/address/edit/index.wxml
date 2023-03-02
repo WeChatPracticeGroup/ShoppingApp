@@ -1,19 +1,28 @@
 <view class="page-container">
     <form catchsubmit="formSubmit" catchreset="formReset">
-        <view class="page-section">
-            <view class="page-section-title">{{addressToEdit.addressMain}}</view>
-            <view class="weui-cells weui-cells_after-title">
-                <view class="weui-cell weui-cell_input">
-                    <view class="weui-cell__bd" style="margin: 30rpx 0">
-                        <input class="weui-input" name="addressMain" placeholder="这是一个输入框" />
-                    </view>
+        <view class="form-container">
+            <view class="form-section">
+                <view class="section-wrapper">
+                    <text class="section-title">地址名称</text>
+                    <input class="section-input" name="addressMain" placeholder="请输入" value="{{addressToEdit.addressMain}}" auto-focus="{{true}}" />
                 </view>
             </view>
-        </view>
-        
-        <view class="btn-area">
-            <button style="margin: 30rpx 0" type="primary" formType="submit">Submit</button>
-            <button style="margin: 30rpx 0" formType="reset">Reset</button>
+            <view class="form-section">
+                <view class="section-wrapper">
+                    <text class="section-title">详细地址</text>
+                    <input class="section-input" name="addressDetail" placeholder="请输入" value="{{addressToEdit.addressDetail}}" />
+                </view>
+            </view>
+            <view class="form-section">
+                <view class="section-wrapper">
+                    <text class="section-title">邮政编码</text>
+                    <input class="section-input" name="zipCode" placeholder="请输入" value="{{addressToEdit.zipCode}}" />
+                </view>
+            </view>
+            <view class="form-action">
+                <button class="form-action-submit" type="primary" formType="submit">提交</button>
+                <button class="form-action-clear" formType="reset">清空</button>
+            </view>
         </view>
     </form>
 </view>

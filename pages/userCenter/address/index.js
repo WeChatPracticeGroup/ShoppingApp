@@ -12,6 +12,7 @@ Page({
         addressSale: [],
         addressDelivery: [],
         addressPayer: [],
+        activeTab: 0,
     },
 
     /**
@@ -25,7 +26,7 @@ Page({
         wx.showLoading({
             title: "加载中",
         });
-        
+
         this.setData({
             addressSale: addressListSale,
             addressDelivery: addressListDelivery,
@@ -36,20 +37,21 @@ Page({
             wx.hideLoading();
         }, 1000);
     },
-    
+
     handleEdit(e) {
         const { id, type } = e.currentTarget.dataset;
-        if(!id || !type) {
+        if (!id || !type) {
             wx.showToast({
-                title: '跳转失败，请重试',
-                icon: 'error',
-                duration: 2000
-              })
-            return;              
+                title: "跳转失败，请重试",
+                icon: "error",
+                duration: 2000,
+            });
+            return;
         }
-        
+
         wx.navigateTo({
-            url: `/pages/userCenter/address/edit/index?id=${id}&type=${type}`,
+            url: `/pages/userCenter/address/edit/index?id=${id}&addressType=${type}`,
         });
-    }
+    },
+    handleCreate(e) {},
 });
