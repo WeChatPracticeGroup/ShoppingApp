@@ -1,12 +1,14 @@
 <!--pages/order/index.wxml-->
 
-<view class="custom-bar" style="height:{{navHeight}}px">
-  <view class="custom-bar__wrapper" style="margin-top:{{searchMarginTop}}px; height: {{searchHeight}}px;width: {{searchWidth}}px" >
+<view class="custom-bar" style="height:{{navHeight - statusBarHeight}}px; padding-top: {{statusBarHeight}}px;">
+  <view class="custom-bar__wrapper" style="margin-top:{{searchMarginTop - statusBarHeight/2}}px; height: {{searchHeight - statusBarHeight}}px;width: {{searchWidth}}px" >
     订单记录
   </view>
-  <view>
-    <van-tabs active="{{ active }}" bind:change="onChange">
-      <van-tab title="全部">
+</view>
+<view>
+  <van-tabs active="{{ active }}" bind:change="onChange">
+    <van-tab title="全部">
+      <scroll-view>
         <view class="order-item" wx:for="{{orderListData}}" wx:key="index" wx:for-item="orderItem">
           <view>
             <view>订单号：</view>
@@ -25,12 +27,12 @@
             <view>{{orderItem.orderAmount}}</view>
           </view>
         </view>
-      </van-tab>
-      <van-tab title="订单待处理">订单待处理</van-tab>
-      <van-tab title="进行中">进行中</van-tab>
-      <van-tab title="已预订">已预订</van-tab>
-      <van-tab title="标签 5">内容 5</van-tab>
-      <van-tab title="标签 6">内容 6</van-tab>
-    </van-tabs>
-  </view>
+      </scroll-view>
+    </van-tab>
+    <van-tab title="订单待处理">订单待处理</van-tab>
+    <van-tab title="进行中">进行中</van-tab>
+    <van-tab title="已预订">已预订</van-tab>
+    <van-tab title="标签 5">内容 5</van-tab>
+    <van-tab title="标签 6">内容 6</van-tab>
+  </van-tabs>
 </view>
