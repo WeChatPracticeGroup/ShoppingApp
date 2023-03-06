@@ -1,1 +1,26 @@
 /* pages/order/index.wxss */
+
+
+.custom-bar {
+  /* background-color: #aaa; */
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #fafafa;
+  z-index: 9;
+}
+.custom-bar__wrapper {
+  padding: 0 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-item {
+  display: flex;
+  margin: 30rpx;
+}
+.status-amount {
+  text-align: end;
+  flex-grow: 1;
+}
