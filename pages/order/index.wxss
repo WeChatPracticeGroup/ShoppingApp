@@ -20,8 +20,22 @@
 .order-item {
   display: flex;
   margin: 30rpx;
+  line-height: 24px;
 }
 .status-amount {
   text-align: end;
   flex-grow: 1;
+}
+.warning-msg {
+  display: flex;
+  padding: 30rpx;
+  margin-top: 18rpx;
+  background-color: #ddd;
+  font-size: 24px;
+  color: gray;
+  line-height: 24px;
+}
+.warning-msg .message {
+  margin-left: 10px;
+  color: black;
 }
