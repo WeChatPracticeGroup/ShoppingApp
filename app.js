@@ -1,3 +1,5 @@
+const util = require('./utils/util');
+
 // app.js
 App({
   onLaunch() {
@@ -13,8 +15,11 @@ App({
     //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
     //   }
     // })
+
+    this.globalData.searchBar = util.getSearchBarBoundingClientRect();
   },
   globalData: {
     // userInfo: null
+    searchBar: {}
   }
 })

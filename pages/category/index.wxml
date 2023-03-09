@@ -1,2 +1,34 @@
-<!--pages/category/index.wxml-->
-<text>pages/category/index.wxml</text>
+<search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" ></search-bar>
+<view class="tabs">
+  <view class="category">
+    <view class="category-item {{item.isActive?'main-category__active':''}}" wx:for="{{categorys}}" wx:key="id" bindtap="handleCategoryTap" data-index="{{index}}" data-source="categorys">
+      {{item.name}}
+    </view>
+  </view>
+  <view class="category">
+    <view class="category-item {{item.isActive?'sub-category__active':''}}" wx:for="{{subCategorys}}" wx:key="id" bindtap="handleCategoryTap" data-index="{{index}}" data-source="subCategorys">
+      {{item.name}}
+    </view>
+  </view>
+  <view class="contentContainer">
+    <view class="menu">
+      <view class="menu-item {{item.isActive?'active':''}}" wx:for="{{menuItems}}" wx:key="id" bindtap="handleCategoryTap" data-index="{{index}}" data-source="menuItems">
+        {{item.name}}
+      </view>
+    </view>
+    <view class="content">
+      <view class="title" wx:for="{{menuItems}}" wx:key="id" wx:if="{{item.isActive}}">{{item.name}}</view>
+      <scroll-view style="height: 1000rpx;" bindscrolltolower="handleScrollLower" scroll-y>
+        <view class="product-list">
+        <view class="product-item" wx:key="id" wx:for="{{30}}">
+          <image class="product-img" src="/images/me.png" mode="scaleToFill"/>
+          <view class="product-name">
+          name
+          </view>
+        </view>
+      </view>
+      </scroll-view>
+      
+    </view>
+  </view>
+</view>
