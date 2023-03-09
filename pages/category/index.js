@@ -1,5 +1,5 @@
 import {categoryListData} from "../../mockData/category/category"
-const app=getApp()
+
 Page({
   data: {
       placeHolder: "请输入关键字搜索",
