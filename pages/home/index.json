@@ -1,5 +1,7 @@
 {
+  "navigationStyle": "custom",
 	"usingComponents": {
-		"van-button": "vant-weapp/button"
+		"navigation-bar": "/components/customNavigationBar/customNavigationBar",
+		"van-icon": "@vant/weapp/icon/index"
 	}
 }
