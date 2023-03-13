@@ -1,12 +1,17 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/list/index",
     "pages/category/index",
     "pages/order/index",
-    "pages/userCenter/index",
+    "pages/order/order-detail/index",
     "pages/example/index",
-    "pages/order/order-detail/index"
+    "pages/login/index",
+    "pages/userCenter/index",
+    "pages/userCenter/address/index",
+    "pages/userCenter/address/edit/index"
   ],
+  "backgroundColor": "#f7f8fa",
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -44,7 +49,8 @@
     ]
   },
   "lazyCodeLoading": "requiredComponents",
-  "usingComponents": {
-    "van-icon": "@vant/weapp/icon/index"
+  "usingComponents": {},
+  "resolveAlias": {
+    "/*": "/*"
   }
 }

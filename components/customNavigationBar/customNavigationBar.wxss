@@ -1,0 +1,33 @@
+.navigation-bar {
+    display: flex;
+    top: 0;
+    width: 100%;
+}
+
+.navigation-bar-content {
+    display: flex;
+    flex-direction: row;
+    padding-left: 12px;
+    align-content: center;
+    align-items: center;
+}
+
+.navigation-bar text:nth-child(1) {
+    color: red;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.navigation-bar text:nth-child(2) {
+    color: #888888;
+    font-size: 22px;
+    font-weight: lighter;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.navigation-bar text:nth-child(3) {
+    color: #222222;
+    font-size: 16px;
+    font-weight: lighter;
+}
