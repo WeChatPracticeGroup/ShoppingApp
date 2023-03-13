@@ -1,1 +1,41 @@
 /* pages/order/index.wxss */
+
+
+.custom-bar {
+  /* background-color: #aaa; */
+  position: sticky;
+  left: 0;
+  top: 0;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #fafafa;
+  z-index: 9;
+}
+.custom-bar__wrapper {
+  padding: 0 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order-item {
+  display: flex;
+  margin: 30rpx;
+  line-height: 24px;
+}
+.status-amount {
+  text-align: end;
+  flex-grow: 1;
+}
+.warning-msg {
+  display: flex;
+  padding: 30rpx;
+  margin-top: 18rpx;
+  background-color: #ddd;
+  font-size: 24px;
+  color: gray;
+  line-height: 24px;
+}
+.warning-msg .message {
+  margin-left: 10px;
+  color: black;
+}

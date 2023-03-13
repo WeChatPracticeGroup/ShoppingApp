@@ -1,0 +1,53 @@
+<view class="page-container">
+    <van-tabs class="tabs-container" color="#1989fa" active="{{ activeTab }}" bind:change="onChange">
+        <van-tab title="售达地址" class="tab-content">
+            <view class="tab-content-cards">
+                <view class="card-container" wx:for="{{addressSale}}" wx:key="id" wx:for-index="index">
+                    <view class="card-content">
+                        <view class="address-main">{{item.addressMain}}</view>
+                        <view class="address-detail">{{item.addressDetail}}</view>
+                        <view class="address-zip">邮编: {{item.zipCode}}</view>
+                    </view>
+                    <view class="card-action">
+                        <text class="card-action-edit" bindtap="handleEdit" data-id="{{item.id}}" data-type="{{item.type}}">
+                            编辑
+                        </text>
+                    </view>
+                </view>
+            </view>
+            <view class="tab-content-actions">
+                <view class="btn-area">
+                    <view class="btn-wrapper">
+                        <button class="btn-create" type="primary" bind:tap="handleCreate">新增地址</button>
+                    </view>
+                </view>
+            </view>
+        </van-tab>
+        <van-tab title="送货地址" class="tab-content">
+            <view class="card-container" wx:for="{{addressDelivery}}" wx:key="id">
+                <view class="card-content">
+                    <view class="address-main">{{item.addressMain}}</view>
+                    <view class="address-detail">{{item.addressDetail}}</view>
+                    <view class="address-zip">邮编: {{item.zipCode}}</view>
+                </view>
+            </view>
+            <view class="btn-area">
+                <button class="btn-create" type="primary" formType="submit">新增地址</button>
+            </view>
+        </van-tab>
+        <van-tab title="付款人地址" class="tab-content">
+            <view class="card-container" wx:for="{{addressPayer}}" wx:key="id">
+                <view class="card-content">
+                    <view class="address-main">{{item.addressMain}}</view>
+                    <view class="address-detail">{{item.addressDetail}}</view>
+                    <view class="address-zip">邮编: {{item.zipCode}}</view>
+                </view>
+            </view>
+            <view class="btn-area">
+                <view class="btn-wrapper">
+                    <button class="btn-create" type="primary" formType="submit">新增地址</button>
+                </view>
+            </view>
+        </van-tab>
+    </van-tabs>
+</view>

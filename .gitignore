@@ -1,5 +1,6 @@
 # dependencies
 **/node_modules
+**/miniprogram_npm
 
 # production
 /dist
@@ -23,3 +24,4 @@ package-lock.json
 miniprogram_npm
 miniprogram_dist
 project.private.config.json
+cloudFunctions

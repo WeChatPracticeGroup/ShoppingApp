@@ -12,3 +12,6 @@ page {
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+view {
+  font-size: small;
+}

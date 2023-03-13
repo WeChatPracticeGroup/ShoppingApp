@@ -1,0 +1,29 @@
+<search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" ></search-bar>
+<view class="tabs">
+  <view class="sort-row">
+    <view class="sort" wx:for="{{sorts}}" wx:key="id" bindtap="handleSortTap" data-index="{{index}}" data-source="sorts">
+      {{item.name}}
+    </view>
+    <image class="switch-mode" src="/images/me.png" mode="scaleToFill"/>
+  </view>
+  <view class="content">
+    <scroll-view style="height: 1000rpx;" bindscrolltolower="handleScrollLower" scroll-y>
+    <view class="product-list">
+      <view class="product-item" wx:key="id" wx:for="{{30}}">
+        <image class="product-img" src="/images/me.png" mode="scaleToFill"/>
+        <view class="product-richText">
+          <view class="product-description">
+            description
+          </view>
+          <view class="product-name">
+            name
+          </view>
+          <view class="product-price">
+            1000
+          </view>
+        </view>
+      </view>
+    </view>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,45 @@
+.page-container {
+    height: 100vh;
+}
+
+.card-container {
+    margin: 12rpx;
+    padding: 24rpx;
+    background-color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-content {
+    flex: 0.8;
+    font-size: 24rpx;
+    line-height: 40rpx;
+}
+
+.card-action {
+    flex: 0.2;
+    padding: 0 32rpx;
+    font-size: 28rpx;
+}
+
+.card-action-edit {
+    float: right;
+    color: #13adff;
+}
+
+.address-main {
+    font-weight: 500;
+    font-size: 28rpx;
+}
+
+.btn-area {
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+}
+
+.btn-wrapper {
+    margin: 0 12rpx;
+}
