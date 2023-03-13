@@ -1,11 +1,13 @@
 // pages/userCenter/index.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo: {},
+    currentLoginType: 1
   },
 
   /**
@@ -62,5 +64,27 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  getUserProfile() {
+    console.log("this function is triggered");
+
+    setTimeout(() => {
+      this.setData({
+        currentLoginType: 2
+      })
+    }, 1000);
+
+    /*  wx.getUserProfile({
+       desc: '展示用户信息',
+       success: (res) => {
+         console.log(res);
+         this.setData({
+           userInfo: res.userInfo
+         })
+       }
+     }) */
+  },
+  Logout() {
+    console.log("call logout");
   }
 })

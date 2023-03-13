@@ -14,6 +14,20 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
+const getSearchBarBoundingClientRect = () => {
+  const { top, width, height, right } = wx.getMenuButtonBoundingClientRect();
+  const { statusBarHeight } = wx.getSystemInfoSync();
+  const margin = top - statusBarHeight;
+
+  return {
+    navHeight: (height + statusBarHeight + (margin * 2)), // 导航栏高度 = 状态栏到胶囊的间距（胶囊距上距离-状态栏高度） * 2 + 胶囊高度 + 状态栏高度
+    height: height,
+    width: right - width - 20,
+    top: statusBarHeight + margin
+  };
+}
+
 module.exports = {
-  formatTime
+  formatTime,
+  getSearchBarBoundingClientRect
 }

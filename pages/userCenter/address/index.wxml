@@ -18,7 +18,9 @@
             <view class="tab-content-actions">
                 <view class="btn-area">
                     <view class="btn-wrapper">
-                        <button class="btn-create" type="primary" bind:tap="handleCreate">新增地址</button>
+                        <button class="btn-create" type="primary" bind:tap="handleCreate" data-type="1">
+                            新增地址
+                        </button>
                     </view>
                 </view>
             </view>
@@ -32,7 +34,11 @@
                 </view>
             </view>
             <view class="btn-area">
-                <button class="btn-create" type="primary" formType="submit">新增地址</button>
+                <view class="btn-wrapper">
+                    <button class="btn-create" type="primary" bind:tap="handleCreate" data-type="2">
+                        新增地址
+                    </button>
+                </view>
             </view>
         </van-tab>
         <van-tab title="付款人地址" class="tab-content">
@@ -45,7 +51,9 @@
             </view>
             <view class="btn-area">
                 <view class="btn-wrapper">
-                    <button class="btn-create" type="primary" formType="submit">新增地址</button>
+                    <button class="btn-create" type="primary" bind:tap="handleCreate" data-type="3">
+                        新增地址
+                    </button>
                 </view>
             </view>
         </van-tab>
