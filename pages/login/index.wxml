@@ -1,0 +1,1 @@
+<button bindtap="getUserProfile"> 获取头像昵称 </button>

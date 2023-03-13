@@ -29,6 +29,12 @@ Page({
             url: "/pages/example/index",
         });
     },
+    
+    toLogin() {
+        wx.navigateTo({
+            url: "/pages/login/index",
+        });
+    },
 
     /**
      * 生命周期函数--监听页面加载

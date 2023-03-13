@@ -15,16 +15,16 @@
 .goods_container_page {
     display: flex;
     flex-direction: column;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
     background-color: #f7f7f7;
     z-index: -1;
 }
 
 .search-bar {
-    padding-left: 12px;
-    padding-right: 12px;
-    height: 54px;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+    height: 108rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,59 +33,59 @@
 .search {
     background-color: #f7f7f7;
     width: 100%;
-    height: 42px;
+    height: 84rpx;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 12px;
-    border-radius: 6px;
+    padding-left: 24rpx;
+    border-radius: 12rpx;
 }
 
 .search text {
     color: #7a7a7a;
-    font-size: 16px;
-    margin-left: 12px;
+    font-size: 32rpx;
+    margin-left: 24rpx;
 }
 
 .message {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
 }
 
 .banner {
-    margin-top: 12px;
-    border-radius: 6px;
+    margin-top: 24rpx;
+    border-radius: 12rpx;
     width: 100%;
-    height: 210px;
+    height: 420rpx;
 }
 
 .banner image {
-    border-radius: 12px;
+    border-radius: 24rpx;
     width: 100%;
-    height: 210px;
+    height: 420rpx;
 }
 
 .goods_container {
-    padding: 12px;
+    padding: 24rpx;
     display: flex;
     background-color: #ffffff;
     flex-direction: column;
-    border-radius: 4px;
-    margin-top: 12px;
+    border-radius: 8rpx;
+    margin-top: 24rpx;
 }
 
 .goods_container_title {
     color: #222222;
-    font-size: 20px;
+    font-size: 40rpx;
     display: block;
     text-align: center;
     width: 100%;
 }
 
 .goods_container_description {
-    margin-top: 8px;
+    margin-top: 16rpx;
     color: #333333;
-    font-size: 12px;
+    font-size: 24rpx;
     display: block;
     text-align: center;
     width: 100%;
@@ -101,13 +101,13 @@
 .goods_items {
     display: flex;
     flex-direction: column;
-    margin-top: 8px;
+    margin-top: 16rpx;
 }
 
 .goods_items image {
-    width: 90px;
-    height: 90px;
-    border-radius: 8px;
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 16rpx;
 }
 
 .goods_items text {
