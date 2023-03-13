@@ -1,3 +1,8 @@
+import {
+  orderList
+} from "../../mockData/example/oerderList";
+
+
 // pages/order/index.js
 Page({
 
@@ -5,8 +10,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    active: 0,
+    speedValue: 10,
+    orderList: orderList,
+    tabAndstatusMap: {
+      "已预定": "已预定",
+      "准备装运": "订单待处理",
+      "发货完成": "进行中",
+      //todo:需根据业务对订单分组
+    }
   },
+
+  onTabsChange(event) {
+    var that = this
+    this.setData({
+      ['orderList']: event.detail.title === "全部" ? orderList : orderList.filter(item =>
+        that.data.tabAndstatusMap[item.status] === event.detail.title
+      )
+    })
+    this.data.orderList
+  },
+
+  openOrderDetail(e) {
+    const orderID = e.target.dataset.id
+    wx.navigateTo({
+      url: '/pages/order/order-detail/index?orderID=' + orderID,
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载

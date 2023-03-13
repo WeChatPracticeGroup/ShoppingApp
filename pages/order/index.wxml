@@ -1,2 +1,35 @@
 <!--pages/order/index.wxml-->
-<text>pages/order/index.wxml</text>
+<template name="orderCard">
+  <view class="page-section">
+    <icon type="warn" size="15" color="#C9C9C9" />
+    <text style="font-size: 12px;margin-left: 8px;">最近下达的订单将在24小时内显示在订单历史记录中。</text>
+  </view>
+  <view wx:for="{{orderList}}" class="order-detail">
+    <view>
+      <view>
+        <text>订单号：{{item.orderID}}</text>
+        <van-icon data-id="{{item.orderID}}" custom-style="margin: 0 0 0 8px;" name="arrow" bind:click="openOrderDetail" />
+      </view>
+      <text style="color: {{item.status === '发货完成'? 'grey':'blue'}};">{{item.status}}</text>
+    </view>
+    <view>
+      <text>PO编号: {{item.poNumber}}</text>
+      <text>{{item.amount}}</text>
+    </view>
+    <view>订购日期: {{item.subscriptionDate}}</view>
+    <view>送达方: {{item.address}}</view>
+  </view>
+</template>
+
+
+<scroll-view>
+  <van-tabs sticky title-active-color="blue" color="blue" active="{{ active }}" bind:change="onTabsChange">
+    <van-tab title="全部"> <template is="orderCard" data="{{orderList}}" /> </van-tab>
+    <van-tab ellipsis="false" title="订单待处理"><template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="进行中"> <template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="已预定"> <template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="不相关"> <template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="部分发货"> <template is="orderCard" data="{{orderList}}" /></van-tab>
+  </van-tabs>
+
+</scroll-view>
