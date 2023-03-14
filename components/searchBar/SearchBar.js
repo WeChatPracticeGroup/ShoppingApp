@@ -7,6 +7,10 @@ Component({
       placeHolder: {
         type: String,
         value:  ""
+      },
+      showBackBtn: {
+        type: Boolean,
+        value: false
       }
   },
 
@@ -25,6 +29,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    handleBackTap: function(e) {
+      console.log('handle back tap in search bar');
+      wx.navigateBack();
+    },
     onInput: function(e) {
       this.setData({
         inputValue: e.detail.value

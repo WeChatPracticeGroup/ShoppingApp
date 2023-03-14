@@ -1,6 +1,7 @@
 Page({
   data: {
       placeHolder: "请输入要搜索的商品",
+      showBackBtnInSearchBar: true,
       sorts: [
         {
           id: 0,
@@ -12,7 +13,9 @@ Page({
         }
       ]
   },
-
+  onLoad(options) {
+    console.log('list page onload:', options);
+  },
   handleCategoryTap(e) {
     console.log(e);
   },
