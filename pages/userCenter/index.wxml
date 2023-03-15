@@ -1,6 +1,6 @@
 <!--pages/userCenter/index.wxml-->
 <view class="user-center">
-  <user-center-card userInfo="{{userInfo}}" currentLoginType="{{currentLoginType}}" bind:getUserProfile="getUserProfile"></user-center-card>
+  <user-center-card isLogin="{{isLogin}}" userInfo="{{userInfo}}" bind:getUserProfile="getUserProfile"></user-center-card>
   <view class="user-menu" wx:if="{{currentLoginType === 2}}">
     <view class="user-menu-item">
       <view class="user-menu-container">

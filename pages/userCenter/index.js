@@ -1,13 +1,17 @@
 // pages/userCenter/index.js
 
+const {
+  default: request
+} = require("/utils/request");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    currentLoginType: 1
+    isLogin: false,
+    userInfo: {}
   },
 
   /**
@@ -65,25 +69,35 @@ Page({
   onShareAppMessage() {
 
   },
-  getUserProfile() {
+  async getUserProfile() {
     console.log("this function is triggered");
 
-    setTimeout(() => {
-      this.setData({
-        currentLoginType: 2
-      })
-    }, 1000);
+    wx.showLoading();
+    request.post("user/login").then(res => {
+      if (res.errMsg) {
+        Promise.reject();
+        return;
+      }
 
-    /*  wx.getUserProfile({
-       desc: '展示用户信息',
-       success: (res) => {
-         console.log(res);
-         this.setData({
-           userInfo: res.userInfo
-         })
-       }
-     }) */
+      const openId = res.data ? res.data.openid : null;
+      if (!openId) return;
+      wx.setStorageSync('openId', openId);
+
+      this.setData({
+        isLogin: !!openId,
+        userInfo: res.data
+      });
+    }).catch(error => {
+      console.warn("[login error]", error);
+      wx.showToast({
+        title: '用户登录失败',
+        icon: "error"
+      })
+    }).finally(() => {
+      wx.hideLoading();
+    });
   },
+
   Logout() {
     console.log("call logout");
   }

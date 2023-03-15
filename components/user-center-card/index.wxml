@@ -2,21 +2,23 @@
 <view class="user-center-card">
   <videw class="user-container">
     <!--未登录-->
-    <block wx:if="{{currentLoginType === LoginType.NoLogin}}">
+    <block wx:if="{{!isLogin}}">
       <view class="user-avatar" bindtap="getUserProfile">
-        <image class=" user-avatar-image" src="{{userInfo.avatarUrl || defaultAvatarUrl}}">
+        <image class=" user-avatar-image" src="{{defaultAvatarUrl}}">
         </image>
         <view class="user-avatar-info">
-          <text>登录</text>
+          <text>尚未登录</text>
         </view>
       </view>
     </block>
-    <!--登录且已经授权用户信息-->
-    <block wx:if="{{currentLoginType === LoginType.Login}}">
+    <!--用户登录-->
+    <block wx:if="{{canIUseOpenData && isLogin}}">
       <view class="user-avatar">
-        <image class="user-avatar-image" src="{{userInfo.avatarUrl || defaultAvatarUrl}}" mode="cover"></image>
+        <view class="user-avatar-image">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
         <view class="user-avatar-info ">
-          <text>{{userInfo.nickName || '微信用户'}}</text>
+          <open-data type="userNickName"></open-data>
         </view>
       </view>
       <view class="user-info">
@@ -41,7 +43,7 @@
           <icon class="iconfont icon-bookmark user-info-icon"></icon>
           <view class="user-info-text">
             <text>客户类型</text>
-            <text>Distributor</text>
+            <text>{{userInfo.clientType || defaultClientType}}</text>
           </view>
         </view>
       </view>

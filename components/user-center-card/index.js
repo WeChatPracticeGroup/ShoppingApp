@@ -5,27 +5,24 @@ const UserStatus = {
 
 Component({
   properties: {
-    currentLoginType: {
-      type: Number,
-      value: UserStatus.NoLogin
+    isLogin: {
+      type: Boolean,
+      value: false
     },
     userInfo: {
       type: Object,
       value: {}
     },
-    isNeedGetUserProfile: {
-      type: Boolean,
-      value: false
-    }
   },
   data: {
-    LoginType: UserStatus,
+    defaultClientType: "Distributor",
     defaultAvatarUrl: '../../images/user-center-avatar.png',
-    phoneNumber: ""
+    phoneNumber: "",
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName')
   },
   methods: {
     getUserProfile(e) {
-      console.log("This is a text");
+      if (this.properties.isLogin) return;
       this.triggerEvent("getUserProfile");
     },
     getPhoneNumber() {

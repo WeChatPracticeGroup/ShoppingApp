@@ -34,6 +34,8 @@
   background-repeat: no-repeat;
   margin-right: 30rpx;
   background-color: white;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .user-avatar-info {
