@@ -1,6 +1,8 @@
-<!--搜索-->
-<view class="nav-bar" >
-  <view class="search-group" style="margin-top:{{searchMarginTop}}px; height: {{searchHeight}}px; width: {{searchWidth}}px;" >
+<!-- search bar -->
+<view class="nav-bar">
+<!-- back button -->
+  <view class="left-arrow" wx:if="{{showBackBtn}}" bindtap="handleBackTap"></view>
+  <view class="search-group" style="margin-top:{{searchMarginTop}}px; height: {{searchHeight}}px; width: {{showBackBtn ? searchWidth - 20 : searchWidth}}px;" >
       <image class='search-group__img' bindtap="onSearch" src="/images/me.png" />
       <input class="search-group__input" type="text" placeholder="{{placeHolder}}" placeholder-style="color: grey" confirm-type="search" value="{{inputValue}}"  bindconfirm="onSearch" bindinput="onInput"></input>
   </view>

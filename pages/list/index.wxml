@@ -1,4 +1,4 @@
-<search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" ></search-bar>
+<search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" showBackBtn="{{showBackBtnInSearchBar}}"></search-bar>
 <view class="tabs">
   <view class="sort-row">
     <view class="sort" wx:for="{{sorts}}" wx:key="id" bindtap="handleSortTap" data-index="{{index}}" data-source="sorts">

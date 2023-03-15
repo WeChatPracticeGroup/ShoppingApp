@@ -38,6 +38,7 @@
   padding: 15rpx;
   text-align: center;
   background-color: rgb(240, 240, 240);
+  font-size: 26rpx;
 }
 .menu-item.active {
   background-color: white;
@@ -46,6 +47,7 @@
   flex: 0.8;
 }
 .product-list {
+  padding: 20rpx;
   display: flex;
   flex-wrap: wrap;
 }

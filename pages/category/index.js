@@ -1,74 +1,84 @@
-import {categoryListData} from "../../mockData/category/category"
+wx.cloud.init({
+    env: 'cloud1-5gnddxta5b8abcf2'
+  })
+const db = wx.cloud.database({env: 'cloud1-5gnddxta5b8abcf2'})
 
 Page({
+  categorysData : [],
+  productsData: [],
   data: {
       placeHolder: "请输入关键字搜索",
-      categorys: [
-        {
-          id: 0,
-          name: '按品牌',
-          isActive: true
-        },
-        {
-          id: 1,
-          name: '按类别',
-          isActive: false
-        }
-      ],
-      subCategorys: [
-        {
-          id: 0,
-          name: '智能生活解决方案',
-          isActive: true
-        },
-        {
-          id: 1,
-          name: '服务',
-          isActive: false
-        },
-        {
-          id: 2,
-          name: '入侵检测',
-          isActive: false
-        },
-        {
-          id: 3,
-          name: '控制器',
-          isActive: false
-        }
-      ],
-      menuItems: [
-        {
-          id: 0,
-          name: '空气处理系统',
-          isActive: true
-        },
-        {
-          id: 1,
-          name: '其他空水产品',
-          isActive: false
-        },
-        {
-          id: 2,
-          name: '全屋水系统',
-          isActive: false
-        },
-        {
-          id: 3,
-          name: '智能控制系统',
-          isActive: false
-        }
-      ]
+      categorys: [],
+      subCategorys: [],
+      menuCategorys: [],
+      products: []
   },
   onReady() {
-    const mockData = categoryListData;
-    console.log(mockData);
+    db.collection('categorys').get().then(res => {
+      if (res?.data && res.data.length > 0) {
+        console.log('categorys:',res.data);
+      } else {
+        console.log('no category data');
+        return;
+      }
+      
+      this.categorysData = res.data;
+      const categorys = res.data;
+      categorys[0].isActive = true;
+      this.setSubCategorys(categorys[0].id);
+      this.setData({ categorys });
+
+      db.collection('products').get().then(res => {
+        if (res?.data) {
+          console.log('products:',res.data);
+        } else {
+          console.log('no product data');
+        }
+       
+        this.productsData = res.data;
+        const { menuCategorys } = this.data;
+        this.setProducts(menuCategorys[0].id);
+      });
+    });
+  },
+  setSubCategorys(categoryId) {
+    const { menuCategorys } = this.categorysData.find(item => item.id === categoryId);
+    menuCategorys[0].isActive = true;
+    this.setData({ subCategorys: menuCategorys }, () => {
+      this.setMenuCategorys(menuCategorys[0].id);
+    });
+  },
+  setMenuCategorys(subCategoryId) {
+    const { subCategorys } = this.data;
+    const { menuCategorys } = subCategorys.find(item => item.id === subCategoryId);
+
+    menuCategorys.forEach((item, index) => {
+      index === 0 ? item.isActive = true : item.isActive = false
+    })
+    this.setData({ menuCategorys });
+  },
+  setProducts(menuCatoryId) {
+    const products = [];
+
+    products.push(this.productsData.find(item => item.id === menuCatoryId));
+    this.setData({
+      products
+    })
   },
   handleCategoryTap(e) {
     console.log(e);
-    const { index, source } = e.currentTarget.dataset;
+    const { id, source } = e.currentTarget.dataset;
     const items = this.data[source];
-    items.forEach((item, i) => item.id === index ? item.isActive = true : item.isActive = false);
+
+    if (source === 'categorys') {
+      this.setSubCategorys(id);
+    } else if(source === 'subCategorys') {
+      this.setMenuCategorys(id);
+    } else {
+      this.setProducts(id);
+    }
+
+    items.forEach((item, i) => item.id === id ? item.isActive = true : item.isActive = false);
     this.setData({
       [source]: items
     })
