@@ -32,19 +32,19 @@ const requestCloud = (options = {}) => {
             },
         })
         .then((res) => {
-            // console.log("request: ", res);
-            // const { fail } = res.result;
-            // if (fail) {
-            //     const err = new Error();
-            //     err.code = res.result.code;
-            //     err.errMsg = res.result.errMsg;
-            //     err.fail = res.result.fail;
-            //     throw err;
-            // }
+            console.log("requestCloud res: ", res);
+            const { result } = res;
+            const { success } = result;
+            
+            const errCodeExist = result?.hasOwnProperty("errCode");
+            if (success !== true || errCodeExist) {
+                throw new Error(result.errMsg);
+            }
 
             return res.result;
         });
 };
+
 const request = new Request();
 
 export default request;

@@ -1,12 +1,12 @@
 const cloud = require("wx-server-sdk");
 
-const { addressCreate } = require('./address');
-
 cloud.init({
     env: cloud.DYNAMIC_CURRENT_ENV,
 });
 
 const db = cloud.database();
+
+const DISTRIBUTOR = "Distributor";
 
 const login = async (event, context) => {
     const wxContext = cloud.getWXContext();
@@ -20,22 +20,21 @@ const login = async (event, context) => {
 
     if (!result.data.length) {
         return await register(event, context);
-    } 
-    
-    return { data: result.data };
-     
+    }
 
+    return { data: result.data[0] };
 };
 
 const register = async (event, context) => {
     const wxContext = cloud.getWXContext();
-    const { nickName, avatarUrl, gender } = event.params;
+    const { nickName, gender, phone } = event.params;
 
     const data = {
         openid: wxContext.OPENID,
+        clientType: DISTRIBUTOR,
         nickName,
-        avatarUrl,
         gender,
+        phone,
     };
 
     return await db.collection("users").add({
@@ -43,7 +42,17 @@ const register = async (event, context) => {
     });
 };
 
+// 获取openId云函数入口函数
+const getOpenId = async (event, context) => {
+    const wxContext = cloud.getWXContext();
+
+    return {
+        openid: wxContext.OPENID,
+    };
+};
+
 module.exports = {
-    login, 
+    login,
     register,
-}
+    getOpenId,
+};

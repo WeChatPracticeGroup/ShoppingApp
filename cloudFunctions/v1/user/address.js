@@ -21,18 +21,12 @@ const addressCreate = async (event, context) => {
 
     if (addressCount.total >= 3) {
         return throwError(400, "最多只可保存3个地址");
-
-        // return {
-        //     data: null,
-        //     errMsg: "最多只可保存3个地址",
-        // };
     }
 
     const data = {
         openid: wxContext.OPENID,
         ...event.params,
     };
-
     return await db.collection("addressBook").add({
         data,
     });
@@ -66,8 +60,23 @@ const addressGetByType = async (event, context) => {
         .get();
 };
 
+const addressDelete = async (event, context) => {
+    const wxContext = cloud.getWXContext();
+
+    const { id } = event.params;
+
+    return await db
+        .collection("addressBook")
+        .where({
+            openid: wxContext.OPENID,
+            _id: id,
+        })
+        .remove();
+};
+
 module.exports = {
     addressCreate,
     addressGetByType,
     addressGetAll,
+    addressDelete,
 };
