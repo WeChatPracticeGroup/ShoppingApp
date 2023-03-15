@@ -1,0 +1,42 @@
+<search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" showBackBtn="{{showBackBtnInSearchBar}}"></search-bar>
+<view class="detail-container">
+  <view class="box">
+    <!-- banner -->
+    <swiper class="banner" interval="3000" autoplay="true" indicator-color="white" indicator-active-color="black" indicator-dots="{{banners}}" bindchange="onBannerChange">
+        <swiper-item wx:key="id" wx:for="{{banners}}">
+            <image src="/images/banner.png" />
+        </swiper-item>
+    </swiper>
+    <span class="item-num">{{bannerCurrentIndex+1}}/{{banners.length}}</span>
+  </view>
+  
+  <view class="detail">
+    <view class="price">
+      {{productDetailData.price}}
+    </view>
+    <view class="name">
+      {{productDetailData.name}}
+    </view>
+    <view class="description">
+      description description description description description
+    </view>
+  </view>
+  <view class="long-description-box">
+    <view class="long-description-title">
+      商品概述
+    </view>
+    <view class="long-description">
+      long description
+    </view>
+  </view>
+</view>
+<view class="goodsaction" > 
+	<view class="logo" bindtap="toHome">
+	    <image class="goodsaction-image" src="/images/home-unselected@2x.png" bindtap="toHome"></image>
+	    <text class="goodsaction-text">主页</text>
+  </view>
+  <view class="action_btn">
+    <button class="btn_left">加入购物车</button>
+    <button class="btn_right">立即购买</button>
+  </view>
+</view>
