@@ -1,11 +1,8 @@
 import {
   orderList
-} from "../../mockData/example/oerderList";
+} from "/mockData/orderList/orderList"
 
 
-// pages/order/index.js
-import {orderListData} from "../../mockData/orderList/orderList"
-import request from '/utils/request';
 Page({
 
   /**
@@ -48,24 +45,29 @@ Page({
     this.setData({
       menuButtonInfo: wx.getMenuButtonBoundingClientRect()
     })
-  //   console.log(this.data.menuButtonInfo)
-    const { top, width, height, right } = this.data.menuButtonInfo
+    //   console.log(this.data.menuButtonInfo)
+    const {
+      top,
+      width,
+      height,
+      right
+    } = this.data.menuButtonInfo
     wx.getSystemInfo({
       success: (res) => {
-        const { statusBarHeight } = res
+        const {
+          statusBarHeight
+        } = res
         const margin = top - statusBarHeight
         this.setData({
           navHeight: (height + statusBarHeight + (margin * 2)),
           statusBarHeight: statusBarHeight,
           searchMarginTop: statusBarHeight + margin, // 状态栏 + 胶囊按钮边距
-          searchHeight: height,  // 与胶囊按钮同高
+          searchHeight: height, // 与胶囊按钮同高
           searchWidth: right - width // 胶囊按钮右边坐标 - 胶囊按钮宽度 = 按钮左边可使用宽度
         })
       },
     })
-    this.getOrderList().then((res) => {
-      this.setData({orderListData: res})
-    })
+
   },
 
   /**

@@ -1,6 +1,7 @@
 import {
   orderList
-} from "../../../mockData/example/oerderList";
+} from "/mockData/orderList/orderList"
+
 
 // pages/order/order-detail/index.js
 Page({

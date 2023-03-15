@@ -4,7 +4,8 @@
     <text class="product-model">{{model}}</text>
     <text style="color: blue; padding-top: 16px;">{{status}}</text>
   </view>
-  <van-collapse-item border="false" title="{{name}}" name="{{index}}">
+  <view class="border-bottom" />
+  <van-collapse-item title="{{name}}" name="{{index}}">
     <view class="order-detail ">
       <text>预计发货时间:</text>
       <text>{{deliveryTime}}</text>
@@ -68,7 +69,7 @@
   <view class="card">
     <van-collapse accordion value="{{ productNames }}" bind:change="onProductCollapseChange">
       <text class="product-model">商品明细</text>
-      <view wx:key="name" wx:for="{{orderInfo.productionInfos}}">
+      <view class="border-bottom" wx:key="name" wx:for="{{orderInfo.productionInfos}}">
         <template is="productCollapse" data="{{...item, index}}" />
       </view>
     </van-collapse>

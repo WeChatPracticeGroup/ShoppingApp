@@ -11,10 +11,13 @@
   font-size: 14px;
 }
 
-.order-detail view {
+.item-name {
+  width: 18%;
+}
+
+.order-item {
   display: flex;
-  justify-content: space-between;
-  margin: 8px 0;
+  line-height: 48rpx;
 }
 
 .page-section {

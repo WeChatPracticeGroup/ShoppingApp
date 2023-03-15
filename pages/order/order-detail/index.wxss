@@ -30,6 +30,10 @@
   justify-content: space-between;
 }
 
+.border-bottom {
+  border-bottom: 1px solid #f8f8f8;
+}
+
 .product-model {
   padding: 16px 16px 0;
   font-weight: bold;
@@ -43,6 +47,6 @@
 .van-button {
   background-color: #E9E9E8 !important;
   border-color: #E9E9E8 !important;
-  width: 160px;
+  width: 300rpx;
   color: #898989 !important;
 }
