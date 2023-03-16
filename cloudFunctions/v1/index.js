@@ -11,11 +11,15 @@ const {
     addressGetByType,
     addressDelete,
 } = require("./user/address");
-const { getOrderList, addOrder, getOrderDetail } = require("./order/index");
+const { getOrderList, addOrder, getOrderDetail, addOrdersTest } = require("./order/index");
 //product
 
-const { getProductList, getSubProductList, getProductDetail, getCategoryList } = require("./product/index");
-
+const {
+    getProductList,
+    getSubProductList,
+    getProductDetail,
+    getCategoryList,
+} = require("./product/index");
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -60,13 +64,13 @@ const GET = async (event, context) => {
         case "order/getOrderList":
             return await getOrderList(event, context);
         case "product/getProductList":
-            return await getProductList(event, context)
+            return await getProductList(event, context);
         case "product/getSubProductList":
-            return await getSubProductList(event, context)
+            return await getSubProductList(event, context);
         case "product/getProductDetail":
-            return await getProductDetail(event, context)
+            return await getProductDetail(event, context);
         case "product/getCategoryList":
-            return await getCategoryList(event, context)
+            return await getCategoryList(event, context);
         case "user/getOpenId":
             return await getOpenId(event, context);
 
@@ -94,6 +98,8 @@ const POST = async (event, context) => {
         // order routes
         case "order/addOrder":
             return await addOrder(event, context);
+        case "order/addOrdersTest":
+            return await addOrdersTest(event, context);
 
         default:
             return throwError(404, "找不到请求地址");
