@@ -1,20 +1,19 @@
-wx.cloud.init({
-    env: 'cloud1-5gnddxta5b8abcf2'
-  })
-const db = wx.cloud.database({env: 'cloud1-5gnddxta5b8abcf2'})
+import request from "/utils/request";
 
 Page({
   categorysData : [],
-  productsData: [],
   data: {
       placeHolder: "请输入关键字搜索",
       categorys: [],
       subCategorys: [],
       menuCategorys: [],
-      products: []
+      products: [],
+      hiddenLoading: true
   },
-  onReady() {
-    db.collection('categorys').get().then(res => {
+  onLoad() {
+    this.setData({ hiddenLoading: false });
+    request.get("product/getCategoryList").then(res => {
+      this.setData({ hiddenLoading: true });
       if (res?.data && res.data.length > 0) {
         console.log('categorys:',res.data);
       } else {
@@ -23,29 +22,20 @@ Page({
       }
       
       this.categorysData = res.data;
-      const categorys = res.data;
-      categorys[0].isActive = true;
-      this.setSubCategorys(categorys[0].id);
-      this.setData({ categorys });
+      const defaultCategory = res.data[0]
+      const categoryId = defaultCategory.id;
+      const menutCategoryId = defaultCategory.menuCategorys[0].menuCategorys[0].id;
 
-      db.collection('products').get().then(res => {
-        if (res?.data) {
-          console.log('products:',res.data);
-        } else {
-          console.log('no product data');
-        }
-       
-        this.productsData = res.data;
-        const { menuCategorys } = this.data;
-        this.setProducts(menuCategorys[0].id);
-      });
+      defaultCategory.isActive = true;
+      this.setSubCategorys(categoryId);
+      this.setData({ categorys: res.data });
     });
   },
   setSubCategorys(categoryId) {
-    const { menuCategorys } = this.categorysData.find(item => item.id === categoryId);
-    menuCategorys[0].isActive = true;
-    this.setData({ subCategorys: menuCategorys }, () => {
-      this.setMenuCategorys(menuCategorys[0].id);
+    const { menuCategorys: subCategorys } = this.categorysData.find(item => item.id === categoryId);
+    subCategorys[0].isActive = true;
+    this.setData({ subCategorys: subCategorys }, () => {
+      this.setMenuCategorys(subCategorys[0].id);
     });
   },
   setMenuCategorys(subCategoryId) {
@@ -55,15 +45,28 @@ Page({
     menuCategorys.forEach((item, index) => {
       index === 0 ? item.isActive = true : item.isActive = false
     })
-    this.setData({ menuCategorys });
+    this.setData({ menuCategorys }, () => {
+      this.setProducts(menuCategorys[0].id);
+    });
   },
-  setProducts(menuCatoryId) {
-    const products = [];
+  setProducts(menutCategoryId) {
+    if (!menutCategoryId) {
+      return;
+    }
 
-    products.push(this.productsData.find(item => item.id === menuCatoryId));
-    this.setData({
-      products
-    })
+    this.setData({ hiddenLoading: false });
+    request.get("product/getProductList", {category: menutCategoryId}).then((res) => {
+      this.setData({ hiddenLoading: true });
+      if (res?.data) {
+        console.log(`${menutCategoryId} products:`,res.data);
+      } else {
+        console.log('no product data');
+      }
+     
+      this.setData({
+        products: res.data
+      })
+    });
   },
   handleCategoryTap(e) {
     console.log(e);

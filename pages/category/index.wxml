@@ -25,7 +25,7 @@
       <view class="title" wx:for="{{menuCategorys}}" wx:key="id" wx:if="{{item.isActive}}">{{item.name}}</view>
       <scroll-view style="height: 1000rpx;" bindscrolltolower="handleScrollLower" scroll-y>
         <view class="product-list">
-        <navigator class="product-item" wx:key="id" wx:for="{{products}}" url="/pages/list/index?id={{item.id}}&parentid={{item.img}}">
+        <navigator class="product-item" wx:key="id" wx:for="{{products}}" url="{{item.price ? '/pages/detail/index?id='+item.id : '/pages/list/index?id='+item.id}}">
           <image class="product-img" src="{{item.image}}" mode="scaleToFill"/>
           <view class="product-name">
           {{item.name}}
@@ -34,5 +34,6 @@
       </view>
       </scroll-view>
     </view>
+    <loading hidden="{{hiddenLoading}}">正在加载</loading>
   </view>
 </view>
