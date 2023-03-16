@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "user-center-card": "../../components/user-center-card/index"
+    "user-center-card": "../../components/userCenterCard/index",
+    "user-authorizer-dialog": "../../components/userAuthorizerDialog/index"
   },
   "navigationStyle": "custom"
 }

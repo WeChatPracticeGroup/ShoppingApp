@@ -1,0 +1,6 @@
+<!--components/userPhoneInputDialog/index.wxml-->
+<view class="user-phone-input-dialog">
+  <van-dialog use-slot title="{{phoneDailog.title}}" show="{{ show }}" show-cancel-button show-confirm-button confirmButtonText="{{phoneDailog.confirmButtonText}}" bind:cancel="onDialogCancel" bind:confirm="onDialogConfirm">
+    <van-field value="{{ phoneInputed }}" label="{{phoneDailog.phoneFieldLabel}}" placeholder="{{phoneDailog.placeHolder}}" error-message="{{phoneFieldErrorMessage}}" bind:input="onFieldInput"></van-field>
+  </van-dialog>
+</view>

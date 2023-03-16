@@ -34,6 +34,8 @@
   background-repeat: no-repeat;
   margin-right: 30rpx;
   background-color: white;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .user-avatar-info {
@@ -69,7 +71,7 @@
 }
 
 .user-info-button::after {
-    border: 0px;
+  border: 0px;
 }
 
 .user-info-text {
