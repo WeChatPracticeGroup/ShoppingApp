@@ -1,1 +1,3 @@
-<button bindtap="getUserProfile"> 获取头像昵称 </button>
+<button bindtap="userLogin"> 获取头像昵称 </button>
+
+<button bindtap="addOrders"> addOrders  </button>

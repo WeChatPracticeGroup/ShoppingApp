@@ -1,4 +1,7 @@
 const cloud = require("wx-server-sdk");
+const moment = require("moment");
+
+const { throwError } = require("../utils");
 
 cloud.init({
     env: cloud.DYNAMIC_CURRENT_ENV,
@@ -6,7 +9,7 @@ cloud.init({
 
 const db = cloud.database();
 
-const DISTRIBUTOR = "Distributor";
+const DISTRIBUTOR = "distributor";
 
 const login = async (event, context) => {
     const wxContext = cloud.getWXContext();
@@ -27,19 +30,34 @@ const login = async (event, context) => {
 
 const register = async (event, context) => {
     const wxContext = cloud.getWXContext();
-    const { nickName, gender, phone } = event.params;
+    const { clientType = DISTRIBUTOR } = event.params;
+    const timestamp = Date.now();
+    const createdAt = moment(timestamp).format("YYYY-MM-DD HH:mm:ss");
 
     const data = {
+        clientType,
         openid: wxContext.OPENID,
-        clientType: DISTRIBUTOR,
-        nickName,
-        gender,
-        phone,
+        createdAt,
+        timestamp,
     };
 
-    return await db.collection("users").add({
+    const { _id } = await db.collection("users").add({
         data,
     });
+
+    if (_id) {
+        const result = await db
+            .collection("users")
+            .where({
+                _id,
+            })
+            .limit(1)
+            .get();
+            
+        return { data: result.data[0] };
+    }
+    
+    return throwError(400, "注册失败");
 };
 
 // 获取openId云函数入口函数
