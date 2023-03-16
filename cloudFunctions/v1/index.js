@@ -61,8 +61,6 @@ const GET = async (event, context) => {
             return await addressGetAll(event, context);
         case "user/addressGetByType":
             return await addressGetByType(event, context);
-        case "order/getOrderList":
-            return await getOrderList(event, context);
         case "product/getProductList":
             return await getProductList(event, context);
         case "product/getSubProductList":
