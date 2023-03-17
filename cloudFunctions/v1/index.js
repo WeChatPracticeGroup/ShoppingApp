@@ -5,6 +5,7 @@ const { throwError, responseInterceptor } = require("./utils");
 
 // routes
 const { login, getOpenId } = require("./user/index");
+const { getHomeImages } = require("./home/index");
 const {
     addressCreate,
     addressGetAll,
@@ -24,6 +25,7 @@ const {
 // 云函数入口函数
 exports.main = async (event, context) => {
     try {
+        console.log("event: ", event);
         let res = await handleRoutes(event, context);
         if (!res) {
             throwError(400, "请求错误");
@@ -56,6 +58,10 @@ const GET = async (event, context) => {
     event.params = params;
 
     switch (route) {
+        // home routes
+        case "home/getHomeImages": 
+            return await getHomeImages(event, context);
+        
         // user routes
         case "user/addressGetAll":
             return await addressGetAll(event, context);

@@ -1,7 +1,7 @@
 import qs from "querystring";
 
 class Request {
-    get(url, params, header = {}, extraOptions) {
+    get(url, params = {}, header = {}, extraOptions) {
         const options = {
             method: "GET",
             url: url + "?" + qs.stringify(params),

@@ -47,5 +47,14 @@ Page({
         }).catch(e => {
             console.log("e: ", e);
         })
+    },
+    
+    getHomeImages() {
+        console.log("updateHomeImages~~");
+        request.get("home/getHomeImages").then(res => {
+            console.log("res: ", res);
+        }).catch(e => {
+            console.log("e: ", e);
+        })
     }
 });

@@ -1,3 +1,6 @@
+import request from '/utils/request';
+// import { getHomeImages } from '/utils/util';
+
 Page({
     /**
      * 页面的初始数据
@@ -6,6 +9,14 @@ Page({
         messageCount: 1,
         banners: [1, 2, 3, 4],
         goods: [1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 9, 9, 9, 9, 9]
+    },
+    
+    onLoad() {
+        request.get("home/getHomeImages").then(res => {
+            console.log("res: ", res);
+        }).cattch(e => {
+            console.log("e: ", e);
+        })
     },
 
     jumpToSearchPage() {
@@ -35,11 +46,6 @@ Page({
             url: "/pages/login/index",
         });
     },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad(options) { },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
