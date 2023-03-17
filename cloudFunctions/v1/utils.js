@@ -1,4 +1,4 @@
-const throwError = (errCode = 400, errMsg = "服务器错误", throwIt = true) => {
+const throwError = (errCode = 400, errMsg = "服务器错误") => {
     const err = new Error(errMsg);
     err.success = false;
     err.errCode = errCode;

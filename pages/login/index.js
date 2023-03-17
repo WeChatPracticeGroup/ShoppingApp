@@ -40,7 +40,7 @@ Page({
     getOrderDetail() {
         console.log("getOrderDetail~~");
         const params = {
-            orderID: "34312553114000",
+            orderID: "34312553114",
         };
         request.get("order/getOrderDetail", params).then(res => {
             console.log("res: ", res);

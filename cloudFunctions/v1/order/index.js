@@ -50,11 +50,11 @@ const getOrderDetail = async (event, context) => {
         })
         .get();
         
-    if(!result?.data?.length) {
+    if(!result.data.length) {
         throwError(400, "该订单号不存在")
     }
     
-    return { data: result.data[0] };
+    return { data: result.data[0] || null };
 };
 
 const addOrder = async (event, context) => {
