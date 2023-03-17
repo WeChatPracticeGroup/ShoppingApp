@@ -1,74 +1,87 @@
-import {categoryListData} from "../../mockData/category/category"
+import request from "/utils/request";
 
 Page({
+  categorysData : [],
   data: {
       placeHolder: "请输入关键字搜索",
-      categorys: [
-        {
-          id: 0,
-          name: '按品牌',
-          isActive: true
-        },
-        {
-          id: 1,
-          name: '按类别',
-          isActive: false
-        }
-      ],
-      subCategorys: [
-        {
-          id: 0,
-          name: '智能生活解决方案',
-          isActive: true
-        },
-        {
-          id: 1,
-          name: '服务',
-          isActive: false
-        },
-        {
-          id: 2,
-          name: '入侵检测',
-          isActive: false
-        },
-        {
-          id: 3,
-          name: '控制器',
-          isActive: false
-        }
-      ],
-      menuItems: [
-        {
-          id: 0,
-          name: '空气处理系统',
-          isActive: true
-        },
-        {
-          id: 1,
-          name: '其他空水产品',
-          isActive: false
-        },
-        {
-          id: 2,
-          name: '全屋水系统',
-          isActive: false
-        },
-        {
-          id: 3,
-          name: '智能控制系统',
-          isActive: false
-        }
-      ]
+      categorys: [],
+      subCategorys: [],
+      menuCategorys: [],
+      products: [],
+      hiddenLoading: true
   },
-  onReady() {
-    const mockData = categoryListData;
-    console.log(mockData);
+  onLoad() {
+    this.setData({ hiddenLoading: false });
+    request.get("product/getCategoryList").then(res => {
+      this.setData({ hiddenLoading: true });
+      if (res?.data && res.data.length > 0) {
+        console.log('categorys:',res.data);
+      } else {
+        console.log('no category data');
+        return;
+      }
+      
+      this.categorysData = res.data;
+      const defaultCategory = res.data[0]
+      const categoryId = defaultCategory.id;
+      const menutCategoryId = defaultCategory.menuCategorys[0].menuCategorys[0].id;
+
+      defaultCategory.isActive = true;
+      this.setSubCategorys(categoryId);
+      this.setData({ categorys: res.data });
+    });
+  },
+  setSubCategorys(categoryId) {
+    const { menuCategorys: subCategorys } = this.categorysData.find(item => item.id === categoryId);
+    subCategorys[0].isActive = true;
+    this.setData({ subCategorys: subCategorys }, () => {
+      this.setMenuCategorys(subCategorys[0].id);
+    });
+  },
+  setMenuCategorys(subCategoryId) {
+    const { subCategorys } = this.data;
+    const { menuCategorys } = subCategorys.find(item => item.id === subCategoryId);
+
+    menuCategorys.forEach((item, index) => {
+      index === 0 ? item.isActive = true : item.isActive = false
+    })
+    this.setData({ menuCategorys }, () => {
+      this.setProducts(menuCategorys[0].id);
+    });
+  },
+  setProducts(menutCategoryId) {
+    if (!menutCategoryId) {
+      return;
+    }
+
+    this.setData({ hiddenLoading: false });
+    request.get("product/getProductList", {category: menutCategoryId}).then((res) => {
+      this.setData({ hiddenLoading: true });
+      if (res?.data) {
+        console.log(`${menutCategoryId} products:`,res.data);
+      } else {
+        console.log('no product data');
+      }
+     
+      this.setData({
+        products: res.data
+      })
+    });
   },
   handleCategoryTap(e) {
     console.log(e);
-    const { index, source } = e.currentTarget.dataset;
+    const { id, source } = e.currentTarget.dataset;
     const items = this.data[source];
-    items.forEach((item, i) => item.id === index ? item.isActive = true : item.isActive = false);
+
+    if (source === 'categorys') {
+      this.setSubCategorys(id);
+    } else if(source === 'subCategorys') {
+      this.setMenuCategorys(id);
+    } else {
+      this.setProducts(id);
+    }
+
+    items.forEach((item, i) => item.id === id ? item.isActive = true : item.isActive = false);
     this.setData({
       [source]: items
     })

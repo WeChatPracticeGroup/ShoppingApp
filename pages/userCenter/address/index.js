@@ -1,8 +1,3 @@
-// import {
-//     addressListSale,
-//     addressListDelivery,
-//     addressListPayer,
-// } from "../../../mockData/userCenter/address";
 import request from "/utils/request";
 import { ADDRESS_TYPES } from "/constants/userCenter/address";
 
@@ -32,7 +27,6 @@ Page({
         request
             .get("user/addressGetAll")
             .then((res) => {
-                console.log("addressGetAll: res: ", res);
                 const addressList = res.data || [];
                 const _addressListSale = [];
                 const _addressDelivery = [];
@@ -56,7 +50,7 @@ Page({
                 });
             })
             .catch(e => {
-                console.log("addressGetAll: e!!!: ", e);
+                console.log("e: ", e.message);
             })
             .finally(() => {
                 setTimeout(() => {

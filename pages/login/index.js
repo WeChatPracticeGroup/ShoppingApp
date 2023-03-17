@@ -1,24 +1,28 @@
 import request from "/utils/request";
+import { mockOrders } from './mockData';
 
 Page({
     data: {},
     onLoad: function (options) {},
 
-    getUserProfile(e) {
-        // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
-        // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-        wx.getUserProfile({
-            desc: "用于完善会员资料", // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-            success: (res) => {
-                // console.log("getUserProfile: ", res);
-                this.userLogin(res.userInfo);
-            },
-        });
-    },
-
-    userLogin(params) {
+    userLogin() {
+        const params = {
+            clientType: "distributor"
+        }
         request.post("user/login", params).then(res => {
             console.log("res: ", res);
         })
+    },
+    
+    addOrders() {
+        mockOrders.forEach(order => {
+            console.log("order: ", order);
+            request.post("order/addOrdersTest", order).then(res => {
+                console.log("addOrdersTest: ", res);
+            }).catch(e => {
+                console.log("addOrdersTest: ", e);
+            });
+        })
+        
     }
 });

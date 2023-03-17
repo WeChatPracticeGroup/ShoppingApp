@@ -1,0 +1,3 @@
+.user-phone-input-dialog {
+  position: absolute;
+}
