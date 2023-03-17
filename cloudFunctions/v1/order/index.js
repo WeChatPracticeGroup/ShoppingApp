@@ -1,5 +1,7 @@
 const cloud = require("wx-server-sdk");
 
+const { throwError } = require("../utils");
+
 cloud.init({
     env: cloud.DYNAMIC_CURRENT_ENV,
 });
@@ -9,32 +11,50 @@ const _ = db.command;
 
 const getOrderList = async (event, context) => {
     const wxContext = cloud.getWXContext();
+    const { status } = event.params;
+    
+    let whereConditions = {
+        openid: _.eq(wxContext.OPENID).or(_.eq(null)),
+    }
+    
+    if(status) {
+        whereConditions = {
+            ...whereConditions,
+            status,
+        }
+    }
+    
     return await db
         .collection("orders")
         .field({
-            POId: true,
-            deliveryParty: true,
-            orderAmount: true,
-            orderDate: true,
-            orderStatus: true,
+            address: true,
+            orderID: true,
+            poNumber: true,
+            status: true,
+            subscriptionDate: true,
+            zipCode: true,
+            amount: true,
         })
-        .where({
-            openid: _.eq(wxContext.OPENID).or(_.eq(null)),
-        })
+        .where(whereConditions)
         .get();
 };
 
 const getOrderDetail = async (event, context) => {
     const wxContext = cloud.getWXContext();
-    const { id } = event.params;
-    return await db
+    const { orderID } = event.params;
+    const result = await db
         .collection("orders")
         .where({
-            openid: wxContext.OPENID,
-            _id: id,
+            // openid: wxContext.OPENID,
+            orderID,
         })
-        .limit(1)
         .get();
+        
+    if(!result?.data?.length) {
+        throwError(400, "该订单号不存在")
+    }
+    
+    return { data: result.data[0] };
 };
 
 const addOrder = async (event, context) => {
