@@ -1,0 +1,52 @@
+/* pages/order/order-detail/index.wxss */
+
+.order-title {
+  background-color: white;
+  padding: 16px 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  background-color: white;
+  margin: 8px;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.custom-class {
+  text-align: center;
+}
+
+.more-order-info {
+  display: flex;
+  justify-content: center;
+}
+
+.order-detail {
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.product-model {
+  padding: 16px 16px 0;
+  font-weight: bold;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.van-button {
+  background-color: #E9E9E8 !important;
+  border-color: #E9E9E8 !important;
+  width: 300rpx;
+  color: #898989 !important;
+}

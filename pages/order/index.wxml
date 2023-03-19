@@ -1,42 +1,41 @@
 <!--pages/order/index.wxml-->
-
-<view class="custom-bar" style="height:{{navHeight - statusBarHeight}}px; padding-top: {{statusBarHeight}}px;">
-  <view class="custom-bar__wrapper" style="margin-top:{{searchMarginTop - statusBarHeight/2}}px; height: {{searchHeight - statusBarHeight}}px;width: {{searchWidth}}px" >
-    订单记录
+<template name="orderCard">
+  <view class="page-section">
+    <icon type="warn" size="15" color="#C9C9C9" />
+    <text style="font-size: 12px;margin-left: 8px;">最近下达的订单将在24小时内显示在订单历史记录中。</text>
   </view>
-</view>
-<view>
-  <van-tabs active="{{ active }}" bind:change="onChange">
-    <van-tab title="全部">
-      <scroll-view>
-        <view class="warning-msg">
-          <van-icon name="warning" />
-          <view class="message">最近下达的订单将在 24 小时内显示在订单历史记录中</view>
-        </view>
-        <view class="order-item" wx:for="{{orderListData}}" wx:key="index" wx:for-item="orderItem">
-          <view>
-            <view>订单号：</view>
-            <view>PO编号：</view>
-            <view>订购日期：</view>
-            <view>送达方：</view>
-          </view>
-          <view>
-            <view>{{orderItem.id}} <van-icon name="arrow" /></view>
-            <view>{{orderItem.POId}}</view>
-            <view>{{orderItem.orderData}}</view>
-            <view>{{orderItem.deliveryParty}}</view>
-          </view>
-          <view class="status-amount">
-            <view>{{orderItem.orderStatus}}</view>
-            <view>{{orderItem.orderAmount}}</view>
-          </view>
-        </view>
-      </scroll-view>
-    </van-tab>
-    <van-tab title="订单待处理">订单待处理</van-tab>
-    <van-tab title="进行中">进行中</van-tab>
-    <van-tab title="已预订">已预订</van-tab>
-    <van-tab title="标签 5">内容 5</van-tab>
-    <van-tab title="标签 6">内容 6</van-tab>
+  <view wx:key="orderID" wx:for="{{orderList}}" class="order-detail">
+    <view class="order-item">
+      <text class="item-name">订单号：</text>
+      <text>{{item.orderID}}</text>
+      <van-icon data-id="{{item.orderID}}" style="margin: 0 0 0 8px;" name="arrow" bind:click="openOrderDetail" />
+      <text style="margin-left: auto;color: {{item.status === '发货完成'? 'grey':'blue'}};">{{item.status}}</text>
+    </view>
+    <view class="order-item">
+      <text class="item-name">PO编号: </text>
+      <text>{{item.poNumber}}</text>
+      <text style="margin-left: auto;">{{item.amount}}</text>
+    </view>
+    <view class="order-item">
+      <text class="item-name">订购日期: </text>
+      <text>{{item.subscriptionDate}}</text>
+    </view>
+    <view class="order-item">
+      <text class="item-name">送达方: </text>
+      <text>{{item.address}}</text>
+    </view>
+  </view>
+</template>
+
+
+<scroll-view>
+  <van-tabs sticky ellipsis="{{false}}" title-active-color="blue" color="blue" active="{{ active }}" bind:change="onTabsChange">
+    <van-tab title="全部"> <template is="orderCard" data="{{orderList}}" /> </van-tab>
+    <van-tab title="订单待处理"><template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="进行中"> <template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="已预定"> <template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="不相关"> <template is="orderCard" data="{{orderList}}" /></van-tab>
+    <van-tab title="部分发货"> <template is="orderCard" data="{{orderList}}" /></van-tab>
   </van-tabs>
-</view>
+
+</scroll-view>
