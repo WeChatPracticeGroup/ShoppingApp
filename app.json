@@ -1,10 +1,11 @@
 {
-    "pages": ["pages/home/index",
-      "pages/detail/index",
-        
+    "pages": [
+        "pages/home/index",
+        "pages/detail/index",
         "pages/list/index",
         "pages/category/index",
         "pages/order/index",
+        "pages/order/order-detail/index",
         "pages/example/index",
         "pages/login/index",
         "pages/userCenter/index",

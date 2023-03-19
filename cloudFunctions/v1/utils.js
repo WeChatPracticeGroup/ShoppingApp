@@ -6,6 +6,7 @@ const throwError = (errCode = 400, errMsg = "服务器错误") => {
     throw err;
 };
 
+
 const responseInterceptor = (response) => {
     response.success = true;
     response.code = 200;

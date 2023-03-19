@@ -1,3 +1,11 @@
 <button bindtap="userLogin"> 获取头像昵称 </button>
 
 <button bindtap="addOrders"> addOrders  </button>
+
+<button bindtap="getOrderList"> getOrderList  </button>
+
+<button bindtap="getOrderDetail">getOrderDetail</button>
+
+<!-- <button bindtap="updateHomeImages">updateHomeImages</button> -->
+
+<button bindtap="getHomeImages">getHomeImages</button>

@@ -23,6 +23,38 @@ Page({
                 console.log("addOrdersTest: ", e);
             });
         })
-        
+    },
+    
+    getOrderList() {
+        console.log("getOrderList~~");
+        const params = {
+            status: "1"
+        };
+        request.get("order/getOrderList", params).then(res => {
+            console.log("res: ", res);
+        }).catch(e => {
+            console.log("e: ", e);
+        })
+    },
+    
+    getOrderDetail() {
+        console.log("getOrderDetail~~");
+        const params = {
+            orderID: "34312553114",
+        };
+        request.get("order/getOrderDetail", params).then(res => {
+            console.log("res: ", res);
+        }).catch(e => {
+            console.log("e: ", e);
+        })
+    },
+    
+    getHomeImages() {
+        console.log("updateHomeImages~~");
+        request.get("home/getHomeImages").then(res => {
+            console.log("res: ", res);
+        }).catch(e => {
+            console.log("e: ", e);
+        })
     }
 });
