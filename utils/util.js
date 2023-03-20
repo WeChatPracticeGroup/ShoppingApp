@@ -27,7 +27,7 @@ const getSearchBarBoundingClientRect = () => {
   };
 }
 
-const generateImgUrl = (filePath) => {
+const generateImgUrl = (filePath = "") => {
     return `cloud://cloud1-5gnddxta5b8abcf2.636c-cloud1-5gnddxta5b8abcf2-1317058792${filePath}`
 }
 

@@ -75,21 +75,38 @@ Page({
       isDialogShow: false
     })
   },
+  checkAuth() {
+    if (!this.data.userInfo) {
+        this.setData({
+          isDialogShow: true
+        });
+        return false;
+      };
+      
+    return true;
+  },
   /*
    * 跳转到通讯簿
    */
-  goToAddressPage() {
-    if (!this.data.userInfo) {
-      this.setData({
-        isDialogShow: true
-      });
-      return;
-    };
-
-    wx.navigateTo({
-      url: '/pages/userCenter/address/index',
-    })
+  goToAddressPage(option) {
+    const authed = this.checkAuth();
+    if(authed) {
+        wx.navigateTo({
+            url: '/pages/userCenter/address/index',
+        })
+    }
   },
+    /*
+   * 跳转到我的资料
+   */
+    goToProfile(option) {
+        const authed = this.checkAuth();
+        if(authed) {
+            wx.navigateTo({
+                url: '/pages/userCenter/userProfile/index',
+            })
+        }
+      },
 
   /*
    * 用户登录 

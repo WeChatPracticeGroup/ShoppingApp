@@ -1,5 +1,5 @@
 import request from '/utils/request';
-// import { getHomeImages } from '/utils/util';
+import { generateImgUrl } from '/utils/util';
 
 Page({
     /**
@@ -7,19 +7,77 @@ Page({
      */
     data: {
         messageCount: 1,
-        banners: [1, 2, 3, 4],
-        goods: [1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 9, 9, 9, 9, 9]
+        banners: [],
+        goods: [],
+        userInfo: null,
+        isDialogShow: false,
+    },
+
+    onLoad() {
+        this.init()
+    },
+
+    init() {
+        this.loadHomePage()
+        this.handleUserLogin()
     },
     
-    onLoad() {
-        request.get("home/getHomeImages").then(res => {
-            console.log("res: ", res);
-        }).cattch(e => {
-            console.log("e: ", e);
+    handleUserLogin() {
+        const userInfo = wx.getStorageSync('userInfo');
+        if(!userInfo) {
+            this.setData({
+                isDialogShow: true,
+            })
+        }
+    },
+    
+    onAuthCompleted() {
+        wx.showToast({
+            title: '授权成功',
+            icon: "success"
+        });
+        this.setData({
+            isDialogShow: false,
         })
     },
 
-    jumpToSearchPage() {
+    loadHomePage() {
+        wx.showLoading({
+            title: 'Loading'
+        });
+        request.get("home/getHomeImages").then(res => {
+            const prefix = generateImgUrl();
+            let { banners, categoryImages } = res.data;
+            
+            banners = banners.map(banner => `${prefix}${banner}`);
+            categoryImages.forEach(img => {
+                img.imagePath = `${prefix}${img.imagePath}`;
+            });
+            
+            this.setData({
+                banners,
+                goods: { ...categoryImages },
+            })
+
+            wx.hideLoading();
+        }).catch(e => {
+            wx.showToast({
+                title: e.message || e || "请求错误",
+            })
+        }).finally(() => {
+            wx.hideLoading();
+        })
+    },
+
+    onItemClick(e) {
+        wx.showToast({
+            title: '跳转产品功能暂未实现，敬请期待',
+            icon: 'none',
+            duration: 2000
+        })
+    },
+
+    toSearchPage() {
         wx.showToast({
             title: 'to search page',
             icon: 'none',
@@ -27,7 +85,7 @@ Page({
         })
     },
 
-    jumpToMessagePage() {
+    toMessagePage() {
         wx.showToast({
             title: 'to message page',
             icon: 'none',
@@ -40,7 +98,7 @@ Page({
             url: "/pages/example/index",
         });
     },
-    
+
     toLogin() {
         wx.navigateTo({
             url: "/pages/login/index",

@@ -10,7 +10,8 @@
         "pages/login/index",
         "pages/userCenter/index",
         "pages/userCenter/address/index",
-        "pages/userCenter/address/edit/index"
+        "pages/userCenter/address/edit/index",
+        "pages/userCenter/userProfile/index"
     ],
     "backgroundColor": "#f7f8fa",
     "window": {
