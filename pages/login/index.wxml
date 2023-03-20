@@ -9,3 +9,5 @@
 <!-- <button bindtap="updateHomeImages">updateHomeImages</button> -->
 
 <button bindtap="getHomeImages">getHomeImages</button>
+
+<button bindtap="updateUserPhone">updateUserPhone</button>

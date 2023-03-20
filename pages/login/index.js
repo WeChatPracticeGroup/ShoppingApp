@@ -56,5 +56,16 @@ Page({
         }).catch(e => {
             console.log("e: ", e);
         })
+    },
+    
+    updateUserPhone() {
+        const params = {
+            phone: "18482105374",
+        }
+        request.post("user/updateUserPhone", params).then(res => {
+            console.log("res: ", res);
+        }).catch(e => {
+            console.log("e: ", e);
+        })
     }
 });

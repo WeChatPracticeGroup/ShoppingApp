@@ -39,6 +39,7 @@ const register = async (event, context) => {
         openid: wxContext.OPENID,
         createdAt,
         timestamp,
+        phone: "",
     };
 
     const { _id } = await db.collection("users").add({
@@ -53,10 +54,10 @@ const register = async (event, context) => {
             })
             .limit(1)
             .get();
-            
+
         return { data: result.data[0] };
     }
-    
+
     return throwError(400, "注册失败");
 };
 
@@ -69,8 +70,30 @@ const getOpenId = async (event, context) => {
     };
 };
 
+const updateUserPhone = async (event, context) => {
+    const wxContext = cloud.getWXContext();
+    const { phone } = event.params;
+    
+    const phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/;
+    if (!phoneReg.test(phone)) {
+        return throwError(400, "手机号格式不正确");
+    };
+
+    return await db
+        .collection("users")
+        .where({
+            openid: wxContext.OPENID,
+        })
+        .update({
+            data: {
+                phone,
+            },
+        });
+};
+
 module.exports = {
     login,
     register,
     getOpenId,
+    updateUserPhone,
 };
