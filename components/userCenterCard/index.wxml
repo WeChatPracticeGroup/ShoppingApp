@@ -16,9 +16,11 @@
       <view class="user-avatar">
         <view class="user-avatar-image">
           <open-data type="userAvatarUrl"></open-data>
+          <image src="{{userInfo.avatarUrl}}"></image>
         </view>
         <view class="user-avatar-info ">
           <open-data type="userNickName"></open-data>
+          <!-- <image src="{{userInfo.nickname}}"></image> -->
         </view>
       </view>
     </block>

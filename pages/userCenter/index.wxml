@@ -3,7 +3,7 @@
   <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted"></user-authorizer-dialog>
   <user-center-card userInfo="{{userInfo}}" bind:login="login"> </user-center-card>
   <view class="user-menu">
-    <view class="user-menu-item" bindtap="checkAuth">
+    <view class="user-menu-item">
       <view class="user-menu-container" bindtap="goToAddressPage">
         <view class="icon-container">
           <icon class="iconfont icon-map-location user-menu-icon map-icon"></icon>

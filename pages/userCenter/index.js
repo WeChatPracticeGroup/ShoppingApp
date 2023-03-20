@@ -80,26 +80,32 @@ Page({
         this.setData({
           isDialogShow: true
         });
-        return;
+        return false;
       };
+      
+    return true;
   },
   /*
    * 跳转到通讯簿
    */
   goToAddressPage(option) {
-    console.log("oprions: ", option);
-    wx.navigateTo({
-      url: '/pages/userCenter/address/index',
-    })
+    const authed = this.checkAuth();
+    if(authed) {
+        wx.navigateTo({
+            url: '/pages/userCenter/address/index',
+        })
+    }
   },
     /*
    * 跳转到我的资料
    */
     goToProfile(option) {
-        console.log("oprions: ", option);
-        wx.navigateTo({
-          url: '/pages/userCenter/userProfile/index',
-        })
+        const authed = this.checkAuth();
+        if(authed) {
+            wx.navigateTo({
+                url: '/pages/userCenter/userProfile/index',
+            })
+        }
       },
 
   /*

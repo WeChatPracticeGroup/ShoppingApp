@@ -26,3 +26,9 @@ page {
 .container {
     display: flex;
 }
+
+.btn-submit {
+    margin-top: 48rpx;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+}
