@@ -1,5 +1,4 @@
 import request from '/utils/request';
-// import { getHomeImages } from '/utils/util';
 
 Page({
     /**
@@ -7,19 +6,46 @@ Page({
      */
     data: {
         messageCount: 1,
-        banners: [1, 2, 3, 4],
-        goods: [1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 9, 9, 9, 9, 9]
+        banners: [],
+        goods: []
     },
-    
+
     onLoad() {
+        this.init()
+    },
+
+    init() {
+        wx.showLoading({
+            title: 'Loading'
+        });
+        this.loadHomePage()
+    },
+
+    loadHomePage() {
         request.get("home/getHomeImages").then(res => {
-            console.log("res: ", res);
-        }).cattch(e => {
+            this.setData({
+                banners: res.data.banners,
+                goods: res.data.categoryImages
+            })
+            wx.hideLoading();
+        }).catch(e => {
+            wx.hideLoading()
+            wx.showToast({
+                title: e,
+            })
             console.log("e: ", e);
         })
     },
 
-    jumpToSearchPage() {
+    onItemClick(e) {
+        wx.showToast({
+            title: 'item index:' + e.currentTarget.dataset.index,
+            icon: 'none',
+            duration: 2000
+        })
+    },
+
+    toSearchPage() {
         wx.showToast({
             title: 'to search page',
             icon: 'none',
@@ -27,7 +53,7 @@ Page({
         })
     },
 
-    jumpToMessagePage() {
+    toMessagePage() {
         wx.showToast({
             title: 'to message page',
             icon: 'none',
@@ -40,7 +66,7 @@ Page({
             url: "/pages/example/index",
         });
     },
-    
+
     toLogin() {
         wx.navigateTo({
             url: "/pages/login/index",

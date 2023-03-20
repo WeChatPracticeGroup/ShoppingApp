@@ -1,7 +1,7 @@
 {
   "navigationStyle": "custom",
-	"usingComponents": {
-		"navigation-bar": "/components/customNavigationBar/customNavigationBar",
-		"van-icon": "@vant/weapp/icon/index"
-	}
+  "usingComponents": {
+    "navigation-bar": "/components/customNavigationBar/customNavigationBar",
+    "van-icon": "@vant/weapp/icon/index"
+  }
 }

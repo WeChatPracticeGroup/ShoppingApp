@@ -5,18 +5,18 @@
         <!-- search bar -->
         <view class="search-bar">
             <!-- search -->
-            <view class="search" bind:tap="jumpToSearchPage">
+            <view class="search" bind:tap="toSearchPage">
                 <icon type="search" color="#757575" />
                 <text>请输入关键词进行搜索</text>
             </view>
             <!-- message icon -->
-            <van-icon class="message" name="comment-o" info="{{messageCount}}" size="24px" bind:click="jumpToMessagePage"/>
+            <van-icon class="message" name="comment-o" info="{{messageCount}}" size="24px" bind:click="toMessagePage" />
         </view>
     </view>
     <view class="goods_container_page">
         <!-- banner -->
         <swiper class="banner" interval="3000" autoplay="true" indicator-color="white" indicator-active-color="black" indicator-dots="{{banners}}">
-            <swiper-item wx:for="{{banners}}">
+            <swiper-item wx:for="{{banners}}" wx:key="this">
                 <image src="/images/banner.png" />
             </swiper-item>
         </swiper>
@@ -24,10 +24,10 @@
         <view class="goods_container">
             <text class="goods_container_title">选购我们的智能建筑科技产品目录</text>
             <text class="goods_container_description">获取最受欢迎的消防、安全、舒适和节能产品的定价和供货情况</text>
-            <block wx:for="{{goods}}" class="goods_container">
-                <view class="goods_items">
+            <block wx:for="{{goods}}" wx:key="index">
+                <view class="goods_items" data-index="{{index}}" bindtap="onItemClick">
                     <image src="/images/banner.png" />
-                    <text>现场设备</text>
+                    <text>{{item.title}}</text>
                 </view>
             </block>
         </view>

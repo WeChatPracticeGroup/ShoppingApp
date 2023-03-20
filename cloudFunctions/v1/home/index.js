@@ -12,7 +12,7 @@ const getHomeImages = async (event, context) => {
     const result = await db.collection("staticImages").limit(1).get();
 
     const imagesObj = result.data[0].home;
-    if (!result.data.length || !imagesObj) {
+    if (!result.data.length || !imagesObj || !imagesObj.success) {
         return throwError(400, "获取主页图片失败");
     }
 
