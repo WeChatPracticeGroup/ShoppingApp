@@ -1,4 +1,5 @@
 <view class="container_page">
+    <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted"></user-authorizer-dialog>
     <view class="title_container_page">
         <!-- navation bar -->
         <navigation-bar />

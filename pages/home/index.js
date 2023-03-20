@@ -8,7 +8,9 @@ Page({
     data: {
         messageCount: 1,
         banners: [],
-        goods: []
+        goods: [],
+        userInfo: null,
+        isDialogShow: false,
     },
 
     onLoad() {
@@ -16,13 +18,33 @@ Page({
     },
 
     init() {
-        wx.showLoading({
-            title: 'Loading'
-        });
         this.loadHomePage()
+        this.handleUserLogin()
+    },
+    
+    handleUserLogin() {
+        const userInfo = wx.getStorageSync('userInfo');
+        if(!userInfo) {
+            this.setData({
+                isDialogShow: true,
+            })
+        }
+    },
+    
+    onAuthCompleted() {
+        wx.showToast({
+            title: '授权成功',
+            icon: "success"
+        });
+        this.setData({
+            isDialogShow: false,
+        })
     },
 
     loadHomePage() {
+        wx.showLoading({
+            title: 'Loading'
+        });
         request.get("home/getHomeImages").then(res => {
             const prefix = generateImgUrl();
             let { banners, categoryImages } = res.data;
@@ -39,11 +61,11 @@ Page({
 
             wx.hideLoading();
         }).catch(e => {
-            wx.hideLoading()
             wx.showToast({
-                title: e,
+                title: e.message || e || "请求错误",
             })
-            console.log("e: ", e);
+        }).finally(() => {
+            wx.hideLoading();
         })
     },
 
