@@ -75,21 +75,32 @@ Page({
       isDialogShow: false
     })
   },
+  checkAuth() {
+    if (!this.data.userInfo) {
+        this.setData({
+          isDialogShow: true
+        });
+        return;
+      };
+  },
   /*
    * 跳转到通讯簿
    */
-  goToAddressPage() {
-    if (!this.data.userInfo) {
-      this.setData({
-        isDialogShow: true
-      });
-      return;
-    };
-
+  goToAddressPage(option) {
+    console.log("oprions: ", option);
     wx.navigateTo({
       url: '/pages/userCenter/address/index',
     })
   },
+    /*
+   * 跳转到我的资料
+   */
+    goToProfile(option) {
+        console.log("oprions: ", option);
+        wx.navigateTo({
+          url: '/pages/userCenter/userProfile/index',
+        })
+      },
 
   /*
    * 用户登录 

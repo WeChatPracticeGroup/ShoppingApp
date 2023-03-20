@@ -3,11 +3,19 @@
   <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted"></user-authorizer-dialog>
   <user-center-card userInfo="{{userInfo}}" bind:login="login"> </user-center-card>
   <view class="user-menu">
-    <view class="user-menu-item" bindtap="goToAddressPage">
-      <view class="user-menu-container">
+    <view class="user-menu-item" bindtap="checkAuth">
+      <view class="user-menu-container" bindtap="goToAddressPage">
         <view class="icon-container">
           <icon class="iconfont icon-map-location user-menu-icon map-icon"></icon>
           <text>通讯簿</text>
+        </view>
+        <icon class="iconfont icon-xiangyoujiantou arrow-icon"></icon>
+      </view>
+      
+      <view class="user-menu-container" bindtap="goToProfile">
+        <view class="icon-container">
+          <icon class="iconfont icon-map-location user-menu-icon map-icon"></icon>
+          <text>我的资料</text>
         </view>
         <icon class="iconfont icon-xiangyoujiantou arrow-icon"></icon>
       </view>
