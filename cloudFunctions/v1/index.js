@@ -99,7 +99,7 @@ const POST = async (event, context) => {
         case "user/addressDelete":
             return await addressDelete(event, context);
         case "user/updateUserPhone":
-            return await updateUserPhone(event, context);
+            return await updateUserProfile(event, context);
 
         // order routes
         case "order/addOrder":

@@ -30,16 +30,21 @@ const login = async (event, context) => {
 
 const register = async (event, context) => {
     const wxContext = cloud.getWXContext();
-    const { clientType = DISTRIBUTOR } = event.params;
+    const {
+        clientType = DISTRIBUTOR,
+        nickname = "",
+        phone = "",
+    } = event.params;
     const timestamp = Date.now();
     const createdAt = moment(timestamp).format("YYYY-MM-DD HH:mm:ss");
 
     const data = {
-        clientType,
         openid: wxContext.OPENID,
+        phone,
+        nickname,
+        clientType,
         createdAt,
         timestamp,
-        phone: "",
     };
 
     const { _id } = await db.collection("users").add({
@@ -70,14 +75,24 @@ const getOpenId = async (event, context) => {
     };
 };
 
-const updateUserPhone = async (event, context) => {
+const updateUserProfile = async (event, context) => {
     const wxContext = cloud.getWXContext();
-    const { phone } = event.params;
-    
+    const { phone, nickname } = event.params;
+
     const phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/;
     if (!phoneReg.test(phone)) {
         return throwError(400, "手机号格式不正确");
+    }
+
+    const dataToUpdate = {
+        phone,
     };
+
+    if (nickname) {
+        dataToUpdate.nickname = nickname;
+    } else {
+        return throwError(400, "请输入昵称");
+    }
 
     return await db
         .collection("users")
@@ -85,9 +100,7 @@ const updateUserPhone = async (event, context) => {
             openid: wxContext.OPENID,
         })
         .update({
-            data: {
-                phone,
-            },
+            data: { ...dataToUpdate },
         });
 };
 
@@ -95,5 +108,5 @@ module.exports = {
     login,
     register,
     getOpenId,
-    updateUserPhone,
+    updateUserProfile,
 };
