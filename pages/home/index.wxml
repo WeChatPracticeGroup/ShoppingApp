@@ -15,9 +15,9 @@
     </view>
     <view class="goods_container_page">
         <!-- banner -->
-        <swiper class="banner" interval="3000" autoplay="true" indicator-color="white" indicator-active-color="black" indicator-dots="{{banners}}">
+        <swiper class="banner" autoplay="false" indicator-color="white" indicator-active-color="black" indicator-dots="{{banners}}">
             <swiper-item wx:for="{{banners}}" wx:key="this">
-                <image src="/images/banner.png" />
+                <image src="{{item}}" />
             </swiper-item>
         </swiper>
         <!-- grid list -->
@@ -26,7 +26,7 @@
             <text class="goods_container_description">获取最受欢迎的消防、安全、舒适和节能产品的定价和供货情况</text>
             <block wx:for="{{goods}}" wx:key="index">
                 <view class="goods_items" data-index="{{index}}" bindtap="onItemClick">
-                    <image src="/images/banner.png" />
+                    <image src="{{item.imagePath}}" />
                     <text>{{item.title}}</text>
                 </view>
             </block>

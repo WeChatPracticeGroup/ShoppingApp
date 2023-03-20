@@ -1,4 +1,5 @@
 import request from '/utils/request';
+import { generateImgUrl } from '/utils/util';
 
 Page({
     /**
@@ -23,10 +24,19 @@ Page({
 
     loadHomePage() {
         request.get("home/getHomeImages").then(res => {
+            const prefix = generateImgUrl();
+            let { banners, categoryImages } = res.data;
+            
+            banners = banners.map(banner => `${prefix}${banner}`);
+            categoryImages.forEach(img => {
+                img.imagePath = `${prefix}${img.imagePath}`;
+            });
+            
             this.setData({
-                banners: res.data.banners,
-                goods: res.data.categoryImages
+                banners,
+                goods: { ...categoryImages },
             })
+
             wx.hideLoading();
         }).catch(e => {
             wx.hideLoading()
@@ -39,7 +49,7 @@ Page({
 
     onItemClick(e) {
         wx.showToast({
-            title: 'item index:' + e.currentTarget.dataset.index,
+            title: '跳转产品功能暂未实现，敬请期待',
             icon: 'none',
             duration: 2000
         })
