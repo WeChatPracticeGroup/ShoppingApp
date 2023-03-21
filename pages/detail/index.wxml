@@ -2,23 +2,23 @@
 <view class="detail-container">
   <view class="box">
     <!-- banner -->
-    <swiper class="banner" interval="3000" autoplay="true" indicator-color="white" indicator-active-color="black" indicator-dots="{{banners}}" bindchange="onBannerChange">
-        <swiper-item wx:key="id" wx:for="{{banners}}">
-            <image src="/images/banner.png" />
+    <swiper class="banner" interval="3000" autoplay="true" bindchange="onBannerChange">
+        <swiper-item wx:key="id" wx:for="{{1}}">
+            <image class="banner-image" mode="scaleToFill" src="{{imagePrefix}}{{detail.image}}" />
         </swiper-item>
     </swiper>
-    <span class="item-num">{{bannerCurrentIndex+1}}/{{banners.length}}</span>
+    <span class="item-num">{{bannerCurrentIndex+1}}/{{1}}</span>
   </view>
   
   <view class="detail">
     <view class="price">
-      {{productDetailData.price}}
+      {{detail.price}}
     </view>
     <view class="name">
-      {{productDetailData.name}}
+      {{detail.name}}
     </view>
     <view class="description">
-      description description description description description
+      {{detail.description}}
     </view>
   </view>
   <view class="long-description-box">
@@ -33,7 +33,7 @@
 <view class="goodsaction" > 
 	<view class="logo" bindtap="toHome">
 	    <image class="goodsaction-image" src="/images/home-unselected@2x.png" bindtap="toHome"></image>
-	    <text class="goodsaction-text">主页</text>
+	    <text class="goodsaction-text" bindtap="handleToHome">主页</text>
   </view>
   <view class="action_btn">
     <button class="btn_left">加入购物车</button>

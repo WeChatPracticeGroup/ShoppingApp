@@ -1,4 +1,5 @@
 import request from "/utils/request";
+import { generateImgUrl } from '/utils/util';
 
 Page({
   categorysData : [],
@@ -8,28 +9,33 @@ Page({
       subCategorys: [],
       menuCategorys: [],
       products: [],
-      hiddenLoading: true
+      imagePrefix: generateImgUrl() + '/categorys/'
   },
   onLoad() {
-    this.setData({ hiddenLoading: false });
+    wx.showLoading({
+      title: 'Loading'
+    });
     request.get("product/getCategoryList").then(res => {
-      this.setData({ hiddenLoading: true });
-      if (res?.data && res.data.length > 0) {
-        console.log('categorys:',res.data);
-      } else {
-        console.log('no category data');
+      if (res?.data?.length === 0) {
         return;
       }
       
       this.categorysData = res.data;
       const defaultCategory = res.data[0]
       const categoryId = defaultCategory.id;
-      const menutCategoryId = defaultCategory.menuCategorys[0].menuCategorys[0].id;
+      // const menutCategoryId = defaultCategory.menuCategorys[0].menuCategorys[0].id;
 
       defaultCategory.isActive = true;
       this.setSubCategorys(categoryId);
       this.setData({ categorys: res.data });
-    });
+      wx.hideLoading();
+    }).catch(e => {
+      wx.showToast({
+        title: e.message || e || "请求错误",
+    })
+    }).finally(() => {
+      wx.hideLoading();
+    });
   },
   setSubCategorys(categoryId) {
     const { menuCategorys: subCategorys } = this.categorysData.find(item => item.id === categoryId);
@@ -54,22 +60,27 @@ Page({
       return;
     }
 
-    this.setData({ hiddenLoading: false });
+    wx.showLoading({
+      title: 'Loading'
+    });
     request.get("product/getProductList", {category: menutCategoryId}).then((res) => {
-      this.setData({ hiddenLoading: true });
-      if (res?.data) {
-        console.log(`${menutCategoryId} products:`,res.data);
-      } else {
-        console.log('no product data');
+      if (res.data === undefined || res.data.length ===0) {
+        return;
       }
      
       this.setData({
         products: res.data
       })
+      wx.hideLoading();
+    }).catch(e => {
+      wx.showToast({
+        title: e.message || e || "请求错误",
+      })
+    }).finally(() => {
+      wx.hideLoading();
     });
   },
   handleCategoryTap(e) {
-    console.log(e);
     const { id, source } = e.currentTarget.dataset;
     const items = this.data[source];
 
@@ -87,7 +98,6 @@ Page({
     })
   },
   handleSearch(e) {
-    console.log(e.detail.inputValue);
     const search = this.selectComponent('#searchBar');
     search.runChild();
   },

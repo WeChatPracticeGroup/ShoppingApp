@@ -26,7 +26,7 @@
       <scroll-view style="height: 1000rpx;" bindscrolltolower="handleScrollLower" scroll-y>
         <view class="product-list">
         <navigator class="product-item" wx:key="id" wx:for="{{products}}" url="{{item.price ? '/pages/detail/index?id='+item.id : '/pages/list/index?id='+item.id}}">
-          <image class="product-img" src="{{item.image}}" mode="scaleToFill"/>
+          <image class="product-img" src="{{imagePrefix}}{{item.image}}" mode="scaleToFill"/>
           <view class="product-name">
           {{item.name}}
           </view>
@@ -34,6 +34,5 @@
       </view>
       </scroll-view>
     </view>
-    <loading hidden="{{hiddenLoading}}">正在加载</loading>
   </view>
 </view>

@@ -1,7 +1,7 @@
 <search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" showBackBtn="{{showBackBtnInSearchBar}}"></search-bar>
 <view class="tabs">
   <view class="sort-row">
-    <view class="sort" hover-class="press-sort" wx:for="{{sorts}}" wx:key="id" bindtap="handleSortTap" data-index="{{index}}" data-source="sorts">
+    <view class="sort" hover-class="press-sort" hover-stay-time="100" wx:for="{{sorts}}" wx:key="id" bindtap="handleSortTap" data-index="{{index}}" data-source="sorts">
       <view>
         {{item.name}}
       </view>
@@ -10,13 +10,13 @@
         <view class="arrow-down" />
       </view>
     </view>
-    <image class="switch-mode" src="/images/me.png" mode="scaleToFill"/>
+    <image class="switch-mode" src="/images/category-select@2x.png" mode="scaleToFill"/>
   </view>
   <view class="content">
     <scroll-view style="height: 1000rpx;" bindscrolltolower="handleScrollLower" scroll-y>
     <view class="product-list">
-      <navigator class="product-item" wx:key="id" wx:for="{{products}}" url="/pages/detail/index?id='+{{item.id}}">
-        <image class="product-img" src="{{item.image}}" mode="scaleToFill"/>
+      <navigator class="product-item" wx:key="id" wx:for="{{products}}" url="/pages/detail/index?id={{item.id}}">
+        <image class="product-img" src="{{imagePrefix}}{{item.image}}" mode="scaleToFill"/>
         <view class="product-richText">
           <view class="product-description">
             {{item.longName}}

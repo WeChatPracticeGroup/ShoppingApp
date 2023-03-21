@@ -1,4 +1,5 @@
 import request from "/utils/request";
+import { generateImgUrl } from '/utils/util';
 
 Page({
   isAsceOrder: false,
@@ -15,19 +16,31 @@ Page({
           name: '价格'
         }
       ],
-      products: []
+      products: [],
+      imagePrefix: generateImgUrl() + '/categorys/'
   },
   onLoad(options) {
     if (!options.id) {
       return;
     }
-    console.log('list onload options:',options);         
-    request.get("product/getSubProductList", {parentId: 6}).then((res) => {
-      console.log('getSubProductList:',res);
+
+    console.log('onload in list page:',options);
+    wx.showLoading({
+      title: 'Loading'
+    });
+
+    request.get("product/getSubProductList", {parentId: options.id}).then((res) => {
       this.setData({
         products: res.data
       })
-    })
+      wx.hideLoading();
+    }).catch(e => {
+      wx.showToast({
+        title: e.message || e || "请求错误",
+      })
+    }).finally(() => {
+      wx.hideLoading();
+    });
   },
   sortList(property) {
     const {products} = this.data;
@@ -47,7 +60,6 @@ Page({
     })
   },
   handleSortTap(e) {
-    console.log(e);
     const {index} = e.currentTarget.dataset;
 
     if (index === 0) {
