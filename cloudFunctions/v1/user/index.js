@@ -34,6 +34,7 @@ const register = async (event, context) => {
         clientType = DISTRIBUTOR,
         nickname = "",
         phone = "",
+        avatarUrl = "",
     } = event.params;
     const timestamp = Date.now();
     const createdAt = moment(timestamp).format("YYYY-MM-DD HH:mm:ss");
@@ -45,6 +46,7 @@ const register = async (event, context) => {
         clientType,
         createdAt,
         timestamp,
+        avatarUrl,
     };
 
     const { _id } = await db.collection("users").add({
@@ -77,22 +79,18 @@ const getOpenId = async (event, context) => {
 
 const updateUserProfile = async (event, context) => {
     const wxContext = cloud.getWXContext();
-    const { phone, nickname } = event.params;
+    const { phone, nickname, avatarUrl } = event.params;
 
     const phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/;
-    if (!phoneReg.test(phone)) {
+    if (phone && !phoneReg.test(phone)) {
         return throwError(400, "手机号格式不正确");
     }
 
     const dataToUpdate = {
         phone,
+        nickname,
+        avatarUrl,
     };
-
-    if (nickname) {
-        dataToUpdate.nickname = nickname;
-    } else {
-        return throwError(400, "请输入昵称");
-    }
 
     return await db
         .collection("users")

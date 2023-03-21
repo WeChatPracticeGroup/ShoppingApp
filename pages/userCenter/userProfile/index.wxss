@@ -1,0 +1,34 @@
+page {
+    background-color: #fff;
+}
+
+.avatar-wrapper {
+    padding: 0;
+    width: 112rpx !important;
+    border-radius: 8rpx;
+    margin-top: 80rpx;
+    margin-bottom: 12rpx;
+}
+
+.avatarText {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40rpx;
+    color: #646566;
+}
+
+.avatar {
+    display: block;
+    width: 112rpx;
+    height: 112rpx;
+}
+
+.container {
+    display: flex;
+}
+
+.btn-submit {
+    margin-top: 48rpx;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+}

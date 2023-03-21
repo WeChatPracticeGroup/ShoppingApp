@@ -4,7 +4,7 @@ const qs = require("qs");
 const { throwError, responseInterceptor } = require("./utils");
 
 // routes
-const { login, getOpenId, updateUserPhone } = require("./user/index");
+const { login, getOpenId } = require("./user/index");
 const { getHomeImages } = require("./home/index");
 const {
     addressCreate,
@@ -98,8 +98,6 @@ const POST = async (event, context) => {
             return await addressCreate(event, context);
         case "user/addressDelete":
             return await addressDelete(event, context);
-        case "user/updateUserPhone":
-            return await updateUserProfile(event, context);
 
         // order routes
         case "order/addOrder":

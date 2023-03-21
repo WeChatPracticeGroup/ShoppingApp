@@ -1,31 +1,43 @@
-// pages/order/index.js
-import {orderListData} from "../../mockData/orderList/orderList"
-import request from '/utils/request';
+import {
+  orderList
+} from "/mockData/orderList/orderList"
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    navHeight: '',
-    menuButtonInfo: {},
-    searchMarginTop: 0,
-    searchWidth: 0,
-    searchHeight: 0,
     active: 0,
-    statusBarHeight: 0,
+    speedValue: 10,
+    orderList: orderList,
+    tabAndstatusMap: {
+      "已预定": "已预定",
+      "准备装运": "订单待处理",
+      "发货完成": "进行中",
+      //todo:需根据业务对订单分组
+    }
   },
-  onChange(event) {
-    wx.showToast({
-      title: `切换到标签 ${event.detail.name}`,
-      icon: 'none',
-    });
+
+  onTabsChange(event) {
+    var that = this
+    this.setData({
+      ['orderList']: event.detail.title === "全部" ? orderList : orderList.filter(item =>
+        that.data.tabAndstatusMap[item.status] === event.detail.title
+      )
+    })
+    this.data.orderList
   },
-  getOrderList() {
-    return new Promise((resolve, reject) => {
-      resolve(orderListData)
+
+  openOrderDetail(e) {
+    const orderID = e.target.dataset.id
+    wx.navigateTo({
+      url: '/pages/order/order-detail/index?orderID=' + orderID,
     })
   },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -33,24 +45,29 @@ Page({
     this.setData({
       menuButtonInfo: wx.getMenuButtonBoundingClientRect()
     })
-  //   console.log(this.data.menuButtonInfo)
-    const { top, width, height, right } = this.data.menuButtonInfo
+    //   console.log(this.data.menuButtonInfo)
+    const {
+      top,
+      width,
+      height,
+      right
+    } = this.data.menuButtonInfo
     wx.getSystemInfo({
       success: (res) => {
-        const { statusBarHeight } = res
+        const {
+          statusBarHeight
+        } = res
         const margin = top - statusBarHeight
         this.setData({
           navHeight: (height + statusBarHeight + (margin * 2)),
           statusBarHeight: statusBarHeight,
           searchMarginTop: statusBarHeight + margin, // 状态栏 + 胶囊按钮边距
-          searchHeight: height,  // 与胶囊按钮同高
+          searchHeight: height, // 与胶囊按钮同高
           searchWidth: right - width // 胶囊按钮右边坐标 - 胶囊按钮宽度 = 按钮左边可使用宽度
         })
       },
     })
-    this.getOrderList().then((res) => {
-      this.setData({orderListData: res})
-    })
+
   },
 
   /**
