@@ -25,27 +25,32 @@
   flex-direction: column;
 }
 .arrow-up {
-  margin: -4rpx 20rpx;
+  width: 1px;
+  height: 1px;
+  margin-left: 8px;
   border: 3px solid black;
-  border-width: 0px 4rpx 4rpx 0px;
+  border-width: 0px 1px 1px 0px;
   display: inline-block;
-  padding: 5px;
-  transform: rotate(135deg);
+  padding: 1px;
+  transform: rotate(225deg);
   -webkit-transform: rotate(225deg);
 }
 .arrow-down {
-  margin: -4rpx 20rpx;
+  width: 1px;
+  height: 1px;
+  margin-left: 8px;
   border: 3px solid black;
-  border-width: 0px 4rpx 4rpx 0px;
+  border-width: 0px 1px 1px 0px;
   display: inline-block;
-  padding: 5px;
-  transform: rotate(135deg);
+  padding: 1px;
+  transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }
 .switch-mode {
   flex: 0.2;
-  height: 80rpx;
-  width: 80rpx;
+  height: 60rpx;
+  width: 60rpx;
+  margin: auto 15rpx;
 }
 .content {
   display: flex;
