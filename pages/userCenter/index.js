@@ -77,12 +77,12 @@ Page({
   },
   checkAuth() {
     if (!this.data.userInfo) {
-        this.setData({
-          isDialogShow: true
-        });
-        return false;
-      };
-      
+      this.setData({
+        isDialogShow: true
+      });
+      return false;
+    };
+
     return true;
   },
   /*
@@ -90,23 +90,23 @@ Page({
    */
   goToAddressPage(option) {
     const authed = this.checkAuth();
-    if(authed) {
-        wx.navigateTo({
-            url: '/pages/userCenter/address/index',
-        })
+    if (authed) {
+      wx.navigateTo({
+        url: '/pages/userCenter/address/index',
+      })
     }
   },
-    /*
+  /*
    * 跳转到我的资料
    */
-    goToProfile(option) {
-        const authed = this.checkAuth();
-        if(authed) {
-            wx.navigateTo({
-                url: '/pages/userCenter/userProfile/index',
-            })
-        }
-      },
+  goToProfile(option) {
+    const authed = this.checkAuth();
+    if (authed) {
+      wx.navigateTo({
+        url: '/pages/userCenter/userProfile/index',
+      })
+    }
+  },
 
   /*
    * 用户登录 
@@ -119,21 +119,20 @@ Page({
     request.post("user/login")
       .then(res => {
         const userInfo = res.data;
-
         if (!userInfo) {
           return Promise.reject("login failed");
         };
-
         wx.setStorageSync('userInfo', userInfo);
-
         this.setData({
           userInfo
         });
       }).catch(error => {
-        console.log(`[login error]: ${error}`);
+        console.log(`[login error]: ${JSON.stringify(error)}`);
         wx.showToast({
-          title: '用户登录失败',
-          icon: "error"
+          title: "用户登录失败",
+          icon: "error",
+          duration: 1500,
+          mask: false
         })
       }).finally(() => {
         wx.hideLoading();

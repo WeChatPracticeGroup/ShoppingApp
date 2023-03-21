@@ -14,7 +14,7 @@
       
       <view class="user-menu-container" bindtap="goToProfile">
         <view class="icon-container">
-          <icon class="iconfont icon-map-location user-menu-icon map-icon"></icon>
+          <icon class="iconfont icon-yibiao user-menu-icon map-icon"></icon>
           <text>我的资料</text>
         </view>
         <icon class="iconfont icon-xiangyoujiantou arrow-icon"></icon>
