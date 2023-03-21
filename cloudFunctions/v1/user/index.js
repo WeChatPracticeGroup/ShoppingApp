@@ -81,8 +81,9 @@ const updateUserProfile = async (event, context) => {
     const wxContext = cloud.getWXContext();
     const { phone, nickname, avatarUrl } = event.params;
 
-    const phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/;
-    if (phone && !phoneReg.test(phone)) {
+    // const phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/;
+    const phoneFormatExp = /^((1[0-9]{10})|(((([0-9]{3}-)?[0-9]{8})|(([0-9]{4}-)?[0-9]{7}))(-[0-9]{1,4})?))$/;
+    if (phone && !phoneFormatExp.test(phone)) {
         return throwError(400, "手机号格式不正确");
     }
 
@@ -92,13 +93,26 @@ const updateUserProfile = async (event, context) => {
         avatarUrl,
     };
 
-    return await db
+    await db
         .collection("users")
         .where({
             openid: wxContext.OPENID,
         })
         .update({
             data: { ...dataToUpdate },
+        })
+        .catch((e) => {
+            throwError(400, "数据更新失败");
+        });
+
+    return await db
+        .collection("users")
+        .where({
+            openid: wxContext.OPENID,
+        })
+        .get()
+        .then((res) => {
+            return { ...res, data: res.data[0] };
         });
 };
 
