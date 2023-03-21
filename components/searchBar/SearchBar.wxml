@@ -3,7 +3,7 @@
 <!-- back button -->
   <view class="left-arrow" wx:if="{{showBackBtn}}" bindtap="handleBackTap"></view>
   <view class="search-group" style="margin-top:{{searchMarginTop}}px; height: {{searchHeight}}px; width: {{showBackBtn ? searchWidth - 20 : searchWidth}}px;" >
-      <image class='search-group__img' bindtap="onSearch" src="/images/me.png" />
+      <icon class='search-group__img' type="search" bindtap="onSearch" color="#757575" />
       <input class="search-group__input" type="text" placeholder="{{placeHolder}}" placeholder-style="color: grey" confirm-type="search" value="{{inputValue}}"  bindconfirm="onSearch" bindinput="onInput"></input>
   </view>
 </view>

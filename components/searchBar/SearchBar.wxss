@@ -13,16 +13,14 @@
   left: 14px;
 }
 .search-group__img {
-  height: 36rpx;
-  width: 36rpx;
   margin-right: 20rpx
 }
 .left-arrow {
-  margin: 0 20rpx;
+  margin: 10rpx 30rpx;
   border: 3px solid black;
   border-width: 0px 7rpx 7rpx 0px;
   display: inline-block;
-  padding: 5px;
+  padding: 7px;
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }
