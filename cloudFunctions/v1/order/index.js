@@ -68,6 +68,19 @@ const addOrder = async (event, context) => {
     });
 };
 
+const addOrders = async (event, context) => {
+    const wxContext = cloud.getWXContext();
+    const { itemList } = event.params;
+    console.log("itemList: ", itemList);
+    const data = {
+        // ...event.params,
+        openid: wxContext.OPENID,
+    };
+    return await db.collection("orders").add({
+        data,
+    });
+};
+
 const getRandomInt = (min, max) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -103,6 +116,7 @@ module.exports = {
     getOrderList,
     getOrderDetail,
     addOrder,
+    addOrders,
     addOrdersTest,
 };
 
