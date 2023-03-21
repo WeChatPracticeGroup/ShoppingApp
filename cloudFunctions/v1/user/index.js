@@ -30,9 +30,10 @@ const login = async (event, context) => {
 
 const register = async (event, context) => {
     const wxContext = cloud.getWXContext();
+    const defaultNickname = wxContext.OPENID.substring(wxContext.OPENID.length - 6);
     const {
         clientType = DISTRIBUTOR,
-        nickname = "",
+        nickname = `用户${defaultNickname}`,
         phone = "",
         avatarUrl = "",
     } = event.params;
