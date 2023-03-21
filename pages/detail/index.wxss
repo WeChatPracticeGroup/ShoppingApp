@@ -20,6 +20,12 @@
 .detail {
   border: 20rpx rgb(238, 238, 238) solid;
 }
+.price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 .price {
   color: red;
   font-size: 50rpx;
@@ -71,7 +77,37 @@
 }
 .goodsaction-text{
   font-size: 26rpx;
-  margin-left: 23rpx;
+  margin-left: 18rpx;
+  width: 50%;
+  text-align: center;
+}
+.stepper {  
+  width: 202rpx;  
+  height: 60rpx;
+  border: 1px solid #ccc;  
+  border-radius: 3px;
+}  
+.stepper text {  
+  width: 59rpx;  
+  line-height: 60rpx;  
+  text-align: center;  
+  float: left;  
+}  
+.stepper input {  
+  width: 80rpx;  
+  height: 60rpx;  
+  float: left;  
+  margin: 0 auto;  
+  text-align: center;  
+  font-size: 30rpx;  
+  border-left: 1px solid #ccc;  
+  border-right: 1px solid #ccc;  
+}  
+.stepper .normal{  
+  color: black;  
+}  
+.stepper .disabled{  
+  color: #ccc;  
 }
 .action_btn{
   display: flex;

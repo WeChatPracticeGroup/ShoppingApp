@@ -22,7 +22,8 @@
     </view>
     <!-- product list -->
     <view class="content">
-      <view class="title" wx:for="{{menuCategorys}}" wx:key="id" wx:if="{{item.isActive}}">{{item.name}}</view>
+      <view class="line"></view>
+      <text class="title" wx:for="{{menuCategorys}}" wx:key="id" wx:if="{{item.isActive}}">{{item.name}}</text>
       <scroll-view style="height: 1000rpx;" bindscrolltolower="handleScrollLower" scroll-y>
         <view class="product-list">
         <navigator class="product-item" wx:key="id" wx:for="{{products}}" url="{{item.price ? '/pages/detail/index?id='+item.id : '/pages/list/index?id='+item.id}}">
