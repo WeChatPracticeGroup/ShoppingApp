@@ -1,0 +1,26 @@
+<!--components/productList/productList.wxml-->
+<view class="list margin-top-sm">
+      <block wx:for="{{list}}" wx:key="key">
+        <view class="listItemWrap listItem1 w100 flex">
+          <van-checkbox
+            value="{{ checked }}"
+            checked-color="#1989fa"
+            bind:change="onChange"
+            shape="square"/>
+          
+          <view class="listItem1">
+            <image class="listItem1Img" bindtap="gotoPDP" data-item="{{item}}" wx:if="{{item.image&&item.image}}" src="{{item.image}}"></image>
+            <view class="listItem1Info">
+              <view class="listItem1InfoTextView  ">
+                <view class="l-h36 f-26 f-black2">{{item.name}}</view>
+                <view class="ellipsis2 margin-top-sm f-24 l-h36 f-grey2">{{item.summary}}</view>
+              </view>
+              <view class="litstItePriceView flex f-red f-32">
+                <view>{{item.price}}</view>
+                <van-stepper value="{{ 1 }}" integer />
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>

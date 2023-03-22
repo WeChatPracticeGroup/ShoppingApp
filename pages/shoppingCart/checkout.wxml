@@ -1,0 +1,26 @@
+<scroll-view class="w100 h100 mt50" scroll-y>
+  <view class="flex flexac">
+    <view class="left-arrow" bindtap="handleBackTap"></view>
+    <view  wx:if="{{showPayCode}}">支付</view>
+    <view  wx:else="">确认订单</view>
+  </view>
+  <view class="w100 h100" wx:if="{{showPayCode}}">支付二维码</view>
+  <view class="w100 pos-rel" wx:else="">
+    <view class="address padding-tb-30 padding-lr-20">
+      <view>{{address.location}}</view>
+      <view>{{address.name}} {{address.phone}}</view>
+    </view>
+    <product-list list="{{list}}"></product-list>
+    <view>
+      <view class="padding-20">价格明细</view>
+      <view class="flex flexsb padding-20">
+        <view>商品金额</view>
+        <view>￥1111.11</view>
+      </view>
+    </view>
+    <view class="flex flexac flexsb padding-20">
+      <view>￥1111.11</view>
+      <van-button  round type="primary" color="#ee0a24" size="normal" bind:click="pay">提交订单</van-button>
+    </view>
+  </view>
+</scroll-view>

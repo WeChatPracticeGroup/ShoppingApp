@@ -1,0 +1,13 @@
+<!--pages/shoppingCart/shoppingCart.wxml-->
+<scroll-view class="w100 h100" scroll-y>
+  <search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" showBackBtn="{{showBackBtnInSearchBar}}"></search-bar>
+
+  <view class="w100 pos-rel">
+    <product-list list="{{list}}"></product-list>
+    
+    <view class="cartAction">
+      <van-button custom-class="cartBtn" round type="primary" color="#999999" size="normal">删除</van-button>
+      <van-button custom-class="cartBtn" round type="primary" color="#ee0a24" size="normal" bind:click="buyNow">立即购买</van-button>
+    </view>
+  </view>  
+</scroll-view>
