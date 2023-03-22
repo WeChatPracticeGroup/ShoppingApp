@@ -117,6 +117,8 @@ const POST = async (event, context) => {
             return await cartItemAdd(event, context);
         case "shoppingCart/cartItemRemove":
             return await cartItemRemove(event, context);
+        case "shoppingCart/pay": 
+            return await pay(event, context);
             
         default:
             return throwError(404, "找不到请求地址");
