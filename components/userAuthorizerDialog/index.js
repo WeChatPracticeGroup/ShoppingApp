@@ -31,10 +31,12 @@ Component({
           wx.setStorageSync('userInfo', userInfo);
           this.triggerEvent("onAuthCompleted");
         }).catch(error => {
-          console.log(`[login error]: ${error}`);
+          console.log(`[login error]: ${JSON.stringify(error)}`);
           wx.showToast({
-            title: '用户授权失败',
-            icon: "error"
+            title: '授权失败',
+            icon: "error",
+            duration: 1500,
+            mask: false
           })
         }).finally(() => {
           wx.hideLoading();
