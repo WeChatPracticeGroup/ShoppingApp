@@ -18,6 +18,7 @@ Page({
     });
 
     request.get("product/getProductDetail", {id: options.id}).then((res) => {
+      res.data[0]['formattedPrice'] = res.data[0].price.toLocaleString('zh', {style:'currency', currency: 'CNY', minimumFractionDigits: 2});
       this.setData({
         detail: res.data[0]
       });
@@ -70,7 +71,8 @@ Page({
     wx.showLoading({
       title: 'Loading'
     });
-    const params = {id: this.data.id, quantity: this.data.num };
+    
+    const params = {id: this.data.detail.id, quantity: this.data.num };
     request.post("shoppingCart/cartItemAdd", params).then(res => {
       if (res.success) {
         wx.showToast({
