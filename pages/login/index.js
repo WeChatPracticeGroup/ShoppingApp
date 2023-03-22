@@ -132,4 +132,26 @@ Page({
                 console.log("e: ", e);
             });
     },
+    
+    getOrderList() {
+        const params = { 
+            status: "1",
+        }
+        request.get("order/getOrderList", params).then(res => {
+            console.log("getOrderList res: ", res);
+        }).catch(e => {
+            console.log("getOrderList e: ", e);
+        })
+    },
+    
+    getOrderDetail() {
+        const params = { 
+            orderId: "1679476515541"
+        }
+        request.get("order/getOrderDetail", params).then(res => {
+            console.log("getOrderDetail res: ", res);
+        }).catch(e => {
+            console.log("getOrderDetail e: ", e);
+        })
+    }
 });

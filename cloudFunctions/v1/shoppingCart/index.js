@@ -107,6 +107,7 @@ const pay = async (event, context) => {
         productItems,
         address = "我是详细地址",
         company = "某某公司",
+        zipCode = "610000",
         amount,
     } = event.params;
 
@@ -122,6 +123,7 @@ const pay = async (event, context) => {
         subscriptionDate: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
         status: "1",
         openid: OPENID,
+        zipCode,
     };
 
     await db
