@@ -1,7 +1,5 @@
-import {
-  orderList
-} from "/mockData/orderList/orderList"
 
+import request from '/utils/request'
 
 Page({
 
@@ -11,23 +9,22 @@ Page({
   data: {
     active: 0,
     speedValue: 10,
-    orderList: orderList,
+    orderList: [],
+    currentOrderList: [],
     tabAndstatusMap: {
-      "已预定": "已预定",
-      "准备装运": "订单待处理",
-      "发货完成": "进行中",
+      "1": "已预定",
+      "2": "订单待处理",
+      "3": "进行中",
+      "4": "订单完成",
       //todo:需根据业务对订单分组
     }
   },
-
   onTabsChange(event) {
-    var that = this
     this.setData({
-      ['orderList']: event.detail.title === "全部" ? orderList : orderList.filter(item =>
-        that.data.tabAndstatusMap[item.status] === event.detail.title
+      ['currentOrderList']: event.detail.index === 0 ? this.data.orderList : this.data.orderList.filter(item =>
+        item.status == event.detail.index
       )
     })
-    this.data.orderList
   },
 
   openOrderDetail(e) {
@@ -67,7 +64,12 @@ Page({
         })
       },
     })
-
+    request.get('order/getOrderList').then((res) => {
+      this.setData({
+        orderList: res.data,
+        currentOrderList: res.data
+      })
+    })
   },
 
   /**
