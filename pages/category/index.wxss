@@ -4,7 +4,12 @@
 .category {
   display: flex;
   flex-wrap: nowrap;
+}
+.category-main {
   justify-content: center;
+}
+.category-scroll {
+  white-space: nowrap;
 }
 .category-item {
   display: flex;

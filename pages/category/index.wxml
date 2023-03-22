@@ -2,17 +2,19 @@
 <search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" ></search-bar>
 <view class="tabs">
 <!-- main category -->
-  <view class="category">
+  <view class="category category-main">
     <view class="category-item {{item.isActive?'main-category__active':''}}" wx:for="{{categorys}}" wx:key="id" bindtap="handleCategoryTap" data-id="{{item.id}}" data-source="categorys">
       {{item.name}}
     </view>
   </view>
   <!-- sub category -->
-  <view class="category">
-    <view class="category-item {{item.isActive?'sub-category__active':''}}" wx:for="{{subCategorys}}" wx:key="id" bindtap="handleCategoryTap" data-id="{{item.id}}" data-source="subCategorys">
-      {{item.name}}
+  <scroll-view class="category-scroll" scroll-x scroll-with-animation="true">
+    <view class="category">
+      <view class="category-item {{item.isActive?'sub-category__active':''}}" wx:for="{{subCategorys}}" wx:key="id" bindtap="handleCategoryTap" data-id="{{item.id}}" data-source="subCategorys">
+        {{item.name}}
+      </view>
     </view>
-  </view>
+  </scroll-view>
   <view class="contentContainer">
     <!-- left menu category -->
     <view class="menu">
@@ -21,7 +23,7 @@
       </view>
     </view>
     <!-- product list -->
-    <view class="content">
+    <view class="content" wx:if="{{menuCategorys.length > 0}}">
       <view class="line"></view>
       <text class="title" wx:for="{{menuCategorys}}" wx:key="id" wx:if="{{item.isActive}}">{{item.name}}</text>
       <scroll-view style="height: 1000rpx;" bindscrolltolower="handleScrollLower" scroll-y>
