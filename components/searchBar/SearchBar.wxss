@@ -17,10 +17,10 @@
 }
 .left-arrow {
   margin: 10rpx 30rpx;
-  border: 3px solid black;
-  border-width: 0px 7rpx 7rpx 0px;
+  border: 1px solid black;
+  border-width: 0px 5rpx 5rpx 0px;
   display: inline-block;
-  padding: 7px;
+  padding: 10rpx;
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }

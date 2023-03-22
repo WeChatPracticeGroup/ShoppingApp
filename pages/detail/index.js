@@ -70,7 +70,8 @@ Page({
     wx.showLoading({
       title: 'Loading'
     });
-    const params = {id: this.data.id, quantity: this.data.num };
+    
+    const params = {id: this.data.detail.id, quantity: this.data.num };
     request.post("shoppingCart/cartItemAdd", params).then(res => {
       if (res.success) {
         wx.showToast({

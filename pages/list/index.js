@@ -30,9 +30,15 @@ Page({
     });
 
     request.get("product/getSubProductList", {parentId: options.id}).then((res) => {
-      this.setData({
-        products: res.data
-      })
+      if (res.data && res.data.length > 0) {
+        res.data.forEach(item => {
+          item['formattedPrice'] = item.price.toLocaleString('zh', {style:'currency', currency: 'CNY', minimumFractionDigits: 2});
+        })
+        this.setData({
+          products: res.data
+        });
+      }
+      
       wx.hideLoading();
     }).catch(e => {
       wx.showToast({

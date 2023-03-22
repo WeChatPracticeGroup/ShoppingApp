@@ -51,7 +51,15 @@
   display: flex;
   flex-wrap: wrap;
 }
+.line {
+  width: 1rpx;
+  height: 25rpx;
+  border-right: solid rgb(0, 123, 192);
+  display: inline-flex;
+  margin: 0 12rpx;
+}
 .title {
+  display: inline-flex
   margin-left: 30rpx;
 }
 .product-item {
