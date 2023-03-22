@@ -3,11 +3,23 @@
   <search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" showBackBtn="{{showBackBtnInSearchBar}}"></search-bar>
 
   <view class="w100 pos-rel">
-    <product-list list="{{list}}"></product-list>
-    
-    <view class="cartAction">
-      <van-button custom-class="cartBtn" round type="primary" color="#999999" size="normal">删除</van-button>
-      <van-button custom-class="cartBtn" round type="primary" color="#ee0a24" size="normal" bind:click="buyNow">立即购买</van-button>
+    <view wx:if="{{list && list.length > 0}}">
+        <product-list 
+            list="{{list}}" 
+            bind:updateSelectedItems="updateSelectedItems"
+            bind:onQuantityChange="onQuantityChange"    
+        ></product-list>
+        
+        <view class="cartAction">
+        <van-button custom-class="cartBtn" round type="primary" color="#999999" size="normal">删除</van-button>
+        <van-button custom-class="cartBtn" round type="primary" color="#ee0a24" size="normal" bind:click="buyNow">立即购买</van-button>
+        </view>
+        
+        <view>
+            <van-button custom-class="cartBtn" round type="info" color="#ee0a24" size="normal" bind:click="addOrder">生成订单</van-button>
+        </view>
     </view>
+    
+    <view wx:else>购物车为空</view>
   </view>  
 </scroll-view>

@@ -7,47 +7,54 @@ Page({
     showBackBtnInSearchBar: true,
     nameState:0,
     priceState:0,
-    chooseImgState:true
+    chooseImgState:true,
+    list: [],
+    selectedItems: [],
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    var list = [
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      },
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      },
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      },
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      },
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      }
-    ]
+    // var list = [
+    //   {
+    //     image: '/images/banner.png',
+    //     name: 'FC400UV24A',
+    //     summary: '电子式空气净化器',
+    //     price: '￥2300.00'
+    //   },
+    //   {
+    //     image: '/images/banner.png',
+    //     name: 'FC400UV24A',
+    //     summary: '电子式空气净化器',
+    //     price: '￥2300.00'
+    //   },
+    //   {
+    //     image: '/images/banner.png',
+    //     name: 'FC400UV24A',
+    //     summary: '电子式空气净化器',
+    //     price: '￥2300.00'
+    //   },
+    //   {
+    //     image: '/images/banner.png',
+    //     name: 'FC400UV24A',
+    //     summary: '电子式空气净化器',
+    //     price: '￥2300.00'
+    //   },
+    //   {
+    //     image: '/images/banner.png',
+    //     name: 'FC400UV24A',
+    //     summary: '电子式空气净化器',
+    //     price: '￥2300.00'
+    //   }
+    // ]
     request.get("shoppingCart/cartItems").then(res => {
-        console.log(res)
+        // console.log("lala: ", res)
+        const prefix = generateImgUrl();
+        const list = res.data.map(item => {
+            item.productInfo.image = `${prefix}/categorys/${item.productInfo.image}`;
+            return item;
+        })
         // const prefix = generateImgUrl();
         // let { banners, categoryImages } = res.data;
         
@@ -55,13 +62,13 @@ Page({
         // categoryImages.forEach(img => {
         //     img.imagePath = `${prefix}${img.imagePath}`;
         // });
-        // this.setData({ list: list });
+        this.setData({ list });
       }).catch(e => {
         wx.showToast({
             title: e.message || e || "请求错误",
         })
       })
-      this.setData({ list: list });
+    //   this.setData({ list: list });
   },
   onChange(event) {
     this.setData({
@@ -79,6 +86,18 @@ Page({
     wx.navigateTo({
       url: '/pages/shoppingCart/checkout',
     })
+  },
+  updateSelectedItems(e) {
+    console.log("updateSelectedItems: ", e.detail);
+    this.setData({
+        selectedItems: e.detail.selectedItems,
+    })
+  },
+  onQuantityChange(e) {
+    console.log("onQuantityChange: ", e.detail);
+  },
+  addOrder() {
+    console.log("addOrder: ", this.data.selectedItems);
   },
 
   /**
