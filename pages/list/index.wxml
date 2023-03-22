@@ -18,14 +18,14 @@
       <navigator class="product-item" wx:key="id" wx:for="{{products}}" url="/pages/detail/index?id={{item.id}}">
         <image class="product-img" src="{{imagePrefix}}{{item.image}}" mode="scaleToFill"/>
         <view class="product-richText">
-          <view class="product-description">
-            {{item.longName}}
-          </view>
           <view class="product-name">
             {{item.name}}
           </view>
+          <view class="product-description">
+            {{item.description}}
+          </view>
           <view class="product-price">
-            {{item.price}}
+            {{item.formattedPrice}}
           </view>
         </view>
       </navigator>

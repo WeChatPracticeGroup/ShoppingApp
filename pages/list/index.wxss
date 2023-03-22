@@ -61,15 +61,25 @@
 }
 .product-item {
   display: flex;
+  padding: 20rpx;
 }
 .product-img {
   height: 220rpx;
   width: 220rpx;
   padding: 20rpx;
 }
-.product-name {
-  margin: 40rpx 0;
+.product-description {
+  margin-top: 30rpx;
+  margin-bottom: 45rpx;
+  color: rgb(158, 158, 158);
+  width: 500rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .product-price {
   color: red;
+  font-size: 36rpx;
 }
