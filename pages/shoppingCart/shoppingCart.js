@@ -98,6 +98,32 @@ Page({
   },
   addOrder() {
     console.log("addOrder: ", this.data.selectedItems);
+    if(!this.data.selectedItems.length) {
+        wx.showToast({
+            title: '请勾选购买的产品',
+            icon: 'error',
+            duration: 1500,
+        });
+        return;
+    }
+    
+    const amount = this.data.selectedItems.reduce((prev, curr) => {
+        const { quantity, productInfo } = curr;
+        const singleAmount = quantity * productInfo.price
+        return prev + Number(singleAmount);
+    }, 0).toFixed(2);
+    
+    const params = {
+        productItems: this.data.selectedItems,
+        amount: Number(amount),
+    }
+    
+    request.post("shoppingCart/pay", params).then(res => {
+        console.log("pay res: ", res);
+    }).catch(e => {
+        console.error(e.message);
+    })
+    
   },
 
   /**
