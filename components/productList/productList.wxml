@@ -1,0 +1,28 @@
+<!--components/productList/productList.wxml-->
+<view class="list margin-top-sm">
+    <van-checkbox-group value="{{ selectedItemIds }}" bind:change="onChange">
+      <block wx:for="{{list}}" wx:key="key">
+        <view class="listItemWrap listItem1 w100 flex">
+          <van-checkbox
+            name="{{ item._id }}"
+            checked-color="#1989fa"
+            bind:change="onChange"
+            shape="square"/>
+          
+          <view class="listItem1">
+            <image class="listItem1Img" bindtap="gotoPDP" data-item="{{item}}" wx:if="{{item.productInfo&&item.productInfo.image}}" src="{{item.productInfo.image}}"></image>
+            <view class="listItem1Info">
+              <view class="listItem1InfoTextView  ">
+                <view class="l-h36 f-26 f-black2">{{item.productInfo.name}}</view>
+                <view class="ellipsis2 margin-top-sm f-24 l-h36 f-grey2">{{item.summary}}</view>
+              </view>
+              <view class="litstItePriceView flex f-red f-32">
+                <view>{{item.productInfo.price}}</view>
+                <van-stepper value="{{ item.quantity }}" min="1" integer data-_id="{{item._id}}" bind:change="onQuantityChange" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </van-checkbox-group>
+</view>

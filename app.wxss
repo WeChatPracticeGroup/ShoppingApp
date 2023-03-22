@@ -15,3 +15,32 @@ page {
 view {
   font-size: small;
 }
+view,
+swiper,
+swiper-item,
+scroll-view {
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+.db {
+  display: block;
+}
+
+.inline {
+  display: inline-block;
+}
+
+/* width, height */
+.w100 {
+  width: 100%;
+}
+
+.h100 {
+  height: 100%;
+}
+
+/*flex*/
+.flex {
+  display: flex;
+}

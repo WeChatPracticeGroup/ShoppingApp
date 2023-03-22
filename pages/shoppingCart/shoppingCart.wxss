@@ -1,0 +1,197 @@
+/* pages/shoppingCart/shoppingCart.wxss */
+.flexwrap {
+  flex-wrap: wrap;
+}
+
+.flexfe {
+  align-items: flex-end;
+}
+
+
+.flexlr {
+  justify-content: space-between;
+}
+
+/*flex center center - 主轴*/
+.flexcc {
+  justify-content: center;
+  align-items: center;
+}
+
+/*flex center auto - 水平居中*/
+.flexca {
+  justify-content: center;
+}
+
+/*flex auto center - 垂直居中*/
+.flexac {
+  align-items: center;
+}
+.flex-item {
+  flex: 1;
+}
+.flex-item2 {
+  flex: 2;
+}
+
+.flexcul {
+  flex-flow: column;
+}
+
+.margin-left {
+  margin-left: 30rpx;
+}
+
+.margin-right {
+  margin-right: 30rpx;
+}
+
+.f-red {
+  color:#EE3124 !important;
+}
+
+.margin-top-xs {
+  margin-top: 10rpx;
+}
+
+.margin-top-sm {
+  margin-top: 20rpx;
+}
+
+.f-24 {
+  font-size: 24rpx;
+}
+
+.l-h36 {
+  line-height: 36rpx;
+}
+
+.f-grey2 {
+  color: #707070 !important;
+}
+
+.f-26 {
+  font-size: 26rpx;
+}
+
+.f-black2 {
+  color: #303030 !important;
+}
+
+.chooseView{
+  width: 100%;
+  height: 80rpx;
+  background-color: white;
+  border-bottom: 1rpx solid rgba(0,0,0,0.10);
+  display: flex;
+  justify-content: center;
+}
+
+.chooseViewInfo{
+  width: 40%;
+}
+
+.updownIcon{
+  width: 14rpx;
+  height: 20rpx;
+}
+
+.chooseIcon{
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.listItem1 {
+  height: 280rpx;
+  padding: 20rpx;
+  display: flex;
+  justify-content:space-between;
+  background-color: white;
+}
+.listItemWrap {
+  align-items: center;
+  width: 100%;
+}
+
+.listItem1Img{
+  width: 240rpx;
+  height: 240rpx;
+
+}
+
+.listItem1Info{
+  width: 365rpx;
+  margin-right: 20rpx;
+  margin-left: 20rpx;
+  line-height: 36rpx;
+}
+
+.listItem1InfoTextView{
+  width: 100%;
+  height: 180rpx;
+}
+
+.litstItePriceView{
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listItem2{
+  width: 350rpx;
+  height: 510rpx;
+  background-color: white;
+  border-radius: 8rpx;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  flex-grow:1;
+  margin-bottom: 20rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.listItem2Img{
+  width: 340rpx;
+  height: 340rpx;
+
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+
+.listItem2Text{
+  width: 100%;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  height: 70rpx;
+}
+
+.list{
+  width: 100%;
+
+}
+
+.list2{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.suggestionsListItem{
+  width: 100%;
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid rgba(0,0,0,0.10);
+}
+
+.closeIcon{
+  width: 28rpx;
+  height: 28rpx;
+}
+.cartAction {
+  margin: 40rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.cartBtn {
+  width: 320rpx;
+}
+

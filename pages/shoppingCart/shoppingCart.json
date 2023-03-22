@@ -1,0 +1,12 @@
+{
+	"usingComponents": {
+    "van-search": "@vant/weapp/search/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "search-bar": "/components/searchBar/SearchBar",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-button": "@vant/weapp/button/index",
+    "product-list": "/components/productList/productList"
+  },
+  "navigationStyle": "custom"
+}
