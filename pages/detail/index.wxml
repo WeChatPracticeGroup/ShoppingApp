@@ -12,7 +12,7 @@
   
   <view class="detail">
     <view class="price-container">
-      <view class="price">{{detail.price}}</view>
+      <view class="price">{{detail.formattedPrice}}</view>
       <view class="stepper">
         <text class="{{minusStatus}}" bindtap="bindMinus">-</text>
         <input type="number" bindchange="bindManual" value="{{num}}" />
@@ -23,7 +23,7 @@
       {{detail.name}}
     </view>
     <view class="description">
-      {{detail.description}}
+      {{detail.longName}}
     </view>
   </view>
   <view class="long-description-box">
@@ -31,7 +31,7 @@
       商品概述
     </view>
     <view class="long-description">
-      long description
+      {{detail.description}}
     </view>
   </view>
 </view>

@@ -12,25 +12,21 @@
       </view>
     </block>
     <!--用户登录-->
-    <block wx:if="{{canIUseOpenData && userInfo}}">
+    <block wx:if="{{ userInfo}}">
       <view class="user-avatar">
-        <view class="user-avatar-image">
-          <open-data type="userAvatarUrl"></open-data>
-          <image src="{{userInfo.avatarUrl}}"></image>
-        </view>
+        <image class="user-avatar-image" src="{{userInfo.avatarUrl || defaultAvatarUrl}}"></image>
         <view class="user-avatar-info ">
-          <open-data type="userNickName"></open-data>
-          <!-- <image src="{{userInfo.nickname}}"></image> -->
+          <text>{{userInfo.nickname }}</text>
         </view>
       </view>
     </block>
     <block>
       <view class="user-info">
-        <view class="user-info-container" bindtap="showUserPhoneDialog">
+        <view class="user-info-container">
           <icon class="iconfont icon-mobile-phone user-info-icon"></icon>
           <view class="user-info-text">
             <text>电话</text>
-            <text>{{phoneNumber}}</text>
+            <text>{{userInfo.phone}}</text>
           </view>
         </view>
         <view class="user-info-container">
@@ -44,4 +40,3 @@
     </block>
   </videw>
 </view>
-<user-phone-input-dialog phoneNumber="{{phoneNumber}}" show="{{isDialogShow}}" bind:savePhoneNumber="savePhoneNumber"></user-phone-input-dialog>

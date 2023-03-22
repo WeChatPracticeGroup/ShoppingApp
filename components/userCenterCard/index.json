@@ -1,6 +1,3 @@
 {
-  "component": true,
-  "usingComponents": {
-    "user-phone-input-dialog": "../userPhoneInputDialog/index"
-  }
+  "component": true
 }

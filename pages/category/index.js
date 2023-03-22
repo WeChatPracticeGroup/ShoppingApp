@@ -23,7 +23,6 @@ Page({
       this.categorysData = res.data;
       const defaultCategory = res.data[0]
       const categoryId = defaultCategory.id;
-      // const menutCategoryId = defaultCategory.menuCategorys[0].menuCategorys[0].id;
 
       defaultCategory.isActive = true;
       this.setSubCategorys(categoryId);
@@ -47,7 +46,6 @@ Page({
   setMenuCategorys(subCategoryId) {
     const { subCategorys } = this.data;
     const { menuCategorys } = subCategorys.find(item => item.id === subCategoryId);
-
     menuCategorys.forEach((item, index) => {
       index === 0 ? item.isActive = true : item.isActive = false
     })
