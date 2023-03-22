@@ -1,4 +1,5 @@
 const cloud = require("wx-server-sdk");
+const moment = require('moment');
 
 const { throwError } = require("../utils");
 
@@ -29,6 +30,25 @@ const cartItemAdd = async (event, context) => {
         });
 };
 
+const cartItemRemove = async (event, context) => {
+    const { OPENID } = cloud.getWXContext();
+
+    const { ids = [] } = event.params;
+    
+    return await db
+        .collection("shoppingCart")
+        .where({ openid: OPENID, _id: _.in(ids) })
+        .remove()
+        .then((res) => {
+            const { removed } = res.stats;
+            if(removed > 0){
+                return res;
+            } else {
+                throwError(400, "删除失败")
+            }
+        });
+};
+
 const cartItems = async (event, context) => {
     const { OPENID } = cloud.getWXContext();
 
@@ -39,8 +59,9 @@ const cartItems = async (event, context) => {
         .then((res) => {
             const { data = [] } = res;
             const idList = data.map((item) => {
-                const { productId, quantity } = item;
+                const { productId, quantity, _id } = item;
                 return {
+                    _id,
                     productId,
                     quantity,
                 };
@@ -80,7 +101,28 @@ const cartItems = async (event, context) => {
     return { data: dataReturn };
 };
 
+const pay = async (event, context) => {
+    const { OPENID } = cloud.getWXContext();
+    const { productItems, address, company, amount } = event.params;
+    
+    const orderId = String(new Date());
+    
+    const order = {
+        amount,
+        company,
+        address,
+        productItems,
+        poNumber: `P-009${orderId.substring(orderId.length - 8)}`,
+        orderId,
+        subscriptionDate: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        status: 1,
+        openid: OPENID,
+    }
+}
+
 module.exports = {
     cartItemAdd,
     cartItems,
+    cartItemRemove,
+    pay,
 };

@@ -104,4 +104,14 @@ Page({
                 console.log("e: ", e);
             });
     },
+    
+    cartItemRemove() {
+        request.post("shoppingCart/cartItemRemove", {
+            ids: ['d3702bb064190e910003923b09489be6', 'db9fa98264190e9100019dcd6d87b60c']
+        }).then(res => {
+            
+        }).catch(e => {
+            console.log("e: ", e);
+        })
+    }
 });

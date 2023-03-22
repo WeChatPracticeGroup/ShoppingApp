@@ -15,3 +15,7 @@
 <button bindtap="cartItemAdd">cartItemAdd</button>
 
 <button bindtap="cartItems">cartItems</button>
+
+<button bindtap="cartItemRemove">cartItemRemove</button>
+
+

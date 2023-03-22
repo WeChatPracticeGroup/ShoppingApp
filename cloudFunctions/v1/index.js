@@ -12,7 +12,7 @@ const {
     addressGetByType,
     addressDelete,
 } = require("./user/address");
-const { cartItemAdd, cartItems } = require("./shoppingCart/index");
+const { cartItemAdd, cartItems, pay, cartItemRemove } = require("./shoppingCart/index");
 const { getOrderList, addOrder, getOrderDetail, addOrdersTest } = require("./order/index");
 //product
 
@@ -115,6 +115,8 @@ const POST = async (event, context) => {
         // shopping cart routes
         case "shoppingCart/cartItemAdd":
             return await cartItemAdd(event, context);
+        case "shoppingCart/cartItemRemove":
+            return await cartItemRemove(event, context);
             
         default:
             return throwError(404, "找不到请求地址");
