@@ -58,7 +58,7 @@ Page({
 
     formSubmit(e) {
         const { addressMain, addressDetail, zipCode } = e.detail.value;
-        if(!addressDetail.trim() || !addressMain.trim() || !zipCode.trim()) {
+        if (!addressDetail.trim() || !addressMain.trim() || !zipCode.trim()) {
             wx.showToast({
                 title: "提交内容不能为空",
                 icon: "error",
@@ -123,5 +123,39 @@ Page({
             requiredFetch: true,
         });
         // beforePage.goUpdate();
+    },
+
+    handleDelete() {
+        wx.showLoading({ title: "删除中" });
+        const params = {
+            id: this.data.addressToEdit._id,
+        };
+        request
+            .post("user/addressDelete", params)
+            .then((res) => {
+                wx.showToast({
+                    title: "删除成功",
+                    icon: "success",
+                    duration: 1500,
+                });
+                this.messageBeforePage();
+                setTimeout(() => {
+                    wx.navigateBack({
+                        delta: 1,
+                    });
+                }, 1000);
+            })
+            .catch((e) => {
+                wx.showToast({
+                    title: e.message || "删除失败",
+                    icon: "error",
+                    duration: 1500,
+                });
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    wx.hideLoading();
+                }, 2000);
+            });
     },
 });

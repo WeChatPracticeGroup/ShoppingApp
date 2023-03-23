@@ -21,7 +21,8 @@
             </view>
             <view class="form-action">
                 <button class="form-action-submit" type="primary" formType="submit">提交</button>
-                <button class="form-action-clear" formType="reset">清空</button>
+                <button wx:if="{{pageType === 'create'}}" class="form-action-clear" formType="reset">清空</button>
+                <button wx:if="{{pageType === 'edit'}}" type="warn" bind:tap="handleDelete" class="form-action-delete">删除地址</button>
             </view>
         </view>
     </form>
