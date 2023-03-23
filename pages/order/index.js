@@ -28,9 +28,9 @@ Page({
   },
 
   openOrderDetail(e) {
-    const orderID = e.target.dataset.id
+    const orderId = e.target.dataset.id
     wx.navigateTo({
-      url: '/pages/order/order-detail/index?orderID=' + orderID,
+      url: '/pages/order/order-detail/index?orderId=' + orderId,
     })
   },
 

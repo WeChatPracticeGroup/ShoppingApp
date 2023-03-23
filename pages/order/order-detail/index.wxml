@@ -1,34 +1,34 @@
 <!--pages/order/order-detail/index.wxml-->
 <template name="productCollapse">
   <view class="order-detail ">
-    <text class="product-model">{{model}}</text>
-    <text style="color: blue; padding-top: 16px;">{{status}}</text>
+    <text class="product-model">{{productInfo.longName}}</text>
+    <text style="color: blue; padding-top: 16px; padding-right: 16px;">{{tabAndstatusMap[status]}}</text>
   </view>
   <view class="border-bottom" />
-  <van-collapse-item title="{{name}}" name="{{index}}">
+  <van-collapse-item title="{{productInfo.name}}" name="{{index}}">
     <view class="order-detail ">
       <text>预计发货时间:</text>
-      <text>{{deliveryTime}}</text>
+      <text>-</text>
     </view>
     <view class="order-detail ">
       <text>订购数量:</text>
-      <text>{{orderQuantity}}</text>
+      <text>{{quantity}}</text>
     </view>
     <view class="order-detail ">
       <text>发货数量:</text>
-      <text>{{shipmentQuantity}}</text>
+      <text>-</text>
     </view>
     <view class="order-detail ">
       <text>未发货数量:</text>
-      <text>{{unshippedQuantity}}</text>
+      <text>-</text>
     </view>
     <view class="order-detail ">
       <text>承运商:</text>
-      <text>{{carrier}}</text>
+      <text>-</text>
     </view>
     <view class="order-detail ">
       <text>运单号:</text>
-      <text>{{waybillNo}}</text>
+      <text>-</text>
     </view>
     <view class="product-footer">
       <van-button custom-style="{{button}}" size="small" round type="primary">发票</van-button>
@@ -39,8 +39,8 @@
 </template>
 <scroll-view>
   <view class="order-title">
-    <text>订单 {{orderInfo.orderID}}</text>
-    <text style="color: blue;">{{orderInfo.status}}</text>
+    <text>订单 {{orderInfo.orderId}}</text>
+    <text style="color: blue; padding-right: 8px;">{{tabAndstatusMap[orderInfo.status]}}</text>
   </view>
   <view class="card">
     <view class="order-detail ">
@@ -69,8 +69,8 @@
   <view class="card">
     <van-collapse accordion value="{{ productNames }}" bind:change="onProductCollapseChange">
       <text class="product-model">商品明细</text>
-      <view class="border-bottom" wx:key="name" wx:for="{{orderInfo.productionInfos}}">
-        <template is="productCollapse" data="{{...item, index}}" />
+      <view class="border-bottom" wx:key="name" wx:for="{{orderInfo.productItems}}">
+        <template is="productCollapse" data="{{...item, index, ...orderInfo, tabAndstatusMap}}" />
       </view>
     </van-collapse>
   </view>

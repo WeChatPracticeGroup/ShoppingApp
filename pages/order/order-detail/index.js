@@ -1,7 +1,7 @@
 import {
   orderList
 } from "/mockData/orderList/orderList"
-
+import request from '/utils/request'
 
 // pages/order/order-detail/index.js
 Page({
@@ -12,7 +12,13 @@ Page({
   data: {
     activeNames: ['1'],
     productNames: ['1'],
-    orderInfo: {}
+    orderInfo: {},
+    tabAndstatusMap: {
+      "1": "已预定",
+      "2": "订单待处理",
+      "3": "进行中",
+      "4": "订单完成",
+    }
   },
 
   onChange(event) {
@@ -26,10 +32,11 @@ Page({
     });
   },
   onLoad(options) {
-    this.setData({
-      ['orderInfo']: orderList.find(item => item.orderID === options.orderID)
+    request.get('order/getOrderDetail', {orderId: options.orderId}).then((res) => {
+      this.setData({
+        orderInfo: res.data
+      })
+      console.log(res.data)
     })
-    this.data
   }
-
 })

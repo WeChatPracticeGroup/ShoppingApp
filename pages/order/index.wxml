@@ -7,8 +7,8 @@
   <view wx:key="orderID" wx:for="{{currentOrderList}}" class="order-detail">
     <view class="order-item">
       <text class="item-name">订单号：</text>
-      <text>{{item.orderID}}</text>
-      <van-icon data-id="{{item.orderID}}" style="margin: 0 0 0 8px;" name="arrow" bind:click="openOrderDetail" />
+      <text>{{item.orderId}}</text>
+      <van-icon data-id="{{item.orderId}}" style="margin: 0 0 0 8px;" name="arrow" bind:click="openOrderDetail" />
       <text style="margin-left: auto;color: {{item.status === '0' ? 'grey':'blue'}};">{{tabAndstatusMap[item.status]}}</text>
     </view>
     <view class="order-item">
