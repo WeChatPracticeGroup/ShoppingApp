@@ -62,6 +62,7 @@ Page({
                     addressDelivery: _addressDelivery,
                     addressPayer: _addressPayer,
                 });
+                console.log("addressSale: ", this.data.addressSale);
             })
             .catch(e => {
                 wx.showToast({

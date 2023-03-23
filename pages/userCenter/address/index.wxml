@@ -8,7 +8,7 @@
                     </view>
                     <view class="card-container" wx:for="{{addressSale}}" wx:key="id" wx:for-index="index">
                         <view class="card-content">
-                            <view class="address-main">{{item.addressMain}}</view>
+                            <view class="address-main">{{item.company}}</view>
                             <view class="address-detail">{{item.addressDetail}}</view>
                             <view class="address-zip">邮编: {{item.zipCode}}</view>
                         </view>
@@ -38,7 +38,7 @@
                 </view>
                 <view class="card-container" wx:for="{{addressDelivery}}" wx:key="id">
                     <view class="card-content">
-                        <view class="address-main">{{item.addressMain}}</view>
+                        <view class="address-main">{{item.company}}</view>
                         <view class="address-detail">{{item.addressDetail}}</view>
                         <view class="address-zip">邮编: {{item.zipCode}}</view>
                     </view>
@@ -65,7 +65,7 @@
                 </view>
                 <view class="card-container" wx:for="{{addressPayer}}" wx:key="id">
                     <view class="card-content">
-                        <view class="address-main">{{item.addressMain}}</view>
+                        <view class="address-main">{{item.company}}</view>
                         <view class="address-detail">{{item.addressDetail}}</view>
                         <view class="address-zip">邮编: {{item.zipCode}}</view>
                     </view>

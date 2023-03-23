@@ -9,7 +9,7 @@ cloud.init({
 const db = cloud.database();
 
 const addressCreate = async (event, context) => {
-    const { type } = event.params;
+    const { type, addressDetail, company, zipCode } = event.params;
     const wxContext = cloud.getWXContext();
     const addressCount = await db
         .collection("addressBook")
@@ -25,7 +25,10 @@ const addressCreate = async (event, context) => {
 
     const data = {
         openid: wxContext.OPENID,
-        ...event.params,
+        type,
+        zipCode,
+        company,
+        addressDetail,
     };
     return await db.collection("addressBook").add({
         data,
@@ -33,12 +36,12 @@ const addressCreate = async (event, context) => {
 };
 
 const addressUpdate = async (event, context) => {
-    const { id, addressDetail, addressMain, zipCode } = event.params;
+    const { id, addressDetail, company, zipCode } = event.params;
     const wxContext = cloud.getWXContext();
     
     const dataToUpdate = {
         addressDetail,
-        addressMain,
+        company,
         zipCode,
     }
     
@@ -64,6 +67,9 @@ const addressGetAll = async (event, context) => {
         .where({
             openid: wxContext.OPENID,
         })
+        .field({
+            openid: false,
+        })
         .orderBy("type", "asc")
         .get();
 };
@@ -81,6 +87,9 @@ const addressGetByType = async (event, context) => {
             openid: wxContext.OPENID,
             type,
         })
+        .field({
+            openid: false,
+        })
         .get();
 };
 
@@ -94,9 +103,11 @@ const addressGetById = async (event, context) => {
             openid: wxContext.OPENID,
             _id: id,
         })
+        .field({
+            openid: false,
+        })
         .get()
         .then((res) => {
-            console.log("addressGetById res: ", res);
             const { data } = res;
             if(!data.length) {
                 throwError(400, "该地址不存在")

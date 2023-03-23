@@ -57,8 +57,8 @@ Page({
     },
 
     formSubmit(e) {
-        const { addressMain, addressDetail, zipCode } = e.detail.value;
-        if (!addressDetail.trim() || !addressMain.trim() || !zipCode.trim()) {
+        const { company, addressDetail, zipCode } = e.detail.value;
+        if (!addressDetail.trim() || !company.trim() || !zipCode.trim()) {
             wx.showToast({
                 title: "提交内容不能为空",
                 icon: "error",
@@ -70,8 +70,8 @@ Page({
         // 缺校验逻辑
         const newAddressToEdit = {
             id: this.data.addressToEdit?._id || null,
-            type: this.data.addressType,
-            addressMain,
+            type: this.data.addressType || null,
+            company,
             addressDetail,
             zipCode,
         };
@@ -79,6 +79,7 @@ Page({
 
         const { pageType } = this.data;
         if (pageType === "create") {
+            console.log("newAddressToEdit: ", newAddressToEdit);
             this.submit("user/addressCreate", newAddressToEdit);
         } else if (pageType === "edit") {
             this.submit("user/addressUpdate", newAddressToEdit);
