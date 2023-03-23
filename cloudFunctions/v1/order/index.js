@@ -28,12 +28,13 @@ const getOrderList = async (event, context) => {
         .collection("orders")
         .field({
             address: true,
-            orderID: true,
+            orderId: true,
             poNumber: true,
             status: true,
             subscriptionDate: true,
             zipCode: true,
             amount: true,
+            company:true,
         })
         .where(whereConditions)
         .get();
@@ -41,12 +42,12 @@ const getOrderList = async (event, context) => {
 
 const getOrderDetail = async (event, context) => {
     const wxContext = cloud.getWXContext();
-    const { orderID } = event.params;
+    const { orderId } = event.params;
     const result = await db
         .collection("orders")
         .where({
-            // openid: wxContext.OPENID,
-            orderID,
+            openid: wxContext.OPENID,
+            orderId,
         })
         .get();
         

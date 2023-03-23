@@ -4,7 +4,12 @@
 .category {
   display: flex;
   flex-wrap: nowrap;
+}
+.category-main {
   justify-content: center;
+}
+.category-scroll {
+  white-space: nowrap;
 }
 .category-item {
   display: flex;
@@ -59,7 +64,7 @@
   margin: 0 12rpx;
 }
 .title {
-  display: inline-flex
+  display: inline-flex;
   margin-left: 30rpx;
 }
 .product-item {

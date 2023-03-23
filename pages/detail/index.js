@@ -18,6 +18,7 @@ Page({
     });
 
     request.get("product/getProductDetail", {id: options.id}).then((res) => {
+      res.data[0]['formattedPrice'] = res.data[0].price.toLocaleString('zh', {style:'currency', currency: 'CNY', minimumFractionDigits: 2});
       this.setData({
         detail: res.data[0]
       });

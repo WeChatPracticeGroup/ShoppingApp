@@ -4,15 +4,13 @@
         <!-- navation bar -->
         <navigation-bar />
         <!-- search bar -->
-        <view class="search-bar">
-            <!-- search -->
+        <!-- <view class="search-bar">
             <view class="search" bind:tap="toSearchPage">
                 <icon type="search" color="#757575" />
                 <text>请输入关键词进行搜索</text>
             </view>
-            <!-- message icon -->
             <van-icon class="message" name="comment-o" info="{{messageCount}}" size="24px" bind:click="toMessagePage" />
-        </view>
+        </view> -->
     </view>
     <view class="goods_container_page">
         <!-- banner -->

@@ -10,19 +10,33 @@ Page({
         addressDelivery: [],
         addressPayer: [],
         activeTab: 0,
+        requiredFetch: true,
     },
 
-    onLoad() {
-        this.fetchAddressList();
-    },
-    
-    // onShow() {
+    // onLoad() {
     //     this.fetchAddressList();
     // },
+    
+    onShow() {
+        if(this.data.requiredFetch) {
+            this.fetchAddressList();
+            this.setData({
+                requiredFetch: false,
+            })
+        }
+    },
+    
+    // goUpdate(){
+    //     console.log('我更新啦');
+    //     this.setData({
+    //         requiredFetch: false,
+    //     })
+    // },
+
 
     fetchAddressList() {
         wx.showLoading({
-            title: "加载中",
+            title: "加载列表中",
         });
         request
             .get("user/addressGetAll")
@@ -48,9 +62,14 @@ Page({
                     addressDelivery: _addressDelivery,
                     addressPayer: _addressPayer,
                 });
+                console.log("addressSale: ", this.data.addressSale);
             })
             .catch(e => {
-                console.log("e: ", e.message);
+                wx.showToast({
+                    title: e.message,
+                    icon: 'error',
+                    duration: 1500,
+                });
             })
             .finally(() => {
                 setTimeout(() => {
