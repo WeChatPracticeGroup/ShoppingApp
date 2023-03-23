@@ -8,5 +8,5 @@
     "van-button": "@vant/weapp/button/index",
     "product-list": "/components/productList/productList"
   },
-  "navigationStyle": "custom"
+  "navigationBarTitleText": "购物车"
 }

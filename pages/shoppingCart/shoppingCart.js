@@ -14,8 +14,11 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad(options) {
-    this.getCartItems()
+//   onLoad(options) {
+//     this.getCartItems();
+//   },
+  onShow(options) {
+    this.getCartItems();
   },
   getCartItems() {
     request.get("shoppingCart/cartItems").then(res => {
@@ -24,7 +27,7 @@ Page({
           item.productInfo.image = `${prefix}/categorys/${item.productInfo.image}`;
           return item;
       })
-      this.setData({ list });
+      this.setData({ list: [...list] });
     }).catch(e => {
       wx.showToast({
           title: e.message || e || "请求错误",
@@ -33,6 +36,15 @@ Page({
   },
   buyNow(e) {
     const _this = this;
+    if(this.data.selectedItems.length < 1) {
+        wx.showToast({
+            title: '请先勾选商品',
+            icon: 'error',
+            duration: 1500,
+        });
+        return;
+    }
+    
     wx.navigateTo({
       url: '/pages/shoppingCart/checkout',
       success: function(res) {
@@ -47,64 +59,36 @@ Page({
       return item._id;
     })
     const param = {ids: removeList};
+    wx.showLoading();
     request.post("shoppingCart/cartItemRemove", param).then(res => {
+        wx.showToast({
+            title: "删除成功"
+        })
       _this.getCartItems()
     }).catch(e => {
       wx.showToast({
           title: e.message || e || "请求错误",
       })
+    }).finally(() => {
+        setTimeout(() => {
+            wx.hideLoading();
+        }, 1000)
     })
   },
   updateSelectedItems(e) {
-    console.log("updateSelectedItems: ", e.detail);
+    // console.log("updateSelectedItems: ", e.detail);
     this.setData({
         selectedItems: e.detail.selectedItems,
     })
   },
   onQuantityChange(e) {
-    console.log("onQuantityChange: ", e.detail);
-  },
-  addOrder() {
-    console.log("addOrder: ", this.data.selectedItems);
-    if(!this.data.selectedItems.length) {
-        wx.showToast({
-            title: '请勾选购买的产品',
-            icon: 'error',
-            duration: 1500,
-        });
-        return;
-    }
-    
-    const amount = this.data.selectedItems.reduce((prev, curr) => {
-        const { quantity, productInfo } = curr;
-        const singleAmount = quantity * productInfo.price
-        return prev + Number(singleAmount);
-    }, 0).toFixed(2);
-    
-    const params = {
-        productItems: this.data.selectedItems,
-        amount: Number(amount),
-    }
-    
-    request.post("shoppingCart/pay", params).then(res => {
-        console.log("pay res: ", res);
-    }).catch(e => {
-        console.error(e.message);
-    })
-    
+    // console.log("onQuantityChange: ", e.detail);
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow() {
 
   },
 

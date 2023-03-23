@@ -105,9 +105,9 @@ const pay = async (event, context) => {
     const { OPENID } = cloud.getWXContext();
     const {
         productItems,
-        address = "我是详细地址",
-        company = "某某公司",
-        zipCode = "610000",
+        address,
+        company,
+        zipCode,
         amount,
     } = event.params;
 

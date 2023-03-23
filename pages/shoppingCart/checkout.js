@@ -1,4 +1,5 @@
 import request from "/utils/request";
+import { generateImgUrl } from '/utils/util';
 
 Page({
 
@@ -8,7 +9,24 @@ Page({
   data: {
       showPayCode: false,
       showCheckbox: false,
-      disableQuatity: true
+      disableQuatity: true,
+      tmpQRCode: `${generateImgUrl()}/pay/payQRCode.png`,
+      showAddressOptions: false,
+      addressOptions: [
+        {
+          name: '选项',
+          subname: '描述信息',
+        },
+        {
+          name: '选项',
+          subname: '描述信息',
+        },
+        {
+          name: '选项',
+          subname: '描述信息',
+        },
+      ],
+      selectedAddress: null,
   },
 
   /**
@@ -24,47 +42,86 @@ Page({
         price += list[i].productInfo.price * list[i].quantity;
       }
       //get address
-      const address = _this.getAddress();
-      _this.setData({ list, price, address });
-      _this.getPay(data.data);
+      _this.getAddress();
+      _this.setData({ list, price: price.toFixed(2) });
+    //   _this.getPay(data.data);
     })
   },
 
   getAddress: function() {
     request.get("user/addressGetByType", {type: 1}).then(res => {
-      console.log(res) 
-      //const address = res.data;
+      const adddressOptions = res.data.map(address => {
+            return {
+                ...address,
+                name: address.company,
+                subname: address.addressDetail,
+            }
+      });
+      
+      this.setData({ 
+        adddressOptions,
+        selectedAddress: adddressOptions[0] || null,
+     })
+      
     }).catch(e => {
       wx.showToast({
           title: e.message || e || "请求错误",
       })
     })
-    
-    const address = {
-      location: '西安市天谷七路环普软件苑',
-      addressName: 'Kate',
-      phone: 111111111,
-      company: '奈佳罗软件'
+  },
+  onShowAddress() {
+    const { addressOptions } = this.data;
+    if(addressOptions && addressOptions.length) {
+        this.setData({ showAddressOptions: true })
+        return;
     }
-
-    return address;
+    
+    wx.showToast({
+        title: '请先添加地址',
+        icon: 'none',
+        duration: 1000,
+        success: ()=>{
+            setTimeout(() => {
+                wx.redirectTo({
+                    url: "/pages/userCenter/address/index",
+                });
+            }, 1500)
+        },
+    });
+  },
+  onSelectAddress(e) {
+    this.setData({
+        selectedAddress: e.detail
+    })
+  },
+  onCloseAddress() {
+    this.setData({ showAddressOptions: false })
   },
   getPay: function(data) {
-    let amount = 0;
-    for(let i = 0; i<data.length; i++) {
-      amount += data[i].quantity;
-    }
+    const { company, addressDetail, zipCode } = this.data.selectedAddress;
     const params = {
-      amount: amount,
-      productItems: data
+      amount: Number(this.data.price),
+      productItems: data,
+      company, 
+      address: addressDetail, 
+      zipCode,
     }
-    console.log(params)
     request.post("shoppingCart/pay", params).then(res => {
-      console.log(res)
+      wx.showToast({
+          title: "支付成功",
+          duration: 1500,
+      })
+      setTimeout(() => {
+        wx.navigateBack({
+            delta: 1
+          });
+      }, 1500)
     }).catch(e => {
       wx.showToast({
           title: e.message || e || "请求错误",
       })
+    }).finally(() => {
+        this.setData({ showPayCode: false });
     })
   },
   handleBackTap: function(e) {
@@ -83,7 +140,10 @@ Page({
     //wx.navigateBack();
   },
   pay:function(e) {
-    this.setData({showPayCode: true})
+    this.setData({ showPayCode: true });
+  },
+  payFinished() {
+    this.getPay(this.data.list)
   },
   /**
    * Lifecycle function--Called when page is initially rendered

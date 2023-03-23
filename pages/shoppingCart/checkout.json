@@ -1,9 +1,11 @@
 {
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "确认订单",
   "usingComponents": {
     "navigation-bar": "/components/customNavigationBar/customNavigationBar",
     "van-icon": "@vant/weapp/icon/index",
     "van-button": "@vant/weapp/button/index",
-    "product-list": "/components/productList/productList"
+    "product-list": "/components/productList/productList",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
   }
 }
