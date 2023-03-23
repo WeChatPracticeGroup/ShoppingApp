@@ -1,26 +1,51 @@
-<scroll-view class="w100 h100 mt50" scroll-y>
-  <view class="flex flexac">
+<scroll-view class="w100 h100" scroll-y>
+  <!-- <view class="flex flexac">
     <view class="left-arrow" bindtap="handleBackTap"></view>
     <view  wx:if="{{showPayCode}}">支付</view>
-    <view  wx:else="">确认订单</view>
-  </view>
-  <view class="w100 h100" wx:if="{{showPayCode}}">支付二维码</view>
-  <view class="w100 pos-rel" wx:else="">
-    <view class="address padding-tb-30 padding-lr-20">
-      <view>{{address.location}}</view>
-      <view>{{address.name}} {{address.phone}}</view>
-    </view>
-    <product-list list="{{list}}"></product-list>
+    <view>确认订单</view>
+  </view> -->
+  <!-- <view class="w100 h100" wx:if="{{showPayCode}}">支付二维码</view> -->
+  <view class="w100 pos-rel">
+    <product-list list="{{list}}" disableQuatity="{{disableQuatity}}" showCheckbox="{{showCheckbox}}"></product-list>
     <view>
-      <view class="padding-20">价格明细</view>
-      <view class="flex flexsb padding-20">
-        <view>商品金额</view>
-        <view>￥1111.11</view>
+      <view class="address-container padding-tb-30 padding-lr-20">
+        <view style="color:#707070;">送货地址</view>
+        <view class="address-content">
+            <view class="address-info">
+                <view class="address-info-company">{{selectedAddress.company || "送货地址未选择"}}</view>
+                <view class="address-info-detail">{{selectedAddress.addressDetail}}</view>
+            </view>
+            <van-button type="danger" size="small" bind:click="onShowAddress">选择地址</van-button>
+        </view>
+      </view>
+      <!-- <view class="padding-20">价格明细</view> -->
+      <view class="flex flexsb padding-20 price-wrapper">
+        <view class="price-label">应付金额</view>
+        <view class="price-amount">￥{{price}}</view>
       </view>
     </view>
-    <view class="flex flexac flexsb padding-20">
-      <view>￥1111.11</view>
-      <van-button  round type="primary" color="#ee0a24" size="normal" bind:click="pay">提交订单</van-button>
+    <view class="flexac flexsb padding-20">
+      <!-- <view>￥{{price}}</view> -->
+      <van-button  round type="primary" color="#ee0a24" size="normal" block bind:click="pay">确认支付</van-button>
     </view>
   </view>
 </scroll-view>
+
+<van-dialog
+  use-slot
+  title="请支付"
+  confirmButtonText="已支付"
+  show="{{ showPayCode }}"
+  bind:confirm="payFinished"
+  theme="round-button"
+>
+    <image src="{{tmpQRCode}}"></image>
+</van-dialog>
+
+<van-action-sheet
+  show="{{ showAddressOptions }}"
+  actions="{{ adddressOptions }}"
+  description="请选择送货地址"
+  bind:close="onCloseAddress"
+  bind:select="onSelectAddress"
+/>

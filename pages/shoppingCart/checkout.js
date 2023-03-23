@@ -1,4 +1,5 @@
 import request from "/utils/request";
+import { generateImgUrl } from '/utils/util';
 
 Page({
 
@@ -6,52 +7,123 @@ Page({
    * Page initial data
    */
   data: {
-    data: {
       showPayCode: false,
-    },
+      showCheckbox: false,
+      disableQuatity: true,
+      tmpQRCode: `${generateImgUrl()}/pay/payQRCode.png`,
+      showAddressOptions: false,
+      addressOptions: [
+        {
+          name: '选项',
+          subname: '描述信息',
+        },
+        {
+          name: '选项',
+          subname: '描述信息',
+        },
+        {
+          name: '选项',
+          subname: '描述信息',
+        },
+      ],
+      selectedAddress: null,
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    var address = {
-      location: '西安市天谷七路环普软件苑',
-      addressName: 'Kate',
-      phone: 111111111,
-    }
-    var list = [
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      },
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
+    const _this =  this;
+    const eventChannel = this.getOpenerEventChannel();
+    eventChannel.on('acceptDataFromOpenerPage', function(data) {
+      const list = data.data;
+      let price = 0;
+      for(var i = 0; i < list.length; i++) {
+        price += list[i].productInfo.price * list[i].quantity;
       }
-    ];
-    // request.post("shoppingcart/pay").then(res => {
-    //   console.log(res)
-      // const prefix = generateImgUrl();
-      // let { addresses, list, price } = res.data;
-      
-      // banners = banners.map(banner => `${prefix}${banner}`);
-      // categoryImages.forEach(img => {
-      //     img.imagePath = `${prefix}${img.imagePath}`;
-      // });
-      // this.setData({ list: list });
-    // }).catch(e => {
-    //   wx.showToast({
-    //       title: e.message || e || "请求错误",
-    //   })
-    // })
-    this.setData({ address: address, list: list })
+      //get address
+      _this.getAddress();
+      _this.setData({ list, price: price.toFixed(2) });
+    //   _this.getPay(data.data);
+    })
   },
-  
+
+  getAddress: function() {
+    request.get("user/addressGetByType", {type: 1}).then(res => {
+      const adddressOptions = res.data.map(address => {
+            return {
+                ...address,
+                name: address.company,
+                subname: address.addressDetail,
+            }
+      });
+      
+      this.setData({ 
+        adddressOptions,
+        selectedAddress: adddressOptions[0] || null,
+     })
+      
+    }).catch(e => {
+      wx.showToast({
+          title: e.message || e || "请求错误",
+      })
+    })
+  },
+  onShowAddress() {
+    const { addressOptions } = this.data;
+    if(addressOptions && addressOptions.length) {
+        this.setData({ showAddressOptions: true })
+        return;
+    }
+    
+    wx.showToast({
+        title: '请先添加地址',
+        icon: 'none',
+        duration: 1000,
+        success: ()=>{
+            setTimeout(() => {
+                wx.redirectTo({
+                    url: "/pages/userCenter/address/index",
+                });
+            }, 1500)
+        },
+    });
+  },
+  onSelectAddress(e) {
+    this.setData({
+        selectedAddress: e.detail
+    })
+  },
+  onCloseAddress() {
+    this.setData({ showAddressOptions: false })
+  },
+  getPay: function(data) {
+    const { company, addressDetail, zipCode } = this.data.selectedAddress;
+    const params = {
+      amount: Number(this.data.price),
+      productItems: data,
+      company, 
+      address: addressDetail, 
+      zipCode,
+    }
+    request.post("shoppingCart/pay", params).then(res => {
+      wx.showToast({
+          title: "支付成功",
+          duration: 1500,
+      })
+      setTimeout(() => {
+        wx.navigateBack({
+            delta: 1
+          });
+      }, 1500)
+    }).catch(e => {
+      wx.showToast({
+          title: e.message || e || "请求错误",
+      })
+    }).finally(() => {
+        this.setData({ showPayCode: false });
+    })
+  },
   handleBackTap: function(e) {
     console.log('handle back tap in search bar');
     let pages = getCurrentPages()
@@ -68,7 +140,10 @@ Page({
     //wx.navigateBack();
   },
   pay:function(e) {
-    this.setData({showPayCode: true})
+    this.setData({ showPayCode: true });
+  },
+  payFinished() {
+    this.getPay(this.data.list)
   },
   /**
    * Lifecycle function--Called when page is initially rendered

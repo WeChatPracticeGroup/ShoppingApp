@@ -32,3 +32,37 @@
   padding-top: 20rpx;
   padding-bottom: 20rpx;
 }
+.price-wrapper {
+    align-items: center;
+    background-color: #fff;
+    margin-bottom: 24rpx;
+}
+.price-label {
+    /* font-size: 32rpx; */
+    color: #707070;
+}
+.price-amount {
+    font-size: 48rpx;
+    color: red;
+}
+.address-container {
+    margin: 24rpx 0;
+    background-color: #fff;
+}
+.address-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.address-info {
+    text-align: left;
+    padding: 12rpx 0;
+}
+.address-info-company {
+    font-size: 32rpx;
+    padding-bottom: 8rpx;
+}
+.address-info-detail {
+    font-size: 24rpx;
+    color: #999;
+}

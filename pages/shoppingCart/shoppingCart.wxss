@@ -194,4 +194,10 @@
 .cartBtn {
   width: 320rpx;
 }
+.list-empty {
+    margin: 48rpx;
+    font-size: 28rpx;
+    color: #bbb;
+    text-align: center;
+}
 
