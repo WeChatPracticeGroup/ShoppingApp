@@ -2,6 +2,20 @@
     height: 100vh;
 }
 
+.tip {
+    font-size: 24rpx;
+    margin: 16rpx;
+    color: #bababa;
+}
+
+.empty {
+    font-size: 28rpx;
+    margin: 16rpx;
+    margin-top: 56rpx;
+    color: #333;
+    text-align: center;
+}
+
 .card-container {
     margin: 12rpx;
     padding: 24rpx;
@@ -37,9 +51,9 @@
 .btn-area {
     position: fixed;
     width: 100vw;
-    bottom: 0;
+    bottom: 48rpx;
 }
 
 .btn-wrapper {
-    margin: 0 12rpx;
+    margin: 0 24rpx;
 }
