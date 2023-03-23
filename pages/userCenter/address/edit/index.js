@@ -58,6 +58,15 @@ Page({
 
     formSubmit(e) {
         const { addressMain, addressDetail, zipCode } = e.detail.value;
+        if(!addressDetail.trim() || !addressMain.trim() || !zipCode.trim()) {
+            wx.showToast({
+                title: "提交内容不能为空",
+                icon: "error",
+                duration: 1500,
+                mask: false,
+            });
+            return;
+        }
         // 缺校验逻辑
         const newAddressToEdit = {
             id: this.data.addressToEdit?._id || null,

@@ -1,7 +1,7 @@
 <!-- components/customNavigationBar.wxml -->
 <view class="navigation-bar" style="height:{{navBarHeight}}px">
     <view class="navigation-bar-content" style="margin-top:{{statusBarHeight}}px">
-        <text>Honeywell</text>
+        <text> </text>
         <text>|</text>
         <text>智慧建筑</text>
     </view>
