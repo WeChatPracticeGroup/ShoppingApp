@@ -6,52 +6,67 @@ Page({
    * Page initial data
    */
   data: {
-    data: {
       showPayCode: false,
-    },
+      showCheckbox: false,
+      disableQuatity: true
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    var address = {
+    const _this =  this;
+    const eventChannel = this.getOpenerEventChannel();
+    eventChannel.on('acceptDataFromOpenerPage', function(data) {
+      const list = data.data;
+      let price = 0;
+      for(var i = 0; i < list.length; i++) {
+        price += list[i].productInfo.price * list[i].quantity;
+      }
+      //get address
+      const address = _this.getAddress();
+      _this.setData({ list, price, address });
+      _this.getPay(data.data);
+    })
+  },
+
+  getAddress: function() {
+    request.get("user/addressGetByType", {type: 1}).then(res => {
+      console.log(res) 
+      //const address = res.data;
+    }).catch(e => {
+      wx.showToast({
+          title: e.message || e || "请求错误",
+      })
+    })
+    
+    const address = {
       location: '西安市天谷七路环普软件苑',
       addressName: 'Kate',
       phone: 111111111,
+      company: '奈佳罗软件'
     }
-    var list = [
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      },
-      {
-        image: '/images/banner.png',
-        name: 'FC400UV24A',
-        summary: '电子式空气净化器',
-        price: '￥2300.00'
-      }
-    ];
-    // request.post("shoppingcart/pay").then(res => {
-    //   console.log(res)
-      // const prefix = generateImgUrl();
-      // let { addresses, list, price } = res.data;
-      
-      // banners = banners.map(banner => `${prefix}${banner}`);
-      // categoryImages.forEach(img => {
-      //     img.imagePath = `${prefix}${img.imagePath}`;
-      // });
-      // this.setData({ list: list });
-    // }).catch(e => {
-    //   wx.showToast({
-    //       title: e.message || e || "请求错误",
-    //   })
-    // })
-    this.setData({ address: address, list: list })
+
+    return address;
   },
-  
+  getPay: function(data) {
+    let amount = 0;
+    for(let i = 0; i<data.length; i++) {
+      amount += data[i].quantity;
+    }
+    const params = {
+      amount: amount,
+      productItems: data
+    }
+    console.log(params)
+    request.post("shoppingCart/pay", params).then(res => {
+      console.log(res)
+    }).catch(e => {
+      wx.showToast({
+          title: e.message || e || "请求错误",
+      })
+    })
+  },
   handleBackTap: function(e) {
     console.log('handle back tap in search bar');
     let pages = getCurrentPages()

@@ -10,16 +10,16 @@
       <view>{{address.location}}</view>
       <view>{{address.name}} {{address.phone}}</view>
     </view>
-    <product-list list="{{list}}"></product-list>
+    <product-list list="{{list}}" disableQuatity="{{disableQuatity}}" showCheckbox="{{showCheckbox}}"></product-list>
     <view>
       <view class="padding-20">价格明细</view>
       <view class="flex flexsb padding-20">
         <view>商品金额</view>
-        <view>￥1111.11</view>
+        <view>￥{{price}}</view>
       </view>
     </view>
     <view class="flex flexac flexsb padding-20">
-      <view>￥1111.11</view>
+      <view>￥{{price}}</view>
       <van-button  round type="primary" color="#ee0a24" size="normal" bind:click="pay">提交订单</van-button>
     </view>
   </view>

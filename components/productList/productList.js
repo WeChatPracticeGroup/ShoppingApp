@@ -8,6 +8,14 @@ Component({
       type: Array,
       value: []
     },
+    showCheckbox: {
+      type: Boolean,
+      value: true
+    },
+    disableQuatity: {
+      type: Boolean,
+      value: false
+    }
   },
 
   /**
@@ -18,14 +26,6 @@ Component({
     selectedItemIds: [],
   },
   
-//   lifetimes: {
-//     ready() {
-//         const { defaultList } = this.properties;
-//         // this.setData({
-//         //     list: defaultList || [],
-//         // })
-//     }
-//   },
   /**
    * Component methods
    */

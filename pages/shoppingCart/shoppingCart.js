@@ -5,86 +5,54 @@ Page({
   data: {
     placeHolder: "请输入要搜索的商品",
     showBackBtnInSearchBar: true,
-    nameState:0,
-    priceState:0,
-    chooseImgState:true,
     list: [],
     selectedItems: [],
+    showCheckbox: true,
+    disableQuatity: false
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    // var list = [
-    //   {
-    //     image: '/images/banner.png',
-    //     name: 'FC400UV24A',
-    //     summary: '电子式空气净化器',
-    //     price: '￥2300.00'
-    //   },
-    //   {
-    //     image: '/images/banner.png',
-    //     name: 'FC400UV24A',
-    //     summary: '电子式空气净化器',
-    //     price: '￥2300.00'
-    //   },
-    //   {
-    //     image: '/images/banner.png',
-    //     name: 'FC400UV24A',
-    //     summary: '电子式空气净化器',
-    //     price: '￥2300.00'
-    //   },
-    //   {
-    //     image: '/images/banner.png',
-    //     name: 'FC400UV24A',
-    //     summary: '电子式空气净化器',
-    //     price: '￥2300.00'
-    //   },
-    //   {
-    //     image: '/images/banner.png',
-    //     name: 'FC400UV24A',
-    //     summary: '电子式空气净化器',
-    //     price: '￥2300.00'
-    //   }
-    // ]
+    this.getCartItems()
+  },
+  getCartItems() {
     request.get("shoppingCart/cartItems").then(res => {
-        // console.log("lala: ", res)
-        const prefix = generateImgUrl();
-        const list = res.data.map(item => {
-            item.productInfo.image = `${prefix}/categorys/${item.productInfo.image}`;
-            return item;
-        })
-        // const prefix = generateImgUrl();
-        // let { banners, categoryImages } = res.data;
-        
-        // banners = banners.map(banner => `${prefix}${banner}`);
-        // categoryImages.forEach(img => {
-        //     img.imagePath = `${prefix}${img.imagePath}`;
-        // });
-        this.setData({ list });
-      }).catch(e => {
-        wx.showToast({
-            title: e.message || e || "请求错误",
-        })
+      const prefix = generateImgUrl();
+      const list = res.data.map(item => {
+          item.productInfo.image = `${prefix}/categorys/${item.productInfo.image}`;
+          return item;
       })
-    //   this.setData({ list: list });
-  },
-  onChange(event) {
-    this.setData({
-      checked: event.detail,
-    });
-  },
-  gotoPDP(e){
-    var item = e.currentTarget.dataset.item;
-    console.log(item)
-    wx.navigateTo({
-      url: '/pages/detail/index?name='+item.code,
+      this.setData({ list });
+    }).catch(e => {
+      wx.showToast({
+          title: e.message || e || "请求错误",
+      })
     })
   },
   buyNow(e) {
+    const _this = this;
     wx.navigateTo({
       url: '/pages/shoppingCart/checkout',
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: _this.data.selectedItems })
+      }
+    })
+  },
+  itemRemove(e) {
+    const _this = this;
+    let removeList = this.data.selectedItems.map((item) => {
+      return item._id;
+    })
+    const param = {ids: removeList};
+    request.post("shoppingCart/cartItemRemove", param).then(res => {
+      _this.getCartItems()
+    }).catch(e => {
+      wx.showToast({
+          title: e.message || e || "请求错误",
+      })
     })
   },
   updateSelectedItems(e) {
