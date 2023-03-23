@@ -64,7 +64,7 @@
   margin: 0 12rpx;
 }
 .title {
-  display: inline-flex
+  display: inline-flex;
   margin-left: 30rpx;
 }
 .product-item {
