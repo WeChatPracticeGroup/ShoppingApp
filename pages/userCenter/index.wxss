@@ -1,1 +1,50 @@
 /* pages/userCenter/index.wxss */
+@import "../../style/userCenterIcon.wxss";
+
+.user-menu {
+  position: relative;
+  margin-top: 400rpx;
+}
+
+.user-menu-item {
+  position: relative;
+  background-color: #ffffff;
+}
+
+.user-menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.switch-account-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 20rpx;
+  font-size: 16px;
+}
+
+.user-menu-icon {
+  margin-right: 25rpx;
+}
+
+.map-icon {
+  font-size: 25px;
+}
+
+.arrow-icon {
+  color: #cdcdcd;
+}
+
+.user-logout-button {
+  margin-top: 30rpx;
+  background-color: #ffffff;
+  color: red;
+
+}

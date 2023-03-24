@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+	"usingComponents": {
+    "van-search": "@vant/weapp/search/index",
+    "search-bar": "/components/searchBar/SearchBar"
+  },
+  "navigationStyle": "custom"
 }

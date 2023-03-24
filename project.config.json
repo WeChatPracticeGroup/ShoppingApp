@@ -1,7 +1,13 @@
 {
   "description": "项目配置文件",
+  "cloudfunctionRoot": "cloudFunctions/",
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      {
+        "value": "cloudFunctions",
+        "type": "folder"
+      }
+    ],
     "include": []
   },
   "setting": {
@@ -27,9 +33,8 @@
     "useApiHook": true,
     "useApiHostProcess": true,
     "showShadowRootInWxmlPanel": true,
-    "packNpmManually": false,
+    "packNpmManually": true,
     "enableEngineNative": false,
-    "packNpmRelationList": [],
     "minifyWXSS": true,
     "showES6CompileOption": false,
     "minifyWXML": true,
@@ -38,15 +43,22 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "condition": false
+    "condition": false,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./"
+      }
+    ]
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
   "appid": "wxfc9b97dd7251b438",
-  "projectname": "miniprogram-92",
+  "projectname": "ShoppingApp",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
 }

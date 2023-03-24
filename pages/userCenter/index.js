@@ -1,32 +1,37 @@
 // pages/userCenter/index.js
+
+const {
+  default: request
+} = require("/utils/request");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    isLogin: false,
+    userInfo: null,
+    isDialogShow: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-
-  },
+  onLoad(options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady() {
-
-  },
+  onReady() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    this.setData({
+      userInfo: wx.getStorageSync('userInfo')
+    });
   },
 
   /**
@@ -62,5 +67,89 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+
+  onAuthCompleted() {
+    this.setData({
+      userInfo: wx.getStorageSync('userInfo'),
+      isDialogShow: false
+    })
+  },
+  checkAuth() {
+    if (!this.data.userInfo) {
+      this.setData({
+        isDialogShow: true
+      });
+      return false;
+    };
+
+    return true;
+  },
+  /*
+   * 跳转到通讯簿
+   */
+  goToAddressPage(option) {
+    const authed = this.checkAuth();
+    if (authed) {
+      wx.navigateTo({
+        url: '/pages/userCenter/address/index',
+      })
+    }
+  },
+  /*
+   * 跳转到我的资料
+   */
+  goToProfile(option) {
+    const authed = this.checkAuth();
+    if (authed) {
+      wx.navigateTo({
+        url: '/pages/userCenter/userProfile/index',
+      })
+    }
+  },
+
+  /*
+   * 用户登录 
+   */
+  login() {
+    wx.showLoading({
+      title: '登录中...',
+    });
+
+    request.post("user/login")
+      .then(res => {
+        const userInfo = res.data;
+        if (!userInfo) {
+          return Promise.reject("login failed");
+        };
+        wx.setStorageSync('userInfo', userInfo);
+        this.setData({
+          userInfo
+        });
+      }).catch(error => {
+        console.log(`[login error]: ${JSON.stringify(error)}`);
+        wx.showToast({
+          title: "用户登录失败",
+          icon: "error",
+          duration: 1500,
+          mask: false
+        })
+      }).finally(() => {
+        wx.hideLoading();
+      });
+  },
+
+  /*
+   * 用户退出登录
+   */
+  logout() {
+    wx.showLoading();
+    wx.removeStorage({
+      key: 'userInfo',
+    });
+    this.setData({
+      userInfo: null
+    });
+    wx.hideLoading();
   }
 })

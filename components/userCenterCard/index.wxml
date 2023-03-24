@@ -1,0 +1,42 @@
+<!--components/userCenterCard/index.wxml-->
+<view class="user-center-card">
+  <videw class="user-container">
+    <!--未登录-->
+    <block wx:if="{{!userInfo}}">
+      <view class="user-avatar" bindtap="login">
+        <image class=" user-avatar-image" src="{{defaultAvatarUrl}}">
+        </image>
+        <view class="user-avatar-info">
+          <text>尚未登录</text>
+        </view>
+      </view>
+    </block>
+    <!--用户登录-->
+    <block wx:if="{{ userInfo}}">
+      <view class="user-avatar">
+        <image class="user-avatar-image" src="{{userInfo.avatarUrl || defaultAvatarUrl}}"></image>
+        <view class="user-avatar-info ">
+          <text>{{userInfo.nickname }}</text>
+        </view>
+      </view>
+    </block>
+    <block>
+      <view class="user-info">
+        <view class="user-info-container">
+          <icon class="iconfont icon-mobile-phone user-info-icon"></icon>
+          <view class="user-info-text">
+            <text>电话</text>
+            <text>{{userInfo.phone}}</text>
+          </view>
+        </view>
+        <view class="user-info-container">
+          <icon class="iconfont icon-bookmark user-info-icon"></icon>
+          <view class="user-info-text">
+            <text>客户类型</text>
+            <text>{{userInfo.clientType}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </videw>
+</view>

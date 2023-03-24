@@ -1,1 +1,35 @@
 /* pages/order/index.wxss */
+.navigator-hover {
+  color: blue;
+}
+
+.order-detail {
+  background-color: white;
+  margin: 8px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.item-name {
+  width: 18%;
+}
+
+.order-item {
+  display: flex;
+  line-height: 48rpx;
+}
+
+.page-section {
+  margin: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.other-navigator-hover {
+  color: red;
+}
+
+.button {
+  color: red !important;
+}

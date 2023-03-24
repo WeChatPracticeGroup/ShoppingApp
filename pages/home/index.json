@@ -1,5 +1,8 @@
 {
-	"usingComponents": {
-		"van-button": "vant-weapp/button"
-	}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "navigation-bar": "/components/customNavigationBar/customNavigationBar",
+    "van-icon": "@vant/weapp/icon/index",
+    "user-authorizer-dialog": "/components/userAuthorizerDialog/index"
+  }
 }

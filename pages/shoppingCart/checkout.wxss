@@ -1,0 +1,68 @@
+/* pages/shoppingCart/checkout.wxss */
+.mt50 {
+  margin-top: 50px;
+}
+.left-arrow {
+  margin: 10rpx 30rpx;
+  border: 3px solid black;
+  border-width: 0px 7rpx 7rpx 0px;
+  display: inline-block;
+  padding: 7px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.flex {
+  display: flex;
+}
+.flexac {
+  align-items: center;
+}
+.flexsb {
+  justify-content: space-between;
+}
+.padding-20 {
+  padding: 20rpx;
+}
+
+.padding-lr-20 {
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.padding-tb-30 {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.price-wrapper {
+    align-items: center;
+    background-color: #fff;
+    margin-bottom: 24rpx;
+}
+.price-label {
+    /* font-size: 32rpx; */
+    color: #707070;
+}
+.price-amount {
+    font-size: 48rpx;
+    color: red;
+}
+.address-container {
+    margin: 24rpx 0;
+    background-color: #fff;
+}
+.address-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.address-info {
+    text-align: left;
+    padding: 12rpx 0;
+}
+.address-info-company {
+    font-size: 32rpx;
+    padding-bottom: 8rpx;
+}
+.address-info-detail {
+    font-size: 24rpx;
+    color: #999;
+}

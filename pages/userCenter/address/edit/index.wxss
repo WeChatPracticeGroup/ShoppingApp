@@ -1,0 +1,39 @@
+page {
+    background-color: #fff;
+}
+
+.form-container {
+    margin: 40rpx 40rpx;
+}
+
+.section-wrapper {
+    display: flex;
+    height: 80rpx;
+    margin: 40rpx 0rpx;
+    border: 3rpx solid #d0d7de;
+    border-radius: 10rpx;
+}
+
+.section-title {
+    position: absolute;
+    font-size: 24rpx;
+    background: white;
+    margin: -20rpx 0 0 20rpx;
+    padding: 0 5rpx;
+    color: rgb(144, 147, 167);
+}
+
+.section-input {
+    font-size: 28rpx;
+    margin: auto 20rpx;
+    width: 100%;
+}
+
+.form-action {
+    margin-top: 72rpx;
+}
+
+.form-action-submit,
+.form-action-clear {
+    margin: 30rpx 0;
+}

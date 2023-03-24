@@ -1,1 +1,34 @@
-<button type="default" bind:tap="toOrder">跳转Example 1</button>
+<view class="container_page">
+    <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted"></user-authorizer-dialog>
+    <view class="title_container_page">
+        <!-- navation bar -->
+        <navigation-bar />
+        <!-- search bar -->
+        <!-- <view class="search-bar">
+            <view class="search" bind:tap="toSearchPage">
+                <icon type="search" color="#757575" />
+                <text>请输入关键词进行搜索</text>
+            </view>
+            <van-icon class="message" name="comment-o" info="{{messageCount}}" size="24px" bind:click="toMessagePage" />
+        </view> -->
+    </view>
+    <view class="goods_container_page">
+        <!-- banner -->
+        <swiper class="banner" autoplay="false" indicator-color="white" indicator-active-color="black" indicator-dots="{{banners}}">
+            <swiper-item wx:for="{{banners}}" wx:key="this">
+                <image src="{{item}}" />
+            </swiper-item>
+        </swiper>
+        <!-- grid list -->
+        <view class="goods_container">
+            <text class="goods_container_title">选购我们的智能建筑科技产品目录</text>
+            <text class="goods_container_description">获取最受欢迎的消防、安全、舒适和节能产品的定价和供货情况</text>
+            <block wx:for="{{goods}}" wx:key="index">
+                <view class="goods_items" data-index="{{index}}" bindtap="onItemClick">
+                    <image src="{{item.imagePath}}" />
+                    <text>{{item.title}}</text>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
