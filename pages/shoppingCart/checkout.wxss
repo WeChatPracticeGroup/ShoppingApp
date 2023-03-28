@@ -73,5 +73,5 @@
 }
 .qrcode {
     width: 400rpx;
-    height: 600rpx;
+    height: 400rpx;
 }

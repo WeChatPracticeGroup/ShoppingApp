@@ -41,7 +41,7 @@
   theme="round-button"
 >
     <view class="qrcode-wrapper">
-        <canvas canvas-id="qrcode" class="qrcode" />
+        <image class="qrcode" src="{{qrcodeImage}}" />
     </view>
 </van-dialog>
 

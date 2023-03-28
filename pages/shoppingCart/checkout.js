@@ -1,6 +1,7 @@
-import wxbarcode from 'wxbarcode';
+// import wxbarcode from 'wxbarcode';
+import QR from 'qrcode-base64'
 import request from "/utils/request";
-import { generateImgUrl } from '/utils/util';
+// import { generateImgUrl } from '/utils/util';
 
 Page({
 
@@ -27,13 +28,13 @@ Page({
         },
       ],
       selectedAddress: null,
+      qrcodeImage: null,
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
-    wxbarcode.qrcode('qrcode', '1234567890123456789', 400, 600);
     const _this =  this;
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptDataFromOpenerPage', function(data) {
@@ -47,6 +48,8 @@ Page({
       _this.setData({ list, price: price.toFixed(2) });
     //   _this.getPay(data.data);
     })
+    
+    this.drawQRCode();
   },
 
   getAddress: function() {
@@ -142,7 +145,7 @@ Page({
     //wx.navigateBack();
   },
   pay:function(e) {
-    this.setData({ showPayCode: true });
+      this.setData({ showPayCode: true });
   },
   payFinished() {
     this.getPay(this.data.list)
@@ -151,6 +154,16 @@ Page({
     let pages = getCurrentPages();
     let beforePage = pages[pages.length - 2];
     beforePage.getCartItems();
+  },
+  drawQRCode() {
+    const imgData = QR.drawImg("模拟支付二维码", {
+        typeNumber: 4,
+        errorCorrectLevel: 'M',
+        size: 500
+    });
+    this.setData({
+        qrcodeImage: imgData
+    })
   },
   /**
    * Lifecycle function--Called when page is initially rendered
