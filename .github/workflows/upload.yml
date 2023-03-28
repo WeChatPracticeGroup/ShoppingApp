@@ -1,8 +1,8 @@
 name: 上传小程序
 on:
   push:
-    branches:
-      - feature/ci
+    tags:
+      - "*.*.*"
 jobs:
   upload:
     runs-on: ubuntu-latest
