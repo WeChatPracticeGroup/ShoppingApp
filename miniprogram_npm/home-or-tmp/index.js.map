@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;;AAAA;AACA;AACA;AACA;AACA;AACA","file":"index.js","sourcesContent":["\nvar osHomedir = require('os-homedir');\nvar osTmpdir = require('os-tmpdir');\n\nmodule.exports = osHomedir() || osTmpdir();\n"]}

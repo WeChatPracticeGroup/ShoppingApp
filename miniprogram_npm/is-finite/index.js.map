@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;;AAAA;AACA;AACA;AACA;AACA;AACA","file":"index.js","sourcesContent":["\n\nmodule.exports = Number.isFinite || function (value) {\n\treturn !(typeof value !== 'number' || value !== value || value === Infinity || value === -Infinity);\n};\n"]}
