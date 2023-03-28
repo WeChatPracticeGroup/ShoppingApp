@@ -1,5 +1,5 @@
 const path = require("path");
-const { Project, upload } = require("miniprogram-ci");
+const { Project, upload, packNpm } = require("miniprogram-ci");
 
 const { version, description } = require("../package.json");
 const { appid: appId } = require("../project.config.json");
@@ -20,7 +20,7 @@ const { appid: appId } = require("../project.config.json");
         ],
     });
     // 构建npm
-    const warning = await ci.packNpm(project, {
+    const warning = await packNpm(project, {
         ignores: ["pack_npm_ignore_list"],
         reporter: (infos) => {
             console.log(infos);
