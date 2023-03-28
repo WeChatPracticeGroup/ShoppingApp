@@ -1,5 +1,8 @@
 {
     "main": "./index",
+    "scripts": {
+        "mp:upload": "node scripts/upload.js"
+    },
     "dependencies": {
         "@vant/weapp": "^1.10.14",
         "miniprogram-ci": "^1.9.5",
