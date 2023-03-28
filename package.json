@@ -2,6 +2,7 @@
     "main": "./index",
     "dependencies": {
         "@vant/weapp": "^1.10.14",
+        "miniprogram-ci": "^1.9.5",
         "qrcode-base64": "^1.0.1",
         "querystring": "^0.2.1",
         "vant": "^3.6.2"
