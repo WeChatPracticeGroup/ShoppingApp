@@ -1,6 +1,6 @@
 # dependencies
 **/node_modules
-# **/miniprogram_npm
+**/miniprogram_npm
 
 # production
 /dist
@@ -21,6 +21,6 @@ yarn-error.log
 *.log
 
 .temp/**
-# miniprogram_npm
-# miniprogram_dist
+miniprogram_npm
+miniprogram_dist
 project.private.config.json
