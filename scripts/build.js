@@ -8,19 +8,21 @@ const { appid: appId } = require("../project.config.json");
         appid: appId,
         type: "miniProgram",
         projectPath: path.join(__dirname, "../"),
-        privateKeyPath: "./private.key",
+        privateKeyPath: "scripts/private.key",
         ignores: [
             ".github",
             "scripts",
             "README.md",
             "yarn.lock",
             "node_modules/**/*",
+            "cloudFunctions/*"
         ],
     });
     // 在有需要的时候构建npm
     const warning = await packNpm(project, {
         ignores: ["pack_npm_ignore_list"],
         reporter: (infos) => {
+            console.log("reporter =>");
             console.log(infos);
         },
     });

@@ -10,7 +10,7 @@ const { appid: appId } = require("../project.config.json");
         appid: appId,
         type: "miniProgram",
         projectPath: path.join(__dirname, "../"),
-        privateKeyPath: "./private.key",
+        privateKeyPath: "scripts/private.key",
         ignores: [
             ".github",
             "scripts",
