@@ -37,9 +37,12 @@
   confirmButtonText="已支付"
   show="{{ showPayCode }}"
   bind:confirm="payFinished"
+  close-on-click-overlay
   theme="round-button"
 >
-    <image src="{{tmpQRCode}}"></image>
+    <view class="qrcode-wrapper">
+        <canvas canvas-id="qrcode" class="qrcode" />
+    </view>
 </van-dialog>
 
 <van-action-sheet

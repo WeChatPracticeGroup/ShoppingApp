@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "search-bar": "/components/searchBar/SearchBar"
+    "search-bar": "/components/searchBar/SearchBar",
+    "user-authorizer-dialog": "/components/userAuthorizerDialog/index"
   },
-  "navigationStyle": "custom"
+  "navigationBarTitleText": "产品详情"
 }

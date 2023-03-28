@@ -6,6 +6,7 @@
         "querystring": "^0.2.1",
         "regenerator-runtime": "^0.13.9",
         "vant": "^3.6.2",
-        "weapp-cookie": "^1.4.8"
+        "weapp-cookie": "^1.4.8",
+        "wxbarcode": "^1.0.2"
     }
 }

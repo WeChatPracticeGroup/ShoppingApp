@@ -9,7 +9,8 @@ Page({
     detail: {},
     imagePrefix: generateImgUrl() + '/categorys/',
     num: 1,  
-    minusStatus: 'disabled'
+    minusStatus: 'disabled',
+    isDialogShow: false,
   },
   onLoad(options) {
     console.log('onload in detail page:',options);
@@ -67,6 +68,17 @@ Page({
           num  
       });  
   },
+  handleAddToCart() {
+    const userInfo = wx.getStorageSync('userInfo');
+    if(!userInfo) {
+        this.setData({
+            isDialogShow: true,
+        });
+        return;
+    }
+    
+    this.addToCart();
+  },
   addToCart() {
     wx.showLoading({
       title: 'Loading'
@@ -88,5 +100,21 @@ Page({
     }).finally(() => {
       wx.hideLoading();
     });
+  },
+  onAuthCompleted() {
+    wx.showToast({
+        title: '授权成功',
+        icon: "success"
+    });
+    this.setData({
+        isDialogShow: false,
+    })
+    this.addToCart();
+  },
+  onAuthCancel() {
+    this.setData({
+        isDialogShow: false,
+    });
   }
+
 })

@@ -1,3 +1,4 @@
+import wxbarcode from 'wxbarcode';
 import request from "/utils/request";
 import { generateImgUrl } from '/utils/util';
 
@@ -10,7 +11,6 @@ Page({
       showPayCode: false,
       showCheckbox: false,
       disableQuatity: true,
-      tmpQRCode: `${generateImgUrl()}/pay/payQRCode.png`,
       showAddressOptions: false,
       addressOptions: [
         {
@@ -33,6 +33,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad(options) {
+    wxbarcode.qrcode('qrcode', '1234567890123456789', 400, 600);
     const _this =  this;
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptDataFromOpenerPage', function(data) {
@@ -111,6 +112,7 @@ Page({
           title: "支付成功",
           duration: 1500,
       })
+      this.messageCartToUpdate();
       setTimeout(() => {
         wx.navigateBack({
             delta: 1
@@ -144,6 +146,11 @@ Page({
   },
   payFinished() {
     this.getPay(this.data.list)
+  },
+  messageCartToUpdate() {
+    let pages = getCurrentPages();
+    let beforePage = pages[pages.length - 2];
+    beforePage.getCartItems();
   },
   /**
    * Lifecycle function--Called when page is initially rendered
