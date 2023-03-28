@@ -1,7 +1,6 @@
 const path = require("path");
 const { Project, packNpm } = require("miniprogram-ci");
 
-const { version, description } = require("../package.json");
 const { appid: appId } = require("../project.config.json");
 
 (async () => {
