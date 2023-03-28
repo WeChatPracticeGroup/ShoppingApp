@@ -9,5 +9,6 @@
         "qrcode-base64": "^1.0.1",
         "querystring": "^0.2.1",
         "vant": "^3.6.2"
-    }
+    },
+    "version": "1.0.5"
 }
