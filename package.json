@@ -1,6 +1,7 @@
 {
     "main": "./index",
     "scripts": {
+        "mp:build": "node scripts/build.js",
         "mp:upload": "node scripts/upload.js"
     },
     "dependencies": {

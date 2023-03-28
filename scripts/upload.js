@@ -1,5 +1,5 @@
 const path = require("path");
-const { Project, upload, packNpm } = require("miniprogram-ci");
+const { Project, upload } = require("miniprogram-ci");
 
 const { version, description } = require("../package.json");
 const { appid: appId } = require("../project.config.json");
@@ -19,15 +19,6 @@ const { appid: appId } = require("../project.config.json");
             "node_modules/**/*",
         ],
     });
-    // 构建npm
-    const warning = await packNpm(project, {
-        ignores: ["pack_npm_ignore_list"],
-        reporter: (infos) => {
-            console.log(infos);
-        },
-    });
-    console.warn(warning);
-
     // 上传体验版
     const uploadResult = await upload({
         project,

@@ -31,5 +31,5 @@ jobs:
           node-version: '16.x'
       - run: |
           yarn
-          # yarn build
+          yarn mp:build
           yarn mp:upload
