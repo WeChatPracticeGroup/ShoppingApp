@@ -3,6 +3,7 @@
     "dependencies": {
         "@babel/plugin-transform-runtime": "^7.18.10",
         "@vant/weapp": "^1.10.14",
+        "qrcode-base64": "^1.0.1",
         "querystring": "^0.2.1",
         "regenerator-runtime": "^0.13.9",
         "vant": "^3.6.2",

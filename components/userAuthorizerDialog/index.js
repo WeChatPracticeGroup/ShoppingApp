@@ -41,6 +41,9 @@ Component({
         }).finally(() => {
           wx.hideLoading();
         });
+    },
+    onCancel() {
+        this.triggerEvent("onCancel");
     }
   }
 });

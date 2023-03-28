@@ -66,3 +66,12 @@
     font-size: 24rpx;
     color: #999;
 }
+.qrcode-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 400rpx;
+}
+.qrcode {
+    width: 400rpx;
+    height: 400rpx;
+}

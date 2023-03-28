@@ -21,6 +21,7 @@ Page({
     this.getCartItems();
   },
   getCartItems() {
+    wx.showLoading();
     request.get("shoppingCart/cartItems").then(res => {
       const prefix = generateImgUrl();
       const list = res.data.map(item => {
@@ -32,7 +33,7 @@ Page({
       wx.showToast({
           title: e.message || e || "请求错误",
       })
-    })
+    }).finally(() => wx.hideLoading())
   },
   buyNow(e) {
     const _this = this;
