@@ -2,7 +2,7 @@ name: Upload MiniProgram
 on:
   push:
     branches:
-      - feature/ci
+      - main
   pull_request:
     types: ['labeled']
 
