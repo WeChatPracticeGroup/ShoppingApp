@@ -6,6 +6,7 @@ const { throwError, responseInterceptor } = require("./utils");
 // routes
 const { login, getOpenId, updateUserProfile } = require("./user/index");
 const { getHomeImages } = require("./home/index");
+const {createQRCode} = require('./QR/index');
 const {
     addressCreate,
     addressGetAll,
@@ -101,6 +102,8 @@ const GET = async (event, context) => {
 
 const POST = async (event, context) => {
     switch (event.url) {
+        case "create/qr":
+          return await createQRCode(event, context);
         // user routes
         case "user/login":
             return await login(event, context);

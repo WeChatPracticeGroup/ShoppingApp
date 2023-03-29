@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "search-bar": "/components/searchBar/SearchBar"
+    "search-bar": "/components/searchBar/SearchBar",
+    "imageModal": "/components/imageModal/index",
+    "van-icon": "@vant/weapp/icon/index"
   },
   "navigationStyle": "custom"
 }

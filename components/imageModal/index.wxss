@@ -1,0 +1,8 @@
+/* components/qrOverlay/index.js.wxss */
+.wrapper{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
