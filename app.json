@@ -6,7 +6,6 @@
     "pages/category/index",
     "pages/order/index",
     "pages/order/order-detail/index",
-    "pages/example/index",
     "pages/login/index",
     "pages/userCenter/index",
     "pages/userCenter/address/index",

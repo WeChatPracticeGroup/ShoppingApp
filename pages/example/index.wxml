@@ -1,19 +1,2 @@
-<text>example route</text>
-
-<button bind:tap="handleAdd">Add Order</button>
-
-<button bind:tap="handleGetOrderList">Get Order List</button>
-
-<button bind:tap="handleClearOrderList">Clear Order List</button>
-
-<view wx:if="{{orderList.length}}">
-    <view wx:for="{{orderList}}" wx:for-item="order">
-        <view>{{order.POId}}</view>
-        <view>{{order.orderData}}</view>
-        <view>{{order.deliveryParty}}</view>
-        <view>{{order.orderStatus}}</view>
-        <view>{{order.orderAmount}}</view>
-        <view>--------------分割线--------------</view>
-    </view>
-</view>
-<view wx:else>当前无订单</view>
+<!--pages/example/index.wxml-->
+<text>pages/example/index.wxml</text>
