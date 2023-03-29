@@ -1,6 +1,6 @@
 {
     "main": "./index",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "scripts": {
         "mp:build": "node scripts/build.js",
         "mp:upload": "node scripts/upload.js"
