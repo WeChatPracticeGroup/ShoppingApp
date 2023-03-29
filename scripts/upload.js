@@ -1,7 +1,7 @@
 const path = require("path");
 const { Project, upload, packNpm } = require("miniprogram-ci");
 
-const { version, description } = require("../package.json");
+const { version } = require("../package.json");
 const { appid: appId } = require("../project.config.json");
 
 (async () => {
@@ -32,7 +32,7 @@ const { appid: appId } = require("../project.config.json");
     const uploadResult = await upload({
         project,
         version,
-        desc: description,
+        desc: `上传时间: ${Date.now()}`,
         setting: {
             es7: true,
             minify: true,
