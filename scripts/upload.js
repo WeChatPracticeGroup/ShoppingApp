@@ -17,6 +17,7 @@ const { appid: appId } = require("../project.config.json");
             "README.md",
             "yarn.lock",
             "node_modules/**/*",
+            "cloudFunctions/*"
         ],
     });
     // 在有需要的时候构建npm
@@ -28,6 +29,7 @@ const { appid: appId } = require("../project.config.json");
         },
     });
     console.warn(warning);
+    
     // 上传体验版
     const uploadResult = await upload({
         project,

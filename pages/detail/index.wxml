@@ -1,5 +1,5 @@
 <!-- <search-bar id='searchBar' placeHolder="{{placeHolder}}" bindsearch="handleSearch" showBackBtn="{{showBackBtnInSearchBar}}"></search-bar> -->
-<user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted" bind:onCancel="onAuthCancel"></user-authorizer-dialog>
+<!-- <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted" bind:onCancel="onAuthCancel"></user-authorizer-dialog> -->
 <view class="detail-container">
   <view class="box">
     <!-- banner -->
@@ -46,3 +46,8 @@
     <button class="btn_right">立即购买</button>
   </view>
 </view>
+
+<view wx:if="{{isDialogShow}}">
+    <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted" bind:onCancel="onAuthCancel"></user-authorizer-dialog>
+</view>
+
