@@ -31,5 +31,5 @@ jobs:
           node-version: '16.x'
       - run: |
           npm i
-          npm run mp:build
+          # npm run mp:build
           npm run mp:upload

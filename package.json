@@ -1,5 +1,6 @@
 {
     "main": "./index",
+    "version": "1.0.7",
     "scripts": {
         "mp:build": "node scripts/build.js",
         "mp:upload": "node scripts/upload.js"
@@ -14,7 +15,6 @@
         "vant": "^3.6.2",
         "weapp-cookie": "^1.4.8"
     },
-    "version": "1.0.6",
     "devDependencies": {
         "miniprogram-ci": "^1.9.5"
     }
