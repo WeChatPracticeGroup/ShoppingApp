@@ -1,12 +1,21 @@
 {
     "main": "./index",
+    "version": "1.0.8",
+    "scripts": {
+        "mp:build": "node scripts/build.js",
+        "mp:upload": "node scripts/upload.js"
+    },
     "dependencies": {
         "@babel/plugin-transform-runtime": "^7.18.10",
         "@vant/weapp": "^1.10.14",
+        "path": "^0.12.7",
         "qrcode-base64": "^1.0.1",
         "querystring": "^0.2.1",
         "regenerator-runtime": "^0.13.9",
         "vant": "^3.6.2",
         "weapp-cookie": "^1.4.8"
+    },
+    "devDependencies": {
+        "miniprogram-ci": "^1.9.5"
     }
 }
