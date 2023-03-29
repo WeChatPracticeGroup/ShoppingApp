@@ -1,5 +1,7 @@
+// import wxbarcode from 'wxbarcode';
+import QR from 'qrcode-base64'
 import request from "/utils/request";
-import { generateImgUrl } from '/utils/util';
+// import { generateImgUrl } from '/utils/util';
 
 Page({
 
@@ -10,7 +12,6 @@ Page({
       showPayCode: false,
       showCheckbox: false,
       disableQuatity: true,
-      tmpQRCode: `${generateImgUrl()}/pay/payQRCode.png`,
       showAddressOptions: false,
       addressOptions: [
         {
@@ -27,6 +28,7 @@ Page({
         },
       ],
       selectedAddress: null,
+      qrcodeImage: null,
   },
 
   /**
@@ -46,6 +48,8 @@ Page({
       _this.setData({ list, price: price.toFixed(2) });
     //   _this.getPay(data.data);
     })
+    
+    this.drawQRCode();
   },
 
   getAddress: function() {
@@ -111,6 +115,7 @@ Page({
           title: "支付成功",
           duration: 1500,
       })
+      this.messageCartToUpdate();
       setTimeout(() => {
         wx.navigateBack({
             delta: 1
@@ -140,10 +145,25 @@ Page({
     //wx.navigateBack();
   },
   pay:function(e) {
-    this.setData({ showPayCode: true });
+      this.setData({ showPayCode: true });
   },
   payFinished() {
     this.getPay(this.data.list)
+  },
+  messageCartToUpdate() {
+    let pages = getCurrentPages();
+    let beforePage = pages[pages.length - 2];
+    beforePage.getCartItems();
+  },
+  drawQRCode() {
+    const imgData = QR.drawImg("模拟支付二维码", {
+        typeNumber: 4,
+        errorCorrectLevel: 'M',
+        size: 500
+    });
+    this.setData({
+        qrcodeImage: imgData
+    })
   },
   /**
    * Lifecycle function--Called when page is initially rendered

@@ -2,7 +2,8 @@
   "usingComponents": {
     "search-bar": "/components/searchBar/SearchBar",
     "imageModal": "/components/imageModal/index",
-    "van-icon": "@vant/weapp/icon/index"
+    "van-icon": "@vant/weapp/icon/index",
+    "user-authorizer-dialog": "/components/userAuthorizerDialog/index"
   },
-  "navigationStyle": "custom"
+  "navigationBarTitleText": "产品详情"
 }

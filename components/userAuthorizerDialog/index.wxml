@@ -1,4 +1,4 @@
 <!--components/userLoginDialog/index.wxml-->
 <view class="user-authorizer-dialog">
-  <van-dialog id="user-authorizer-dialog" show="{{show}}" title="{{authorizerDialog.title}}" message="{{authorizerDialog.message}}" show-cancel-button show-confirm-button confirmButtonText="{{authorizerDialog.confirmButtonText}}" cancelButtonText="{{authorizerDialog.cancelButtonText}}" confirmButtonColor="red" overlay bind:confirm="onConfirm"></van-dialog>
+  <van-dialog id="user-authorizer-dialog" show="{{show}}" title="{{authorizerDialog.title}}" message="{{authorizerDialog.message}}" show-cancel-button show-confirm-button confirmButtonText="{{authorizerDialog.confirmButtonText}}" cancelButtonText="{{authorizerDialog.cancelButtonText}}" confirmButtonColor="red" overlay bind:confirm="onConfirm" bind:cancel="onCancel"></van-dialog>
 </view>
