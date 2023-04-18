@@ -36,6 +36,7 @@ const getOrderList = async (event, context) => {
             amount: true,
             company:true,
         })
+        .orderBy("subscriptionDate", "desc")
         .where(whereConditions)
         .get();
 };
