@@ -1,90 +1,35 @@
 <view class="page-container">
-    <van-tabs class="tabs-container" color="#1989fa" active="{{ activeTab }}" bind:change="onChange">
-        <van-tab title="售达地址" class="tab-content">
-            <view class="tab-content-cards">
-                <view wx:if="{{addressSale.length}}">
-                    <view class="tip">
-                        <text>提示: 地址最多可保留3个</text>
-                    </view>
-                    <view class="card-container" wx:for="{{addressSale}}" wx:key="id" wx:for-index="index">
-                        <view class="card-content">
-                            <view class="address-main">{{item.company}}</view>
-                            <view class="address-detail">{{item.addressDetail}}</view>
-                            <view class="address-zip">邮编: {{item.zipCode}}</view>
-                        </view>
-                        <view class="card-action">
-                            <text class="card-action-edit" bindtap="handleEdit" data-id="{{item._id}}" data-type="{{item.type}}">
-                                编辑
-                            </text>
-                        </view>
-                    </view>
-                </view>
-                <view wx:else class="empty">暂无记录, 清添加地址</view>
+  <van-tabs class="tabs-container" color="#1989fa" active="{{ activeTab }}" bind:change="onChange">
+    <block wx:for="{{ AdrMetaData }}" wx:for-item="metaData">
+      <van-tab title="{{ metaData.title }}" class="tab-content">
+        <view class="tab-content-cards">
+          <view wx:if="{{addresses[metaData.key].length}}">
+            <view class="tip">
+              <text>提示: 地址最多可保留3个</text>
             </view>
-
-            <view class="btn-area">
-                <view class="btn-wrapper">
-                    <button class="btn-create" type="primary" bind:tap="handleCreate" data-type="1">
-                        新增地址
-                    </button>
-                </view>
+            <view class="card-container" wx:for="{{addresses[metaData.key]}}" wx:key="id" wx:for-index="index">
+              <view class="card-content">
+                <view class="address-main">{{item.company}}</view>
+                <view class="address-detail">{{item.addressDetail}}</view>
+                <view class="address-zip">邮编: {{item.zipCode}}</view>
+              </view>
+              <view class="card-action">
+                <text class="card-action-edit" bindtap="handleEdit" data-id="{{item._id}}" data-type="{{item.type}}">
+                  编辑
+                </text>
+              </view>
             </view>
-
-        </van-tab>
-        <van-tab title="送货地址" class="tab-content">
-            <view wx:if="{{addressDelivery.length}}">
-                <view class="tip">
-                    <text>提示: 地址最多可保留3个</text>
-                </view>
-                <view class="card-container" wx:for="{{addressDelivery}}" wx:key="id">
-                    <view class="card-content">
-                        <view class="address-main">{{item.company}}</view>
-                        <view class="address-detail">{{item.addressDetail}}</view>
-                        <view class="address-zip">邮编: {{item.zipCode}}</view>
-                    </view>
-                    <view class="card-action">
-                        <text class="card-action-edit" bindtap="handleEdit" data-id="{{item._id}}" data-type="{{item.type}}">
-                            编辑
-                        </text>
-                    </view>
-                </view>
-            </view>
-            <view wx:else class="empty">暂无记录, 清添加地址</view>
-            <view class="btn-area">
-                <view class="btn-wrapper">
-                    <button class="btn-create" type="primary" bind:tap="handleCreate" data-type="2">
-                        新增地址
-                    </button>
-                </view>
-            </view>
-        </van-tab>
-        <van-tab title="付款人地址" class="tab-content">
-            <view wx:if="{{addressPayer.length}}">
-                <view class="tip">
-                    <text>提示: 地址最多可保留3个</text>
-                </view>
-                <view class="card-container" wx:for="{{addressPayer}}" wx:key="id">
-                    <view class="card-content">
-                        <view class="address-main">{{item.company}}</view>
-                        <view class="address-detail">{{item.addressDetail}}</view>
-                        <view class="address-zip">邮编: {{item.zipCode}}</view>
-                    </view>
-                    <view class="card-action">
-                        <text class="card-action-edit" bindtap="handleEdit" data-id="{{item._id}}" data-type="{{item.type}}">
-                            编辑
-                        </text>
-                    </view>
-                </view>
-            </view>
-            <view wx:else class="empty">暂无记录, 清添加地址</view>
-
-            <view class="btn-area">
-                <view class="btn-wrapper">
-                    <button class="btn-create" type="primary" bind:tap="handleCreate" data-type="3">
-                        新增地址
-                    </button>
-                </view>
-            </view>
-        </van-tab>
-    </van-tabs>
+          </view>
+          <view wx:else class="empty">暂无记录, 清添加地址</view>
+        </view>
+        <view class="btn-area">
+          <view class="btn-wrapper">
+            <button class="btn-create" type="primary" bind:tap="handleCreate" data-type="1">
+              新增地址
+            </button>
+          </view>
+        </view>
+      </van-tab>
+    </block>
+  </van-tabs>
 </view>

@@ -120,7 +120,7 @@ const pay = async (event, context) => {
         productItems,
         poNumber: `PO-${orderId.substring(orderId.length - 6)}`,
         orderId,
-        subscriptionDate: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        subscriptionDate: moment().format("YYYY-MM-DD HH:mm:ss"),
         status: "1",
         openid: OPENID,
         zipCode,

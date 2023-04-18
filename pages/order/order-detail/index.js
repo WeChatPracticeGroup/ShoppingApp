@@ -1,9 +1,5 @@
-import {
-  orderList
-} from "/mockData/orderList/orderList"
 import request from '/utils/request'
 
-// pages/order/order-detail/index.js
 Page({
 
   /**
@@ -36,7 +32,6 @@ Page({
       this.setData({
         orderInfo: res.data
       })
-      console.log(res.data)
     })
   }
 })

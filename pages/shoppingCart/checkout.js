@@ -1,7 +1,5 @@
-// import wxbarcode from 'wxbarcode';
 import QR from 'qrcode-base64'
 import request from "/utils/request";
-// import { generateImgUrl } from '/utils/util';
 
 Page({
 
@@ -130,7 +128,6 @@ Page({
     })
   },
   handleBackTap: function(e) {
-    console.log('handle back tap in search bar');
     let pages = getCurrentPages()
     if(pages[pages.length - 2]){
       //如果有上一页，就返回上一页
@@ -142,7 +139,6 @@ Page({
           url: '/pages/home/index',
         })
     }
-    //wx.navigateBack();
   },
   pay:function(e) {
       this.setData({ showPayCode: true });
@@ -164,53 +160,5 @@ Page({
     this.setData({
         qrcodeImage: imgData
     })
-  },
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide() {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage() {
-
   }
 })

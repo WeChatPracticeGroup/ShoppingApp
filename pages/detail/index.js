@@ -13,7 +13,6 @@ Page({
     isDialogShow: false,
   },
   onLoad(options) {
-    console.log('onload in detail page:',options);
     wx.showLoading({
       title: 'Loading'
     });
@@ -115,7 +114,6 @@ Page({
       this.setData({
         imgQRSrc: res.fileID
       })
-      console.log('suc:',res);
     }).catch(err=>{
       wx.hideLoading();
       console.log('failed');

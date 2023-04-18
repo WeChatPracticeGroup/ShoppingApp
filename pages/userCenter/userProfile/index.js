@@ -5,8 +5,6 @@ const defaultAvatarUrl =
 
 const phoneFormatExp = /^((1[0-9]{10})|(((([0-9]{3}-)?[0-9]{8})|(([0-9]{4}-)?[0-9]{7}))(-[0-9]{1,4})?))$/;
 
-const phoneErrorMessage = "电话格式错误，请重新输入";
-
 Page({
   data: {
     avatarUrl: defaultAvatarUrl,
@@ -37,16 +35,14 @@ Page({
       cloudPath: `avatar/${Date.now()}.jpg`,
       filePath: avatarUrl
     }).then(res => {
-      console.log("uploadFile success: ", res.fileID)
       this.setData({
         avatarUrl: res.fileID
       })
     }).catch(error => {
-      console.log("uploadFile failed", JSON.stringify(error));
+      console.error("uploadFile failed", JSON.stringify(error));
     })
   },
   onNicknameChange(event) {
-    console.log("nickName: ", event.detail);
     this.setData({
       nickname: event.detail,
     });
@@ -78,7 +74,6 @@ Page({
         avatarUrl,
       })
       .then((res) => {
-        console.log("updateUserProfile res: ", res);
         wx.setStorageSync('userInfo', res.data);
         setTimeout(() => {
           wx.showToast({
@@ -91,7 +86,6 @@ Page({
 
       })
       .catch((e) => {
-        console.log("updateUserProfile e: ", JSON.stringify(e));
         wx.showToast({
           title: e.message,
           icon: 'error',

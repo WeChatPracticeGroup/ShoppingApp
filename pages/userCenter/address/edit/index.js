@@ -18,18 +18,7 @@ Page({
             this.fetchAddress({ id, addressType });
         }
     },
-
-    // handleDelete(params) {
-    //     request
-    //         .post("user/addressDelete", params)
-    //         .then((res) => {
-    //             console.log("handleLogin res: ", res);
-    //         })
-    //         .catch((e) => {
-    //             console.log("handleLogin e: ", e);
-    //         });
-    // },
-
+    
     fetchAddress({ id }) {
         const params = {
             id,

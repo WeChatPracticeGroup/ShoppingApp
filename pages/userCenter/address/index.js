@@ -1,38 +1,44 @@
 import request from "/utils/request";
 import { ADDRESS_TYPES } from "/constants/userCenter/address";
 
+const AdrMetaData = [
+    {
+      key: 'addressSale',
+      title: '售达地址'
+    },
+    {
+      key: 'addressDelivery',
+      title: '送货地址'
+    },
+    {
+      key: 'addressPayer',
+      title: '付款人地址'
+    },
+]
+
 Page({
     /**
      * 页面的初始数据
      */
     data: {
-        addressSale: [],
-        addressDelivery: [],
-        addressPayer: [],
+        AdrMetaData,
+        addresses: {
+            addressSale: [],
+            addressDelivery: [],
+            addressPayer: [],
+        },
         activeTab: 0,
         requiredFetch: true,
     },
 
-    // onLoad() {
-    //     this.fetchAddressList();
-    // },
-    
     onShow() {
-        if(this.data.requiredFetch) {
+        if (this.data.requiredFetch) {
             this.fetchAddressList();
             this.setData({
                 requiredFetch: false,
-            })
+            });
         }
     },
-    
-    // goUpdate(){
-    //     console.log('我更新啦');
-    //     this.setData({
-    //         requiredFetch: false,
-    //     })
-    // },
-
 
     fetchAddressList() {
         wx.showLoading({
@@ -58,16 +64,17 @@ Page({
                 });
 
                 this.setData({
-                    addressSale: _addressListSale,
-                    addressDelivery: _addressDelivery,
-                    addressPayer: _addressPayer,
+                    addresses: {
+                        addressSale: _addressListSale,
+                        addressDelivery: _addressDelivery,
+                        addressPayer: _addressPayer,
+                    },
                 });
-                console.log("addressSale: ", this.data.addressSale);
             })
-            .catch(e => {
+            .catch((e) => {
                 wx.showToast({
                     title: e.message,
-                    icon: 'error',
+                    icon: "error",
                     duration: 1500,
                 });
             })

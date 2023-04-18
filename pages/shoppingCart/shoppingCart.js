@@ -14,9 +14,6 @@ Page({
   /**
    * Lifecycle function--Called when page load
    */
-//   onLoad(options) {
-//     this.getCartItems();
-//   },
   onShow(options) {
     this.getCartItems();
   },
@@ -77,7 +74,6 @@ Page({
     })
   },
   updateSelectedItems(e) {
-    // console.log("updateSelectedItems: ", e.detail);
     this.setData({
         selectedItems: e.detail.selectedItems,
     })

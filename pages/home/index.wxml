@@ -1,16 +1,7 @@
 <view class="container_page">
     <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted"></user-authorizer-dialog>
     <view class="title_container_page">
-        <!-- navation bar -->
         <navigation-bar />
-        <!-- search bar -->
-        <!-- <view class="search-bar">
-            <view class="search" bind:tap="toSearchPage">
-                <icon type="search" color="#757575" />
-                <text>请输入关键词进行搜索</text>
-            </view>
-            <van-icon class="message" name="comment-o" info="{{messageCount}}" size="24px" bind:click="toMessagePage" />
-        </view> -->
     </view>
     <view class="goods_container_page">
         <!-- banner -->

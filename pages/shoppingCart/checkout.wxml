@@ -1,10 +1,4 @@
 <scroll-view class="w100 h100" scroll-y>
-  <!-- <view class="flex flexac">
-    <view class="left-arrow" bindtap="handleBackTap"></view>
-    <view  wx:if="{{showPayCode}}">支付</view>
-    <view>确认订单</view>
-  </view> -->
-  <!-- <view class="w100 h100" wx:if="{{showPayCode}}">支付二维码</view> -->
   <view class="w100 pos-rel">
     <product-list list="{{list}}" disableQuatity="{{disableQuatity}}" showCheckbox="{{showCheckbox}}"></product-list>
     <view>
@@ -18,14 +12,12 @@
             <van-button type="danger" size="small" bind:click="onShowAddress">选择地址</van-button>
         </view>
       </view>
-      <!-- <view class="padding-20">价格明细</view> -->
       <view class="flex flexsb padding-20 price-wrapper">
         <view class="price-label">应付金额</view>
         <view class="price-amount">￥{{price}}</view>
       </view>
     </view>
     <view class="flexac flexsb padding-20">
-      <!-- <view>￥{{price}}</view> -->
       <van-button  round type="primary" color="#ee0a24" size="normal" block bind:click="pay">确认支付</van-button>
     </view>
   </view>
