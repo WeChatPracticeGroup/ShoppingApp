@@ -64,25 +64,15 @@
 .logo{
   display: flex;
   flex-direction: column;
-  width: 20%;
-  height: 100%;
   margin-top: 4rpx;
-  margin-left: 10rpx;
 }
 
-.goodsaction-image{
-  width: 50%;
-  height: 50%;
-  margin-left: 20rpx;
-}
 .goodsaction-text{
   font-size: 26rpx;
-  margin-left: 18rpx;
-  width: 50%;
   text-align: center;
 }
 .stepper {  
-  width: 202rpx;  
+  width: 210rpx;  
   height: 60rpx;
   border: 1px solid #ccc;  
   border-radius: 3px;
@@ -113,7 +103,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 75%;
+  width: 60%;
   height: 80%;
   margin-left: 20rpx;
   margin-right: 20rpx;

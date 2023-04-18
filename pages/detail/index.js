@@ -1,6 +1,5 @@
 import request from "/utils/request";
 import { generateImgUrl } from '/utils/util';
-
 Page({
   data: {
     placeHolder: "请输入要搜索的商品",
@@ -10,6 +9,7 @@ Page({
     imagePrefix: generateImgUrl() + '/categorys/',
     num: 1,  
     minusStatus: 'disabled',
+    imgQRSrc: '',
     isDialogShow: false,
   },
   onLoad(options) {
@@ -100,6 +100,31 @@ Page({
     }).finally(() => {
       wx.hideLoading();
     });
+  },
+  createQR() {
+    const {id} = this.data.detail;
+    wx.showLoading({
+      title: 'Loading'
+    });
+    request.post("create/qr", {
+      path: '/pages/detail/index?id='+id,
+      scene: 'type=detail',
+      name: id 
+    }).then(res=>{
+      wx.hideLoading();
+      this.setData({
+        imgQRSrc: res.fileID
+      })
+      console.log('suc:',res);
+    }).catch(err=>{
+      wx.hideLoading();
+      console.log('failed');
+    })
+  },
+  onCloseQRModal() {
+    this.setData({
+      imgQRSrc: ''
+    })
   },
   onAuthCompleted() {
     wx.showToast({

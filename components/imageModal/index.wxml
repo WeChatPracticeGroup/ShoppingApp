@@ -1,0 +1,7 @@
+<!--components/qrOverlay/index.js.wxml-->
+<van-overlay show="true" bind:click="clickHide">
+  <view class="wrapper">
+    <van-image  width="13rem" height="13rem" src="{{imgSrc}}" />
+    <van-button type="primary" bind:click="saveToPhone">保存二维码</van-button>
+  </view>
+</van-overlay>

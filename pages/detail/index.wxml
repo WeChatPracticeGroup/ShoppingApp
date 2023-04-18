@@ -38,16 +38,16 @@
 </view>
 <view class="goodsaction" > 
 	<view class="logo" bindtap="toHome">
-	    <image class="goodsaction-image" src="/images/home-unselected@2x.png" bindtap="toHome"></image>
+      <van-icon name="wap-home-o" bindtap="toHome"/>
 	    <text class="goodsaction-text" bindtap="toHome">主页</text>
+  </view>
+  <view class="logo" bindtap="createQR">
+      <van-icon name="qr" bindtap="createQR"/>
+	    <text class="goodsaction-text" bindtap="createQR">QR</text>
   </view>
   <view class="action_btn">
     <button class="btn_left" bindtap="handleAddToCart">加入购物车</button>
     <button class="btn_right">立即购买</button>
   </view>
 </view>
-
-<view wx:if="{{isDialogShow}}">
-    <user-authorizer-dialog show="{{isDialogShow}}" bind:onAuthCompleted="onAuthCompleted" bind:onCancel="onAuthCancel"></user-authorizer-dialog>
-</view>
-
+<imageModal wx:if="{{imgQRSrc}}" imgSrc="{{imgQRSrc}}" fileName="{{detail.id}}" bind:closeModal="onCloseQRModal"/>
