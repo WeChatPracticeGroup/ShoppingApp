@@ -5,7 +5,7 @@ const { version } = require("../package.json");
 const { appid: appId } = require("../project.config.json");
 
 (async () => {
-    // 注意： new ci.Project 调用时，请确保项目代码已经是完整的，避免编译过程出现找不到文件的报错。
+    // Configure a new Project
     const project = new Project({
         appid: appId,
         type: "miniProgram",
@@ -20,7 +20,8 @@ const { appid: appId } = require("../project.config.json");
             "cloudFunctions/*"
         ],
     });
-    // 在有需要的时候构建npm
+    
+    // npm build
     const warning = await packNpm(project, {
         ignores: ["pack_npm_ignore_list"],
         reporter: (infos) => {
@@ -30,7 +31,7 @@ const { appid: appId } = require("../project.config.json");
     });
     console.warn(warning);
     
-    // 上传体验版
+    // upload and release Dev version
     const uploadResult = await upload({
         project,
         version,

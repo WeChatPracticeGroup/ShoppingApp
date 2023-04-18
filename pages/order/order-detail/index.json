@@ -1,5 +1,6 @@
 {
   "component": true,
+  "navigationBarTitleText": "订单详情",
   "usingComponents": {
     "van-collapse": "@vant/weapp/collapse/index",
     "van-collapse-item": "@vant/weapp/collapse-item/index",
